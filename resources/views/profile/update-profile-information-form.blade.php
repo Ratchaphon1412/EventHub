@@ -81,6 +81,69 @@
                 @endif
             @endif
         </div>
+
+            <!-- frist name -->
+            <div class="col-span-6 sm:col-span-4">
+                <x-label for="first_name" value="{{ __('FirstName') }}" />
+                <x-input id="first_name" type="text" class="mt-1 block w-full" wire:model.defer="state.first_name" autocomplete="first_name" value="{{$this->user->first_name}}" />
+                <x-input-error for="first_name" class="mt-2" />
+            </div>
+            <!-- last name -->
+            <div class="col-span-6 sm:col-span-4">
+                <x-label for="last_name" value="{{ __('LastName') }}" />
+                <x-input id="last_name" type="text" class="mt-1 block w-full" wire:model.defer="state.last_name" autocomplete="last_name" value="{{$this->user->last_name}}" />
+                <x-input-error for="last_name" class="mt-2" />
+            </div>
+
+           <!-- phone -->
+           <div class="col-span-6 sm:col-span-4">
+                <x-label for="phone" value="{{ __('Phone') }}" />
+                <x-input id="phone" type="text" class="mt-1 block w-full" wire:model.defer="state.phone"  autocomplete="phone" value="{{$this->user->phone}}"/>
+                <x-input-error for="phone" class="mt-2" />
+            </div>
+
+
+        
+             <!-- gender -->
+           <div class="col-span-6 sm:col-span-4">
+               
+                
+                <x-label for="gender" value="{{ __('Gender') }}" />
+                <select name="gender" class="block mt-1 w-full"  wire:model.defer="state.gender">
+                    @foreach (['Female','Male','Other'] as $items)
+                        <option >{{ $items }}</option>
+                        
+                    @endforeach
+                </select>
+            </div>
+            <!-- age -->
+            <div class="col-span-6 sm:col-span-4">
+                <x-label for="age" value="{{ __('Age') }}" />
+                <x-input id="age" type="text" class="mt-1 block w-full" wire:model.defer="state.age" autocomplete="age" value="{{$this->user->age}}" />
+                <x-input-error for="age" class="mt-2" />
+            </div>
+            
+                <!-- facebook  -->
+                <div class="col-span-6 sm:col-span-4">
+                    <x-label for="facebook" value="{{ __('Facebook') }}" />
+                    <x-input id="facebook" type="text" class="mt-1 block w-full" wire:model.defer="state.facebook" autocomplete="facebook" value="{{$this->user->facebook}}" />
+                    <x-input-error for="last_name" class="mt-2" />
+                </div>
+                  <!-- instagram  -->
+                  <div class="col-span-6 sm:col-span-4">
+                    <x-label for="instagram" value="{{ __('Instagram') }}" />
+                    <x-input id="instagram" type="text" class="mt-1 block w-full" wire:model.defer="state.instagram" autocomplete="instagram" value="{{$this->user->instagram}}" />
+                    <x-input-error for="instagram" class="mt-2" />
+                </div>
+                  <!-- Line  -->
+                  <div class="col-span-6 sm:col-span-4">
+                    <x-label for="line" value="{{ __('Line') }}" />
+                    <x-input id="line" type="text" class="mt-1 block w-full" wire:model.defer="state.line" autocomplete="line" value="{{$this->user->line}}" />
+                    <x-input-error for="line" class="mt-2" />
+                </div>
+
+
+
     </x-slot>
 
     <x-slot name="actions">
