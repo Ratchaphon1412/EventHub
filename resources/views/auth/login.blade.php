@@ -1,4 +1,5 @@
-<x-guest-layout>
+<x-app-layout>
+
     <x-authentication-card>
         <x-slot name="logo">
             <x-authentication-card-logo />
@@ -11,6 +12,8 @@
                 {{ session('status') }}
             </div>
         @endif
+
+        <h2 class="font-bold text-2xl w-full text-center">Event Hub</h2>
 
         <form method="POST" action="{{ route('login') }}">
             @csrf
@@ -45,4 +48,10 @@
             </div>
         </form>
     </x-authentication-card>
-</x-guest-layout>
+
+    {{-- <section class="h-screen">
+        <img src="{{url('assets/images/login_background.png')}}" class="img-fluid h-screen " alt="">
+    </section> --}}
+
+
+</x-app-layout>
