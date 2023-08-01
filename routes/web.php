@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\RegisterStepTwoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,14 +16,25 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
+})->name('home');
+
+Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified'])->group(function () {
+ 
+
+    Route::group(['middleware'=>['registration_completed']],function(){
+        Route::get('/dashboard', function () {
+            return view('dashboard');
+        })->name('dashboard');
+    
+    });
+
+    Route::get('register-step-two',[RegisterStepTwoController::class,'create'])->name('register-step-two.view');
+    Route::post('register-step-two',[RegisterStepTwoController::class,'store'])->name('register-step-two.store');
+
 });
 
-Route::middleware([
-    'auth:sanctum',
-    config('jetstream.auth_session'),
-    'verified'
-])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
-});
+// Route::group(['middleware'=>['auth']],function (){
+//     Route::get('register-step-two',[RegisterStepTwoController::class,'create'])->name('register-step-two.view');
+//     Route::post('register-step-two',[RegisterStepTwoController::class,'store'])->name('register-step-two.store');
+// });
+
