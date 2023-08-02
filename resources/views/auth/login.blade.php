@@ -1,5 +1,6 @@
 <x-app-layout>
 
+<div class="flex-col md:grid md:grid-cols-2 ">
     <x-authentication-card>
         <x-slot name="logo">
             <x-authentication-card-logo />
@@ -49,9 +50,10 @@
         </form>
     </x-authentication-card>
 
-    {{-- <section class="h-screen">
-        <img src="{{url('assets/images/login_background.png')}}" class="img-fluid h-screen " alt="">
-    </section> --}}
+    <section class="h-screen hidden md:block">
+        <img src="https://images.unsplash.com/photo-1504851149312-7a075b496cc7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=705&q=80" class="image-fluid h-[65vh] md:h-screen  w-full md:order-first" alt="">
+    </section>
+</div>
 
 
 </x-app-layout>
