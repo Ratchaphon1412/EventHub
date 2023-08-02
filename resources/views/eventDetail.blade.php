@@ -32,10 +32,10 @@
                         </button> --}}
                         </div>
                         <div class="md:flex-auto items-top h-5/12 w-1/12 bg-gray-50/[0.6] rounded-lg ml-10 mr-20 p-10">
-                            <label class="text-2xl">A Night of Musical Magic - The Concert Spectacular! </label>
+                            <label class="md:text-2xl">A Night of Musical Magic - The Concert Spectacular! </label>
                             <h1>Category</h1>
                             <div class="flex">
-                                <a href="">how many people</a>
+                                <a href="">รับทั้งหมดกี่คน</a>
                             </div>
                             
                             
@@ -44,9 +44,9 @@
                 </div>
             </div>
          </div>
-            <div class="absolute h-1/2">
+            <div class="absolute h-1/2 md:min-h">
                 <h1 class="flex justify-center items-center mt-20 text-4xl">Detail</h1>
-                <p class="flex  mx-60 text-center justify-center items-center mt-10 text-2xl">Join us for an unforgettable evening of musical brilliance as we present "A Night of Musical Magic" - a concert extravaganza that promises to leave you spellbound!
+                <p class="flex  mx-60 text-center justify-center items-center mt-10 md:text-2xl md:min-h">Join us for an unforgettable evening of musical brilliance as we present "A Night of Musical Magic" - a concert extravaganza that promises to leave you spellbound!
                 The stage is set, the lights are dimmed, and the anticipation in the air is palpable. As the audience fills the grand concert hall, whispers of excitement mingle with the gentle hum of anticipation. Tonight is no ordinary night; it is a celebration of artistry and a union of soul-stirring melodies.</p>
                 <hr>
             </div>
@@ -59,25 +59,48 @@
         <div id="Register time" class="text-center mt-20 text-4xl">
             <label>Until Register end date</label>
             <h1 class="mt-5">Date</h1>
-            <div class="grid grid-flow-col justify-center gap-5 text-center auto-cols-max mt-20">
-                <div class="flex flex-wrap items-center justify-center gap-4 p-2">
-                    <div class="bg-white rounded-full px-6 py-2 min-w-[120px]">
-                        <div id="days" class="font-bold text-xl text-gray-800"></div>
-                        <div class="text-xs uppercase text-gray-500">days</div>
+            <div id="gallery" class="relative w-full" data-carousel="slide">
+                <!-- Carousel wrapper -->
+                <div class="relative h-56 overflow-hidden rounded-lg md:h-96">
+                     <!-- Item 1 -->
+                    <div class="hidden duration-700 ease-in-out" data-carousel-item>
+                        <img src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-1.jpg" class="absolute block max-w-full h-auto -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="">
                     </div>
-                    <div class="bg-white rounded-full px-6 py-2 min-w-[120px]">
-                        <div id="hours" class="font-bold text-xl text-gray-800"></div>
-                        <div class="text-xs uppercase text-gray-500">hours</div>
+                    <!-- Item 2 -->
+                    <div class="hidden duration-700 ease-in-out" data-carousel-item="active">
+                        <img src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-2.jpg" class="absolute block max-w-full h-auto -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="">
                     </div>
-                    <div class="bg-white rounded-full px-6 py-2 min-w-[120px]">
-                        <div id="minutes" class="font-bold text-xl text-gray-800"></div>
-                        <div class="text-xs uppercase text-gray-500">minutes</div>
+                    <!-- Item 3 -->
+                    <div class="hidden duration-700 ease-in-out" data-carousel-item>
+                        <img src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-3.jpg" class="absolute block max-w-full h-auto -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="">
                     </div>
-                    <div class="bg-white rounded-full px-6 py-2 min-w-[120px]">
-                        <div id="seconds" class="font-bold text-xl text-gray-800"></div>
-                        <div class="text-xs uppercase text-gray-500">seconds</div>
+                    <!-- Item 4 -->
+                    <div class="hidden duration-700 ease-in-out" data-carousel-item>
+                        <img src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-4.jpg" class="absolute block max-w-full h-auto -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="">
+                    </div>
+                    <!-- Item 5 -->
+                    <div class="hidden duration-700 ease-in-out" data-carousel-item>
+                        <img src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-5.jpg" class="absolute block max-w-full h-auto -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="">
                     </div>
                 </div>
+                <!-- Slider controls -->
+                <button type="button" class="absolute top-0 left-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-prev>
+                    <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+                        <svg class="w-4 h-4 text-white dark:text-gray-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 1 1 5l4 4"/>
+                        </svg>
+                        <span class="sr-only">Previous</span>
+                    </span>
+                </button>
+                <button type="button" class="absolute top-0 right-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-next>
+                    <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+                        <svg class="w-4 h-4 text-white dark:text-gray-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
+                        </svg>
+                        <span class="sr-only">Next</span>
+                    </span>
+                </button>
+            </div>
                 <hr>
               </div>
         
@@ -96,7 +119,7 @@
             <a href="" class="text-indigo-700 border border-indigo-600 py-4 px-6 rounded inline-flex">
                 Question Page
                 <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    viewBox="0 0 24 24" class="w-6 h-6 ml-2">
+                    viewBox="0 0 24 24" class="w-8 h-8 ml-4">
                     <path d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
                 </svg>
             </a>
