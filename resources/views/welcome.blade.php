@@ -14,6 +14,14 @@
     </head>
     <body >
        <x-app-layout>
+           <div>
+               <x-card>
+
+               </x-card>
+           </div>
+           <div>
+               test
+           </div>
         Test
        </x-app-layout>
     </body>
