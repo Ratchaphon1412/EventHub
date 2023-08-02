@@ -18,13 +18,13 @@ use App\Http\Controllers\WelcomeController;
 Route::get('/',[WelcomeController::class,'index'])->name('home');
 
 Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified'])->group(function () {
- 
+
 
     Route::group(['middleware'=>['registration_completed']],function(){
         Route::get('/dashboard', function () {
             return view('dashboard');
         })->name('dashboard');
-    
+
     });
 
     Route::get('register-step-two',[RegisterStepTwoController::class,'create'])->name('register-step-two.view');

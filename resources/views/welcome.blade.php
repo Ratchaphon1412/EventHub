@@ -67,11 +67,11 @@
         <div class="flex flex-row justify-around">
 
             
-
+            
             @foreach ($categories as $category)
             <livewire:card-background-image image="{{$category->category_photo_path}}" title="{{$category->name}}" description=""/>
-             @endforeach
-     
+            @endforeach
+        
     
         </div>
     </section>
@@ -100,7 +100,7 @@
             </div>
         </div>
     </section>
-   
+
     <section class="flex flex-col w-full h-[400px] bg-cover bg-fixed bg-center  justify-center items-center bg-[url('https://images.unsplash.com/photo-1642427749670-f20e2e76ed8c?auto=format&fit=crop&w=880&q=80')]">
         <h1 class="text-white text-5xl font-semibold mt-20 mb-10">
             This is Parallax Effect
@@ -143,7 +143,6 @@
         </span>
     </section>
 </main>
-
        </x-app-layout>
     </body>
 </html>
