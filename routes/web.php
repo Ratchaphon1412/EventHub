@@ -29,8 +29,11 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified'])-
 
     Route::get('register-step-two',[RegisterStepTwoController::class,'create'])->name('register-step-two.view');
     Route::post('register-step-two',[RegisterStepTwoController::class,'store'])->name('register-step-two.store');
-
 });
+
+Route::get('/detail',function (){
+    return view('eventDetail');
+})->name("EventDetail");
 
 // Route::group(['middleware'=>['auth']],function (){
 //     Route::get('register-step-two',[RegisterStepTwoController::class,'create'])->name('register-step-two.view');
