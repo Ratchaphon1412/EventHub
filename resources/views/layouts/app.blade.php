@@ -33,7 +33,7 @@
             @endif
 
             <!-- Page Content -->
-            <main class="my-18 py-12">
+            <main class="mt-18 pt-12">
                 {{ $slot }}
             </main>
         </div>
