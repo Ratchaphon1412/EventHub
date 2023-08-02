@@ -65,10 +65,12 @@
             <x-button> Show More</x-button>
         </div>
         <div class="flex flex-row justify-around">
+
             
-                <x-card-background-image image="https://daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg" title="Shoes!" description="If a dog chews shoes whose shoes does he choose?"/>
-    
-             
+
+            @foreach ($categories as $category)
+            <livewire:card-background-image image="{{$category->category_photo_path}}" title="{{$category->name}}" description=""/>
+             @endforeach
      
     
         </div>
@@ -80,7 +82,8 @@
             <x-button> Show More</x-button>
         </div>
         <div class="flex flex-row justify-between flex-wrap">
-            <x-card-event-image title="Shoes!" image="https://daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg" status="Upcomming" category="Camp" description="If a dog chews shoes whose shoes does he choose?"/>
+            <livewire:card-event-image title="Shoes!" image="https://daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg" status="Upcomming" category="Camp" description="If a dog chews shoes whose shoes does he choose?"/>
+            
         </div>
     </section>
     <!-- Section Information-->
@@ -139,7 +142,6 @@
             </p>
         </span>
     </section>
-
 </main>
 
        </x-app-layout>
