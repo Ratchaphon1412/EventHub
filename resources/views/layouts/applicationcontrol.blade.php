@@ -14,7 +14,7 @@
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
 
-        <!-- Styles -->
+        !-<- Styles -->
         @livewireStyles
     </head>
     <body class="font-sans antialiased">
@@ -31,15 +31,18 @@
                     </div>
                 </header>
             @endif
-
+            <livewire:slidebar/>
             <!-- Page Content -->
-            <main class="mt-18 pt-12">
-                {{ $slot }}
+       
+            <main class="mt-18 pt-12 p-4 sm:ml-64">
+             
+               @yield('content')
             </main>
         </div>
+        <x-footer/>
 
         @stack('modals')
-        <x-footer/>
+       
 
         @livewireScripts
     </body>

@@ -1,4 +1,5 @@
-<x-app-layout>
+@extends('layouts.applicationcontrol')
 
-
-</x-app-layout>
+@section('content')
+   Dashboard
+@endsection
