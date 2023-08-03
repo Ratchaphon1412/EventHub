@@ -1,4 +1,7 @@
-<x-app-layout>
+@extends('layouts.applicationcontrol')
+
+
+@section('content')
     {{-- <div class="image">
             <img src="https://images.unsplash.com/photo-1501612780327-45045538702b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" 
             alt="Poster" class="h-auto max-w-lg rounded-lg" style="justify-items: center; margin-left: auto; margin-right: auto;">
@@ -120,6 +123,7 @@
                         <label>Announment Date</label>
                         <h1 class="mt-5">Date</h1>
                     </div>
+                    <!-- Google map-->
                     <div class="relative flex justify-center w-full h-full rounded-xl mt-20">
                         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15495.430065221823!2d100.55934052016653!3d13.84759001989712!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30e29d1e111be769%3A0x4332e8cd6aec8c31!2sKasetsart%20University!5e0!3m2!1sen!2sth!4v1690953595631!5m2!1sen!2sth" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                     </div>
@@ -141,6 +145,6 @@
 
  
     
-</x-app-layout>
+        @endsection
 
 
