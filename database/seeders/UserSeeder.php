@@ -15,6 +15,13 @@ class UserSeeder extends Seeder
     public function run(): void
     {
         //
+
+        if(User::count() > 0){
+
+            echo "Have some user in database \n";
+            
+            return;
+        }
         $user = new User();
         $user->name = 'Ratchaphon1412';
         $user->email = 'ratchaphon.h111@gmail.com';
