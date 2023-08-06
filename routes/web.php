@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RegisterStepTwoController;
 use App\Http\Controllers\WelcomeController;
-
+use App\Http\Controllers\KanbanController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -34,6 +34,17 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified'])-
 Route::get('/detail',function (){
     return view('eventDetail');
 })->name("EventDetail");
+
+
+Route::controller(KanbanController::class)->group(function (){
+    Route::get('/kanban/{id}','index')->name('kanban.index');
+    Route::post('/kanban','store')->name('kanban.store');
+    Route::post('/kanban/card/delete','destroy')->name('kanban.card.delete');
+    Route::post('/kanban/card/edit','edit')->name('kanban.card.edit');
+    Route::post('/kanban/card/update','update')->name('kanban.card.update');
+
+});
+
 
 // Route::group(['middleware'=>['auth']],function (){
 //     Route::get('register-step-two',[RegisterStepTwoController::class,'create'])->name('register-step-two.view');
