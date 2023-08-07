@@ -6,6 +6,10 @@ use App\Models\Kanban;
 use App\Models\KanbanCard;
 use App\Models\KanbanColumn;
 use Illuminate\Http\Request;
+use App\Notifications\UpdateKanban;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Notification;
+
 
 class KanbanController extends Controller
 {
@@ -45,6 +49,8 @@ class KanbanController extends Controller
     public function store(Request $request)
     {
         //
+         $user = Auth::user();
+         Notification::send($user, new UpdateKanban());
 
         if($request->Title == null){
             return redirect()->back();
