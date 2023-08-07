@@ -9,9 +9,11 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 
 
+
 class KanbanCard extends Model
 {
     use HasFactory,SoftDeletes;
+
 
     protected $fillable = ['title','description','kanban_column_id'];
     
