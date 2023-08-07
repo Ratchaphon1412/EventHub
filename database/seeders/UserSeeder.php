@@ -32,5 +32,26 @@ class UserSeeder extends Seeder
         $user->gender = 'Male';
         $user->save();
 
+        $user = new User();
+        $user->name = 'Ratchaphon111';
+        $user->email = 'sevenknight5570@gmail.com';
+        $user->password = bcrypt('$Nueng111');
+        $user->first_name = 'Ratchaphon';
+        $user->last_name = 'Hinsui';
+        $user->phone = '0632686119';
+        $user->gender = 'Male';
+        $user->save();
+
+        $user = new User();
+        $user->name = 'Test 1';
+        $user->email = 'Test111@gmail.com';
+        $user->password = bcrypt('$Nueng111');
+        $user->first_name = 'Ratchaphon';
+        $user->last_name = 'Hinsui';
+        $user->phone = '0632686119';
+        $user->gender = 'Male';
+        $user->save();
+
+
     }
 }

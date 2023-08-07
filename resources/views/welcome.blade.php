@@ -82,7 +82,10 @@
             <x-button> Show More</x-button>
         </div>
         <div class="flex flex-row justify-between flex-wrap">
-            <livewire:card-event-image title="Shoes!" image="https://daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg" status="Upcomming" category="Camp" description="If a dog chews shoes whose shoes does he choose?"/>
+            @foreach ($events as $event)
+            <livewire:card-event-image title="{{$event->title}}" image="{{$event->image_poster}}" status="Upcomming" category="{{$event->category->category_name}}" description="{{$event->description}}"/>
+            @endforeach
+            
             
         </div>
     </section>

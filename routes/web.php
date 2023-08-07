@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RegisterStepTwoController;
 use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\KanbanController;
+use App\Http\Controllers\DashboardController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -21,11 +22,22 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified'])-
 
 
     Route::group(['middleware'=>['registration_completed']],function(){
-        Route::get('/dashboard', function () {
-            return view('dashboard');
-        })->name('dashboard');
+       Route::controller(DashboardController::class)->group(function(){
+              Route::get('/dashboard','index')->name('dashboard');
+       });
+
+       Route::controller(KanbanController::class)->group(function (){
+        Route::get('/kanban/{id}','index')->name('kanban.index');
+        Route::post('/kanban','store')->name('kanban.store');
+        Route::post('/kanban/card/delete','destroy')->name('kanban.card.delete');
+        Route::post('/kanban/card/edit','edit')->name('kanban.card.edit');
+        Route::post('/kanban/card/update','update')->name('kanban.card.update');
+    
+    });
 
     });
+
+    
 
     Route::get('register-step-two',[RegisterStepTwoController::class,'create'])->name('register-step-two.view');
     Route::post('register-step-two',[RegisterStepTwoController::class,'store'])->name('register-step-two.store');
@@ -36,14 +48,6 @@ Route::get('/detail',function (){
 })->name("EventDetail");
 
 
-Route::controller(KanbanController::class)->group(function (){
-    Route::get('/kanban/{id}','index')->name('kanban.index');
-    Route::post('/kanban','store')->name('kanban.store');
-    Route::post('/kanban/card/delete','destroy')->name('kanban.card.delete');
-    Route::post('/kanban/card/edit','edit')->name('kanban.card.edit');
-    Route::post('/kanban/card/update','update')->name('kanban.card.update');
-
-});
 
 
 // Route::group(['middleware'=>['auth']],function (){

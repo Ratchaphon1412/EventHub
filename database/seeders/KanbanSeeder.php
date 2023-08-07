@@ -8,7 +8,7 @@ use Illuminate\Database\Seeder;
 use App\Models\Kanban;
 use App\Models\KanbanColumn;
 use App\Models\KanbanCard;
-
+use App\Models\Event;
 
 
 class KanbanSeeder extends Seeder
@@ -26,6 +26,7 @@ class KanbanSeeder extends Seeder
         //
         $kanban = new Kanban();
         $kanban->name = "Kanban 1";
+        $kanban->event_id = Event::find(1)->get()[0]->id;
         $kanban->save();
 
         $column = new KanbanColumn();
