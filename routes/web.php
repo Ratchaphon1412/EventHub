@@ -55,3 +55,6 @@ Route::get('/detail',function (){
 //     Route::post('register-step-two',[RegisterStepTwoController::class,'store'])->name('register-step-two.store');
 // });
 
+Route::get('/createEvent',function(){
+    return view('createEvent');
+})->name('createEvent');
