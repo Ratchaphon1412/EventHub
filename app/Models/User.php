@@ -10,6 +10,8 @@ use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
 
+use Illuminate\Database\Eloquent\Relations\HasMany;
+
 class User extends Authenticatable
 {
     use HasApiTokens;
@@ -66,4 +68,17 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    
+    public function eventOwner():HasMany
+    {
+        return $this->hasMany(Event::class);
+    }
+
+
+    public function teamJoined():HasMany
+    {
+        return $this->hasMany(Team::class);
+    }
+
 }
