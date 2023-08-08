@@ -39,6 +39,4 @@ class Event extends Model
     {
         return $this->hasOne(Kanban::class);
     }
-
-
 }

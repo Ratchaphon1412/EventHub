@@ -2,7 +2,8 @@
 
 @section('content')
     <main class="flex-col justify-center items-center ">
-        
+        <form action="">
+
         <section id="coverImage" class="relative h-auto w-auto overflow-hidden bg-cover bg-no-repeat">
             <div class="flex justify-center items-center bg-black h-64 opacity-80 w-full rounded-lg">
                 <button>
@@ -198,6 +199,7 @@
         </section>  
 
         </section>
+        </form>
     </main>
 
 @endsection   
