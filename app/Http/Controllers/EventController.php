@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Event;
+use App\Models\Category;
 use Illuminate\Http\Request;
+
 
 class EventController extends Controller
 {
@@ -20,7 +22,8 @@ class EventController extends Controller
      */
     public function create()
     {
-        //
+        $category = Category::all(); 
+        return view('createEvent',['categorys'=>$category]);
     }
 
     /**
@@ -28,7 +31,27 @@ class EventController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'title' => ['required','min:1','max:255'],
+            'detail' => ['required','min:1','max:255'],
+            'category' => ['required'],
+            'dateCloseIn' => ['required'],
+            'datetimeCloseIn' => ['required'],
+        ]);
+        $event = new Event();
+        $event->title = $request->get('title');
+        $event->description = $request->get('detail');
+
+        $category = Category::where();
+        $event->category_id = $category->where('category_name', '=', $request->category)->get()->id;
+
+        $combinedDTCloseIn = date('Y-m-d H:i:s', strtotime("$request->dateCloseIn $request->datetimeCloseIn"));
+        $event->registration_end_date = $combinedDTCloseIn;
+
+
+
+        // $event->
+        return view('home');
     }
 
     /**
