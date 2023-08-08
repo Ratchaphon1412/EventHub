@@ -69,7 +69,7 @@ class User extends Authenticatable
         'profile_photo_url',
     ];
 
-    
+
     public function eventOwner():HasMany
     {
         return $this->hasMany(Event::class);
@@ -79,6 +79,11 @@ class User extends Authenticatable
     public function teamJoined():HasMany
     {
         return $this->hasMany(Team::class);
+    }
+
+    public function question():HasMany
+    {
+        return $this->hasMany(Question::class);
     }
 
 }
