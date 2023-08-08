@@ -88,19 +88,29 @@
                     <div class="-mx-3 flex flex-wrap">
                         <div class="w-full px-3 sm:w-1/2">
                             <div class="mb-5">
-                                <label for="date" class="mb-3 block text-base text-xl text-[#07074D]">
+                                <label for="Annumentdate" class="mb-3 block text-base text-xl text-[#07074D]">
                                     Annument date
                                 </label>
-                                <input type="date" name="dateAnnument" id="date"
+                                @error('Annumentdate')
+                                        <div class="text-red-600">
+                                            {{ $message }}
+                                        </div>
+                                 @enderror
+                                <input type="date" name="Annumentdate" id="Annumentdate"
                                         class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" />
                                 </div>
                                 </div>
                                     <div class="w-full px-3 sm:w-1/2">
                                         <div class="mb-5">
-                                    <label for="time" class="mb-3 block text-base font-medium text-[#07074D]">
+                                    <label for="datetimeAnnument" class="mb-3 block text-base font-medium text-[#07074D]">
                                         <br>
                                     </label>
-                                <input type="time" name="datetimeAnnument" id="time"
+                                @error('datetimeAnnument')
+                                        <div class="text-red-600">
+                                            {{ $message }}
+                                        </div>
+                                 @enderror
+                                <input type="time" name="datetimeAnnument" id="datetimeAnnument"
                                 class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" />
                             </div>
                         </div>
@@ -111,19 +121,29 @@
                     <div class="-mx-3 flex flex-wrap">
                         <div class="w-full px-3 sm:w-1/2">
                             <div class="mb-5">
-                                <label for="date" class="mb-3 block text-base text-xl text-[#07074D]">
+                                <label for="startEventDate" class="mb-3 block text-base text-xl text-[#07074D]">
                                     Start Event Date
                                 </label>
-                                <input type="date" name="dateAnnument" id="date"
+                                @error('startEventDate')
+                                        <div class="text-red-600">
+                                            {{ $message }}
+                                        </div>
+                                 @enderror
+                                <input type="date" name="startEventDate" id="startEventDate"
                                         class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" />
                                 </div>
                                 </div>
                                     <div class="w-full px-3 sm:w-1/2">
                                         <div class="mb-5">
-                                    <label for="time" class="mb-3 block text-base  text-xl text-[#07074D]">
+                                    <label for="endEventDate" class="mb-3 block text-base  text-xl text-[#07074D]">
                                     End Event Date
                                     </label>
-                                <input type="date" name="datetimeAnnument" id="date"
+                                @error('endEventDate')
+                                        <div class="text-red-600">
+                                            {{ $message }}
+                                        </div>
+                                 @enderror
+                                <input type="date" name="endEventDate" id="endEventDate"
                                 class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" />
                             </div>
                         </div>
@@ -131,8 +151,14 @@
                 </section>
             </section>
         <section id="upload payment">
-            <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="file_input">Upload Payment File</label>
-            <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="file_input" type="file">
+            <label class="block mb-2 text-2xl font-medium text-gray-900 dark:text-white" for="file_input">Upload Payment File</label>
+            @error('file_input')
+                <div class="text-red-600">
+                    {{ $message }}
+                </div>
+            @enderror
+            <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" 
+            id="file_input" type="file" name="file_input">
         </section>
         <!-- dynamic_fields.blade.php -->
         <section id="AddMember">
