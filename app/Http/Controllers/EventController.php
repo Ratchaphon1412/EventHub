@@ -37,6 +37,11 @@ class EventController extends Controller
             'category' => ['required'],
             'dateCloseIn' => ['required'],
             'datetimeCloseIn' => ['required'],
+            'Annumentdate' => ['required'],
+            'datetimeAnnument' => ['required'],
+            'startEventDate' => ['required'],
+            'endEventDate' => ['required'],
+            'file_input' => ['required'], 
         ]);
         $event = new Event();
         $event->title = $request->get('title');
@@ -48,7 +53,12 @@ class EventController extends Controller
         $combinedDTCloseIn = date('Y-m-d H:i:s', strtotime("$request->dateCloseIn $request->datetimeCloseIn"));
         $event->registration_end_date = $combinedDTCloseIn;
 
+        $combinedDTAnnumentdate = date('Y-m-d H:i:s', strtotime("$request->Annumentdate $request->datetimeAnnument"));
+        $event->announcement_date = $combinedDTAnnumentdate;
 
+        $event->event_start_date = $request->startEventDate;
+        $event->event_end_date = $request->endEventDate;
+        $event->document_payment = $request->file_input;
 
         // $event->
         return view('home');
