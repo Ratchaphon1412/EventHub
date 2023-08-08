@@ -5,6 +5,8 @@ use App\Http\Controllers\RegisterStepTwoController;
 use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\KanbanController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\EventController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -43,11 +45,13 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified'])-
     Route::post('register-step-two',[RegisterStepTwoController::class,'store'])->name('register-step-two.store');
 });
 
-Route::get('/detail',function (){
-    return view('eventDetail');
-})->name("EventDetail");
+// Route::get('/detail',function (){
+//     return view('eventDetail');
+// })->name("EventDetail");
 
-
+Route::controller(EventController::class)->group(function(){
+    Route::get('/event/detail/{event}','show')->name('event.detail.show');
+});
 
 
 // Route::group(['middleware'=>['auth']],function (){
