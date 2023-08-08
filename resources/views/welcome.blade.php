@@ -83,8 +83,10 @@
         </div>
         <div class="flex flex-row justify-between flex-wrap">
             @foreach ($events as $event)
-            <livewire:card-event-image title="{{$event->title}}" image="{{$event->image_poster}}" status="Upcomming" category="{{$event->category->category_name}}" description="{{$event->description}}"/>
-            @endforeach
+            <a href="{{route('event.detail.show' , ['event'=>$event])}}">
+                <livewire:card-event-image title="{{$event->title}}" image="{{$event->image_poster}}" status="Upcomming" category="{{$event->category->category_name}}" description="{{$event->description}}"/>
+            </a>
+                @endforeach
             
             
         </div>
