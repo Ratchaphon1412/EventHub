@@ -50,7 +50,9 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified'])-
 // })->name("EventDetail");
 
 Route::controller(EventController::class)->group(function(){
-    Route::get('/event/detail/{event}','show')->name('event.detail.show');
+    Route::get('/event/detail/{event}',[EventController::class,'show'])->name('event.detail.show');
+    Route::post('/event/create',[EventController::class,'store'])->name('event.create.store');
+    Route::get('/event/create',[EventController::class,'create'])->name('event.create.view');
 });
 
 
@@ -58,7 +60,3 @@ Route::controller(EventController::class)->group(function(){
 //     Route::get('register-step-two',[RegisterStepTwoController::class,'create'])->name('register-step-two.view');
 //     Route::post('register-step-two',[RegisterStepTwoController::class,'store'])->name('register-step-two.store');
 // });
-
-Route::get('/createEvent',function(){
-    return view('createEvent');
-})->name('createEvent');
