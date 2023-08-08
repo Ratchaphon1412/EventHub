@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Question;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -33,7 +34,8 @@ class TeamSeeder extends Seeder
         $team->user_id = User::find(1)->id;
         $team->save();
 
-        
+        QuestionSeeder::run();
+
 
 
 
