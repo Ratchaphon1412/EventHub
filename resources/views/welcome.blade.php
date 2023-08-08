@@ -66,8 +66,6 @@
         </div>
         <div class="flex flex-row justify-around">
 
-            
-            
             @foreach ($categories as $category)
             <livewire:card-background-image image="{{$category->category_photo_path}}" title="{{$category->name}}" description=""/>
             @endforeach
@@ -86,7 +84,7 @@
             <a href="{{route('event.detail.show' , ['event'=>$event])}}">
                 <livewire:card-event-image title="{{$event->title}}" image="{{$event->image_poster}}" status="Upcomming" category="{{$event->category->category_name}}" description="{{$event->description}}"/>
             </a>
-                @endforeach
+            @endforeach
             
             
         </div>
