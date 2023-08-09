@@ -2,17 +2,18 @@
 
 @section('content')
     <main class="flex-col justify-center items-center ">
-        <form action="{{route('event.create.store')}}" method="POST">
+        <form action="{{route('event.create.store')}}" method="POST" enctype="multipart/form-data">
         @csrf
         <section id="coverImage" class="relative h-auto w-auto overflow-hidden bg-cover bg-no-repeat">
             <div class="flex justify-center items-center bg-black h-64 opacity-80 w-full rounded-lg">
                 <div class="flex-col">
-                    @error('poster')
+                    <!-- @error('poster')
                         <div class="text-red-600">
                             {{ $message }}
                         </div>
-                    @enderror
-                    <input id="poster" type="file" class="hover:opacity-40" name="poster" 
+                    @enderror -->
+                    <!-- @livewire('upload-photo') -->
+                    <input id="poster" type="file" name="poster" 
                     class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"/>
                     <!-- <button type="button" id="poster" name="poster" class="hover:opacity-60 bg-[url('https://png.pngtree.com/element_our/sm/20180516/sm_5afbe35ff3ec9.jpg')] "> -->
                         <!-- <input type="file" id="poster" name="poster" class="bg-[url('https://png.pngtree.com/element_our/sm/20180516/sm_5afbe35ff3ec9.jpg')] "> -->
