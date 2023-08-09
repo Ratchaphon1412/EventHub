@@ -13,7 +13,10 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Event extends Model
 {
     use HasFactory;
-
+    protected $fillable = ['title','description','category_id','image_poster','date_post','registration_start_date',
+                            'registration_end_date','announcement_date','event_start_date','event_end_date',
+                            'event_latitude','event_longitude','document_payment','user_id'];
+    
     public function category():BelongsTo
     {
         return $this->belongsTo(Category::class);
