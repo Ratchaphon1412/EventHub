@@ -58,3 +58,7 @@ Route::get('/detail',function (){
 Route::get('/createEvent',function(){
     return view('createEvent');
 })->name('createEvent');
+
+Route::get('/event/approve',function(){
+    return view('approveEvent');
+})->name('approveEvent');
