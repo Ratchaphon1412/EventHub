@@ -25,7 +25,6 @@ class EventSeeder extends Seeder
         $category = Category::find(1)->get()[0];
         $event->category_id = $category->id;
         $event->image_poster = fake()->imageUrl(640, 480, 'events', true);
-        $event->date_post = fake()->dateTime();
         $event->registration_start_date = fake()->dateTime();
         $event->registration_end_date = fake()->dateTime();
         $event->event_start_date = fake()->dateTime();
@@ -41,7 +40,6 @@ class EventSeeder extends Seeder
         $category = Category::find(1)->get()[0];
         $event->category_id = $category->id;
         $event->image_poster = fake()->imageUrl(640, 480, 'events', true);
-        $event->date_post = fake()->dateTime();
         $event->registration_start_date = fake()->dateTime();
         $event->registration_end_date = fake()->dateTime();
         $event->event_start_date = fake()->dateTime();
