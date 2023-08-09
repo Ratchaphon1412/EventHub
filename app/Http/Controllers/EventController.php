@@ -6,6 +6,7 @@ use App\Models\Event;
 use App\Models\Category;
 use App\Models\EventImage;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -33,49 +34,93 @@ class EventController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'title' => ['required','min:1','max:255'],
-            'detail' => ['required','min:1','max:255'],
-            'category' => ['required'],
-            'dateCloseIn' => ['required'],
-            'datetimeCloseIn' => ['required'],
-            'Annumentdate' => ['required'],
-            'datetimeAnnument' => ['required'],
-            'startEventDate' => ['required'],
-            'endEventDate' => ['required'],
-            'file_input' => ['required'],
-            'poster' => ['required','image','mimes:jpeg,png,jpg','max:2048'],
-            'listImage'
-        ]);
-
+        // $request->validate([
+        //     'title' => ['required','min:1','max:255'],
+        //     'detail' => ['required','min:1','max:255'],
+        //     'category' => ['required'],
+        //     'dateCloseIn' => ['required'],
+        //     'datetimeCloseIn' => ['required'],
+        //     'Annumentdate' => ['required'],
+        //     'datetimeAnnument' => ['required'],
+        //     'startEventDate' => ['required'],
+        //     'endEventDate' => ['required'],
+        //     'file_input' => ['required'],
+        //     'poster' => ['required','image','mimes:jpeg,png,jpg','max:2048'],
+        //     'listImage'
+        // ]);
+        // dd($request->all());
         $event = new Event();
-        //poster
+        // $timeStamp = ;
 
-        $event->title = $request->get('title');
-        $event->description = $request->get('detail');
+        $imageName = time(). '.' . $request->image->extendstopm();
+        $request->image->move(public_path('images',$imageName));
 
-        $category = Category::where();
-        $event->category_id = $category->where('category_name', '=', $request->category)->get()->id;
 
-        $event->poster = $request->get('poster');
-        $combinedDTCloseIn = date('Y-m-d H:i:s', strtotime("$request->dateCloseIn $request->datetimeCloseIn"));
-        $event->registration_end_date = $combinedDTCloseIn;
+        $namePoster = $request->file('poster')->getClientOriginalName();
+        $request->file('poster')->store('public/images/',$namePoster);
+            
 
-        $combinedDTAnnumentdate = date('Y-m-d H:i:s', strtotime("$request->Annumentdate $request->datetimeAnnument"));
-        $event->announcement_date = $combinedDTAnnumentdate;
+            
+        //check request file have image 
 
-        $event->event_start_date = $request->startEventDate;
-        $event->event_end_date = $request->endEventDate;
-        $event->document_payment = $request->file_input;
+        // if($request->hasFile('poster')){
+            
+        //     $filename = $request->getSchemeAndHttpHost() . '/assets/image/' . time() . '.' . $request->poster->extension();
+        //     $request->poster->move(public_path('/assets/image/'), $filename);
 
-        // $
-        //Images_event
-        // foreach($request->listImage)
-        // $eventImage = new EventImage();
-        // $event->event_image_id = $eventImage->id;
-        // $listImg = [];
+        //     // $name = $request->file('image')->getClientOriginalName();
+        //     // $path = $request->file('image')->storeAs('public/images/', $name);
+        //     // $event->poster = $path;
 
-        // $request->get('listImage')->$eventImage;
+        //     // $destination_path = 'public/images';
+        //     // $image = $request->file('image');
+        //     // $image_name = $image->getClientOriginalName();
+        //     // $path = $request->file('image')->storeAs($destination_path,$image_name);
+        //     // $input['image'] = $image_name;
+
+
+        //     // $file = $request->file('image');
+        //     // $filename = $file->getClientOriginalName();
+        //     // $file->storage_path('public/' . $filename);
+        // }
+
+        
+        // if($request->file('poster')){
+        //     $path = $request->file('poster')->store('eventImages','public');
+        //     $event->poster = $path;
+        // }
+
+
+
+
+        // $event->title = $request->get('title');
+        // $event->description = $request->get('detail');
+
+        // $category = Category::where();
+        // $event->category_id = $category->where('category_name', '=', $request->category)->get()->id;
+
+        // $event->poster = $request->get('poster');
+        // $request->get('poster')->save('storage/app/test.jpg');
+
+
+        // $combinedDTCloseIn = date('Y-m-d H:i:s', strtotime("$request->dateCloseIn $request->datetimeCloseIn"));
+        // $event->registration_end_date = $combinedDTCloseIn;
+
+        // $combinedDTAnnumentdate = date('Y-m-d H:i:s', strtotime("$request->Annumentdate $request->datetimeAnnument"));
+        // $event->announcement_date = $combinedDTAnnumentdate;
+
+        // $event->event_start_date = $request->startEventDate;
+        // $event->event_end_date = $request->endEventDate;
+        // $event->document_payment = $request->file_input;
+
+        // // $
+        // //Images_event
+        // // foreach($request->listImage)
+        // // $eventImage = new EventImage();
+        // // $event->event_image_id = $eventImage->id;
+        // // $listImg = [];
+
+        // // $request->get('listImage')->$eventImage;
 
 
         // $user = Auth::user();
@@ -84,7 +129,8 @@ class EventController extends Controller
 
 
         // $event->
-        return view('home');
+        return redirect()->back();
+        // return view('');
     }
     /**
      * Display the specified resource.
