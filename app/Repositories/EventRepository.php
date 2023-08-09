@@ -8,24 +8,40 @@ use App\Models\Event;
 
 class  EventRepository implements EventRepositoryInterface
 {
-    public function getAllEvent(){
+    public function getAllEvent()
+    {
 
         return Event::all();
     }
 
 
-    public function getEventByCategory($category){
-        return Event::where('category_id',$category->id)->get();
+    public function getEventByCategory($category)
+    {
+        return Event::where('category_id', $category->id)->get();
     }
 
 
-    public function getEventByUserOwner($user){
-        return Event::where('user_id',$user->id)->get();
+    public function getEventByUserOwner($user)
+    {
+        return Event::where('user_id', $user->id)->get();
     }
 
-    public function createEvent($title,$description,$category,$image_poster,$date_post,$registration_start_date,
-                                $registration_end_date,$announcement_date,$event_start_date,$event_end_date,
-                                $event_latitude,$event_longitude,$document_payment,$user){
+    public function createEvent(
+        $title,
+        $description,
+        $category,
+        $image_poster,
+        $date_post,
+        $registration_start_date,
+        $registration_end_date,
+        $announcement_date,
+        $event_start_date,
+        $event_end_date,
+        $event_latitude,
+        $event_longitude,
+        $document_payment,
+        $user
+    ) {
         return Event::create([
             'title' => $title,
             'description' => $description,
@@ -44,32 +60,20 @@ class  EventRepository implements EventRepositoryInterface
         ]);
     }
 
-    public function findById($event_id){
+    public function findById($event_id)
+    {
         return Event::find($event_id);
     }
 
-    public function editEvent(){
-
-
+    public function editEvent()
+    {
     }
 
-    public function deleteEvent(){
-
-
+    public function deleteEvent()
+    {
     }
 
-    public function updateEvent(){
-
-
-
+    public function updateEvent()
+    {
     }
-
-    
-
-
-
-
-
-
-
 }
