@@ -7,11 +7,11 @@
         <section id="coverImage" class="relative h-auto w-auto overflow-hidden bg-cover bg-no-repeat">
             <div class="flex justify-center items-center bg-black h-64 opacity-80 w-full rounded-lg">
                 <div class="flex-col">
-                    <!-- @error('poster')
+                    @error('poster')
                         <div class="text-red-600">
                             {{ $message }}
                         </div>
-                    @enderror -->
+                    @enderror
                     <!-- @livewire('upload-photo') -->
                     <input id="poster" type="file" name="poster" 
                     class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"/>
@@ -57,12 +57,44 @@
                     @enderror
                     <select data-te-select-init id='category' name="category" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 ">
                     @foreach($categorys as $category)
-                        <option id="category" name="category_id"> {{$category->category_name}}  </option>
+                        <option id="category"> {{$category->category_name}}  </option>
                     @endforeach 
                     </select>
                 </section>
 
                 <!-- Event Date Time-->
+                <section id="Datepicker Start In" class='grid cols-span-6 mt-6'>
+                    <div class="-mx-3 flex flex-wrap">
+                        <div class="w-full px-3 sm:w-1/2">
+                            <div class="mb-5">
+                                <label for="dateStartIn" class="mb-3 block text-base text-xl text-[#07074D]">
+                                    StartIn
+                                </label>
+                                @error('dateStartIn')
+                                    <div class="text-red-600">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                                <input type="date" name="dateStartIn" id="dateStartIn"
+                                        class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" />
+                                </div>
+                                </div>
+                                    <div class="w-full px-3 sm:w-1/2">
+                                        <div class="mb-5">
+                                    <label for="time" class="mb-3 block text-base font-medium text-[#07074D]">
+                                        <br>
+                                    </label>
+                                    @error('datetimeStartIn')
+                                        <div class="text-red-600">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                <input type="time" name="datetimeStartIn" id="datetimeStartIn"
+                                class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" />
+                            </div>
+                        </div>
+                    </div>
+                </section>
                 <section id="Datepicker Close In" class='grid cols-span-6 mt-6'>
                     <div class="-mx-3 flex flex-wrap">
                         <div class="w-full px-3 sm:w-1/2">
@@ -303,6 +335,8 @@
 
         </section>
         <button type="submit" class="block w-full bg-blue-500 text-white font-bold p-4 rounded-lg">Submit</button>
+
+
         </form>
 
     </main>
