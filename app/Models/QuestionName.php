@@ -19,4 +19,8 @@ class QuestionName extends Model
     public function event(): BelongsToMany{
         return $this->belongsToMany(Event::class);
     }
+
+    public function questionAnswer(): HasMany{
+        return $this->hasMany(QuestionName::class);
+    }
 }
