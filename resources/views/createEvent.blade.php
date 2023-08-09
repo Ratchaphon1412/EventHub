@@ -6,10 +6,21 @@
         @csrf
         <section id="coverImage" class="relative h-auto w-auto overflow-hidden bg-cover bg-no-repeat">
             <div class="flex justify-center items-center bg-black h-64 opacity-80 w-full rounded-lg">
-                <button>
-                    <img src="https://png.pngtree.com/element_our/sm/20180516/sm_5afbe35ff3ec9.jpg" alt="Avatar"
-                    class="w-16 h-16 rounded-lg mr-2 bg-black object-cover">
-                </button>
+                <div class="flex-col">
+                    @error('poster')
+                        <div class="text-red-600">
+                            {{ $message }}
+                        </div>
+                    @enderror
+                    <input id="poster" type="file" class="hover:opacity-40" name="poster" 
+                    class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"/>
+                    <!-- <button type="button" id="poster" name="poster" class="hover:opacity-60 bg-[url('https://png.pngtree.com/element_our/sm/20180516/sm_5afbe35ff3ec9.jpg')] "> -->
+                        <!-- <input type="file" id="poster" name="poster" class="bg-[url('https://png.pngtree.com/element_our/sm/20180516/sm_5afbe35ff3ec9.jpg')] "> -->
+                        <!-- <img src="https://png.pngtree.com/element_our/sm/20180516/sm_5afbe35ff3ec9.jpg" alt="Avatar" 
+                        class="w-16 h-16 rounded-lg mr-2 bg-black object-cover">  -->
+                    </button>
+                </div>
+            </div>
         </section>
         <section id="Form" class="grid grid-6 md:grid-cols-1">
 
@@ -161,12 +172,12 @@
             id="file_input" type="file" name="file_input">
         </section>
         <!-- dynamic_fields.blade.php -->
-        <section id="AddMember">
+        <!-- <section id="AddMember">
             <div class="container  mt-6">
-                <button id="addMember" class="px-4 py-2 bg-blue-500 text-white rounded">Add Member</button>
-                <div id="inputContainer" class="mt-4">
+                <button id="addMember" type="button" class="px-4 py-2 bg-blue-500 text-white rounded">Add Member</button>
+                <div id="inputContainer" class="mt-4"> -->
                     <!-- Dynamically added input fields will go here -->
-                </div>
+                <!-- </div>
             </div>
             <script>
                 document.addEventListener('DOMContentLoaded', function () {
@@ -179,6 +190,7 @@
                     inputField.setAttribute('type', 'text');
                     inputField.setAttribute('name', `input_${fieldCounter}`);
                     inputField.setAttribute('class', 'block w-full mt-2 p-2 border rounded');
+    
 
                     const removeBtn = document.createElement('button');
                     removeBtn.textContent = 'Remove';
@@ -195,15 +207,23 @@
                     fieldCounter++;
                     });
                 });
-            </script>
+            </script> -->
         </section>
+                
             <div class="container mt-6">
-                <button id="addImage" class="px-4 py-2 bg-blue-500 text-white rounded">Add Image</button>
+                <!-- <button id="addImage" type="button" class="px-4 py-2 bg-blue-500 text-white rounded">Add Image</button> -->
+                <label class="block mb-2 text-2xl font-medium text-gray-900 dark:text-white" for="file_input">Upload Event Images</label>
                 <div id="imageContainer" class="mt-4">
+                    @error('listImage')
+                        <div class="text-red-600">
+                            {{ $message }}
+                        </div>
+                    @enderror
+                    <input type="file" name="listImage" multiple class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400">
                     <!-- Dynamically added input fields will go here -->
                 </div>
             </div>
-            <script>
+            <!-- <script>
                 document.addEventListener('DOMContentLoaded', function () {
                 const addImageBtn = document.getElementById('addImage');
                 const imageContainer = document.getElementById('imageContainer');
@@ -217,7 +237,8 @@
                     imageField.setAttribute('type', 'file');
                     imageField.setAttribute('name', `image_${imageFieldCounter}`);
                     imageField.setAttribute('class', 'block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400');
-
+                    imageField.setAttribute('mutiple');
+                    
                     const removeBtn = document.createElement('button');
                     removeBtn.textContent = 'Remove';
                     removeBtn.setAttribute('class', 'mt-2 px-4 py-2 bg-red-500 text-white rounded');
@@ -234,7 +255,7 @@
                     imageFieldCounter++;
                     });
                 });
-            </script>
+            </script> -->
         <section>
 
         </section>
