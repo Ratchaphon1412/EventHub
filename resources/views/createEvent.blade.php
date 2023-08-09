@@ -2,89 +2,182 @@
 
 @section('content')
     <main class="flex-col justify-center items-center ">
-        
+        <form action="{{route('event.create.store')}}" method="POST">
+        @csrf
         <section id="coverImage" class="relative h-auto w-auto overflow-hidden bg-cover bg-no-repeat">
             <div class="flex justify-center items-center bg-black h-64 opacity-80 w-full rounded-lg">
-                <button>
-                    <img src="https://png.pngtree.com/element_our/sm/20180516/sm_5afbe35ff3ec9.jpg" alt="Avatar"
-                    class="w-16 h-16 rounded-lg mr-2 bg-black object-cover">
-                </button>
+                <div class="flex-col">
+                    @error('poster')
+                        <div class="text-red-600">
+                            {{ $message }}
+                        </div>
+                    @enderror
+                    <input id="poster" type="file" class="hover:opacity-40" name="poster" 
+                    class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"/>
+                    <!-- <button type="button" id="poster" name="poster" class="hover:opacity-60 bg-[url('https://png.pngtree.com/element_our/sm/20180516/sm_5afbe35ff3ec9.jpg')] "> -->
+                        <!-- <input type="file" id="poster" name="poster" class="bg-[url('https://png.pngtree.com/element_our/sm/20180516/sm_5afbe35ff3ec9.jpg')] "> -->
+                        <!-- <img src="https://png.pngtree.com/element_our/sm/20180516/sm_5afbe35ff3ec9.jpg" alt="Avatar" 
+                        class="w-16 h-16 rounded-lg mr-2 bg-black object-cover">  -->
+                    </button>
+                </div>
+            </div>
         </section>
         <section id="Form" class="grid grid-6 md:grid-cols-1">
 
             <section id="Title" class="">
                 <section id="Title" class="grid  mt-10 items-start">
-                    <label for="" class=" justify-start pb-1 text-xl">Title</label>
-                    <input type="text" class="rounded-lg w-3/4 mx-5" >
+                    <label for="title" class=" justify-start pb-1 text-xl">Title</label>
+                    @error('title')
+                        <div class="text-red-600">
+                            {{ $message }}
+                        </div>
+                    @enderror
+                    <input type="text" id='title' name='title' class="rounded-lg w-3/4 mx-5 @error('title') border-red-600 bg-red-200 @enderror" >
                 </section>
             </section>
             <section id="Description" class="grid col-span-full mt-10 w-full items-start">
-                    <label for="" class=" justify-start pb-1 text-xl">Description</label>
-                    <input type="text" class="rounded-lg w-3/4 h-20 mx-5">
+                    <label for="detail" class=" justify-start pb-1 text-xl">Description</label>
+                    @error('detail')
+                        <div class="text-red-600">
+                            {{ $message }}
+                        </div>
+                    @enderror
+                    <input type="text" id='detail' name='detail' class="rounded-lg  @error('detail') border-red-600 bg-red-200 @enderror w-3/4 h-20 mx-5">
             </section>
+
             <section id="Category & Datepicker" class="">
                 <section id="Category" class="grid cols-span-6 w-1/3">
-                    <button id="dropdownOffsetButton" data-dropdown-toggle="dropdownOffset" 
-                    data-dropdown-offset-distance="35" data-dropdown-offset-skidding="0" 
-                    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 mt-10" 
-                    type="button">Select Category <svg class="w-2.5 h-2.5 ml-2.5" 
-                    aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 10">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
-                    </svg></button>
                     <!-- Dropdown menu -->
-                    <div id="dropdownOffset" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 w-1/4">
-                        <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefault">
-                        <li>
-                            <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Concert</a>
-                        </li>
-                        <li>
-                            <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Camp</a>
-                        </li>
-                        <li>
-                            <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Online Camp</a>
-                        </li>
-                        </ul>
-                    </div>
+                    <label data-te-select-label-ref for='category'class="justify-start pb-1 text-xl mt-10">Category</label>
+                    @error('category')
+                        <div class="text-red-600">
+                            {{ $message }}
+                        </div>
+                    @enderror
+                    <select data-te-select-init id='category' name="category" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 ">
+                    @foreach($categorys as $category)
+                        <option id="category" name="category_id"> {{$category->category_name}}  </option>
+                    @endforeach 
+                    </select>
                 </section>
+
                 <!-- Event Date Time-->
                 <section id="Datepicker Close In" class='grid cols-span-6 mt-6'>
-                    <x-datepicker>
-                        Close In
-                    </x-datepicker>
+                    <div class="-mx-3 flex flex-wrap">
+                        <div class="w-full px-3 sm:w-1/2">
+                            <div class="mb-5">
+                                <label for="dateCloseIn" class="mb-3 block text-base text-xl text-[#07074D]">
+                                    CloseIn
+                                </label>
+                                @error('dateCloseIn')
+                                    <div class="text-red-600">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                                <input type="date" name="dateCloseIn" id="dateCloseIn"
+                                        class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" />
+                                </div>
+                                </div>
+                                    <div class="w-full px-3 sm:w-1/2">
+                                        <div class="mb-5">
+                                    <label for="time" class="mb-3 block text-base font-medium text-[#07074D]">
+                                        <br>
+                                    </label>
+                                    @error('datetimeCloseIn')
+                                        <div class="text-red-600">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                <input type="time" name="datetimeCloseIn" id="datetimeCloseIn"
+                                class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" />
+                            </div>
+                        </div>
+                    </div>
                 </section>
 
                 <section id="Datepicker Annument date" class="grid cols-span-6 mt-6">
-                    <x-datepicker>
-                        Annument date
-                    </x-datepicker>
+                    <div class="-mx-3 flex flex-wrap">
+                        <div class="w-full px-3 sm:w-1/2">
+                            <div class="mb-5">
+                                <label for="Annumentdate" class="mb-3 block text-base text-xl text-[#07074D]">
+                                    Annument date
+                                </label>
+                                @error('Annumentdate')
+                                        <div class="text-red-600">
+                                            {{ $message }}
+                                        </div>
+                                 @enderror
+                                <input type="date" name="Annumentdate" id="Annumentdate"
+                                        class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" />
+                                </div>
+                                </div>
+                                    <div class="w-full px-3 sm:w-1/2">
+                                        <div class="mb-5">
+                                    <label for="datetimeAnnument" class="mb-3 block text-base font-medium text-[#07074D]">
+                                        <br>
+                                    </label>
+                                @error('datetimeAnnument')
+                                        <div class="text-red-600">
+                                            {{ $message }}
+                                        </div>
+                                 @enderror
+                                <input type="time" name="datetimeAnnument" id="datetimeAnnument"
+                                class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" />
+                            </div>
+                        </div>
+                    </div>
                 </section>
 
                 <section id="Datepicker duration Event" class="grid cols-span-6 mt-6" >
-                    <x-datepicker-duration>
-                        Start Event Date
-                    </x-datepicker-duration>
-                    <!-- Bug at datepicker-duration -->
-                <div class="w-full px-3 sm:w-1/2">
-                    <div class="mb-5">
-                        <label for="time" class="mb-3 block text-base text-xl text-[#07074D]">
-                            End Event Date
-                        </label>
-                        <input type="date" name="date" id="date"
-                        class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" />
-                </div>
+                    <div class="-mx-3 flex flex-wrap">
+                        <div class="w-full px-3 sm:w-1/2">
+                            <div class="mb-5">
+                                <label for="startEventDate" class="mb-3 block text-base text-xl text-[#07074D]">
+                                    Start Event Date
+                                </label>
+                                @error('startEventDate')
+                                        <div class="text-red-600">
+                                            {{ $message }}
+                                        </div>
+                                 @enderror
+                                <input type="date" name="startEventDate" id="startEventDate"
+                                        class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" />
+                                </div>
+                                </div>
+                                    <div class="w-full px-3 sm:w-1/2">
+                                        <div class="mb-5">
+                                    <label for="endEventDate" class="mb-3 block text-base  text-xl text-[#07074D]">
+                                    End Event Date
+                                    </label>
+                                @error('endEventDate')
+                                        <div class="text-red-600">
+                                            {{ $message }}
+                                        </div>
+                                 @enderror
+                                <input type="date" name="endEventDate" id="endEventDate"
+                                class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" />
+                            </div>
+                        </div>
+                    </div>
                 </section>
             </section>
         <section id="upload payment">
-            <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="file_input">Upload Payment File</label>
-            <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="file_input" type="file">
+            <label class="block mb-2 text-2xl font-medium text-gray-900 dark:text-white" for="file_input">Upload Payment File</label>
+            @error('file_input')
+                <div class="text-red-600">
+                    {{ $message }}
+                </div>
+            @enderror
+            <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" 
+            id="file_input" type="file" name="file_input">
         </section>
         <!-- dynamic_fields.blade.php -->
-        <section id="AddMember">
+        <!-- <section id="AddMember">
             <div class="container  mt-6">
-                <button id="addMember" class="px-4 py-2 bg-blue-500 text-white rounded">Add Member</button>
-                <div id="inputContainer" class="mt-4">
+                <button id="addMember" type="button" class="px-4 py-2 bg-blue-500 text-white rounded">Add Member</button>
+                <div id="inputContainer" class="mt-4"> -->
                     <!-- Dynamically added input fields will go here -->
-                </div>
+                <!-- </div>
             </div>
             <script>
                 document.addEventListener('DOMContentLoaded', function () {
@@ -97,6 +190,7 @@
                     inputField.setAttribute('type', 'text');
                     inputField.setAttribute('name', `input_${fieldCounter}`);
                     inputField.setAttribute('class', 'block w-full mt-2 p-2 border rounded');
+    
 
                     const removeBtn = document.createElement('button');
                     removeBtn.textContent = 'Remove';
@@ -113,15 +207,23 @@
                     fieldCounter++;
                     });
                 });
-            </script>
+            </script> -->
         </section>
+                
             <div class="container mt-6">
-                <button id="addImage" class="px-4 py-2 bg-blue-500 text-white rounded">Add Image</button>
+                <!-- <button id="addImage" type="button" class="px-4 py-2 bg-blue-500 text-white rounded">Add Image</button> -->
+                <label class="block mb-2 text-2xl font-medium text-gray-900 dark:text-white" for="file_input">Upload Event Images</label>
                 <div id="imageContainer" class="mt-4">
+                    @error('listImage')
+                        <div class="text-red-600">
+                            {{ $message }}
+                        </div>
+                    @enderror
+                    <input type="file" name="listImage" multiple class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400">
                     <!-- Dynamically added input fields will go here -->
                 </div>
             </div>
-            <script>
+            <!-- <script>
                 document.addEventListener('DOMContentLoaded', function () {
                 const addImageBtn = document.getElementById('addImage');
                 const imageContainer = document.getElementById('imageContainer');
@@ -135,7 +237,8 @@
                     imageField.setAttribute('type', 'file');
                     imageField.setAttribute('name', `image_${imageFieldCounter}`);
                     imageField.setAttribute('class', 'block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400');
-
+                    imageField.setAttribute('mutiple');
+                    
                     const removeBtn = document.createElement('button');
                     removeBtn.textContent = 'Remove';
                     removeBtn.setAttribute('class', 'mt-2 px-4 py-2 bg-red-500 text-white rounded');
@@ -152,7 +255,7 @@
                     imageFieldCounter++;
                     });
                 });
-            </script>
+            </script> -->
         <section>
 
         </section>
@@ -198,6 +301,9 @@
         </section>  
 
         </section>
+        <button type="submit" class="block w-full bg-blue-500 text-white font-bold p-4 rounded-lg">Submit</button>
+        </form>
+
     </main>
 
 @endsection   

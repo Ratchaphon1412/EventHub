@@ -1,5 +1,6 @@
 
 <x-app-layout>
+    
     <main class="flex-col justify-center items-center ">
        
         <section id="coverImage" class="justify-center items-center  bg-fixed bg-black   w-full  rounded-lg  bg-cover bg-no-repeat bg-[url('https://images.unsplash.com/photo-1501560379-05951a742668?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80')]">
