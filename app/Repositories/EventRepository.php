@@ -3,7 +3,9 @@
 namespace App\Repositories;
 
 use App\Interfaces\EventRepositoryInterface;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Event;
+
 
 
 class  EventRepository implements EventRepositoryInterface
@@ -31,7 +33,6 @@ class  EventRepository implements EventRepositoryInterface
         $description,
         $category,
         $image_poster,
-        $date_post,
         $registration_start_date,
         $registration_end_date,
         $announcement_date,
@@ -47,7 +48,6 @@ class  EventRepository implements EventRepositoryInterface
             'description' => $description,
             'category_id' => $category->id,
             'image_poster' => $image_poster,
-            'date_post' => $date_post,
             'registration_start_date' => $registration_start_date,
             'registration_end_date' => $registration_end_date,
             'announcement_date' => $announcement_date,
