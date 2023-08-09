@@ -10,16 +10,32 @@ use App\Notifications\UpdateKanban;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Notification;
 
+use App\Interfaces\KanbanCardRepositoryInterface;
+use App\Interfaces\KanbanColumnsRepositoryInterface;
+use App\Interfaces\KanbanRepositoryInterface;
 
 class KanbanController extends Controller
 {
+
+    private KanbanRepositoryInterface $kanbanRepository;
+    private KanbanColumnsRepositoryInterface $kanbanColumnRepository;
+    private KanbanCardRepositoryInterface $kanbanCardRepository;
+
+    public function __construct(KanbanRepositoryInterface $kanbanRepository,KanbanColumnsRepositoryInterface $kanbanColumnRepository,KanbanCardRepositoryInterface $kanbanCardRepository)
+    {
+        $this->kanbanRepository = $kanbanRepository;
+        $this->kanbanColumnRepository = $kanbanColumnRepository;
+        $this->kanbanCardRepository = $kanbanCardRepository;
+    }
+   
+
     /**
      * Display a listing of the resource.
      */
     public function index(string $id)
     {
         //
-       $kanban = Kanban::find($id);
+       $kanban = $this->kanbanRepository->findById($id);
        $todo = [];
        $working = [];
        $done = [];
@@ -48,34 +64,28 @@ class KanbanController extends Controller
      */
     public function store(Request $request)
     {
-        //
-         $user = Auth::user();
-         Notification::send($user, new UpdateKanban());
-
-        if($request->Title == null){
-            return redirect()->back();
-        }
+        // validate
+        $validated = $request->validate([
+            'Title' => 'required',
+            'kanban' => 'required',
+            'Description' => 'required',
+        ]);
+    
+      
 
         $title = $request->Title;
         $kanban_id = $request->kanban;
-        $description = null;
-        if ($request->Description == null){
-            $description = "";
-        }else{
-            $description = $request->Description;
-        }
+        $description = $request->Description;
+      
 
-       
+        // Notification
+        $user = Auth::user();
+        Notification::send($user, new UpdateKanban());
 
-       $kanban = Kanban::find($kanban_id);
+        // create card
+       $kanban = $this->kanbanRepository->findById($kanban_id);
        $columnsTodo = $kanban->columns[0];
-
-       $newCard = new KanbanCard();
-       $newCard->title = $title;
-       $newCard->description = $description;
-       $newCard->kanban_column_id = $columnsTodo->id;
-       $newCard->save();
-
+       $this->kanbanCardRepository->createCard($columnsTodo,$title,$description,$user);
        
 
 
@@ -95,13 +105,17 @@ class KanbanController extends Controller
      */
     public function edit(Request $request,Kanban $kanban)
     {
-        //
-        $card = KanbanCard::where("id",$request->card_id)
-        ->update([
-            "title" => $request->title,
-            "description" => $request->description
+
+        // validate
+        $validated = $request->validate([
+            'title' => 'required',
+            'description' => 'required',
+            'card_id' => 'required',
         ]);
 
+        // edit card
+        $card = $this->kanbanCardRepository->findById($request->card_id);
+        $this->kanbanCardRepository->editCard($request->title,$request->description,$card);
         return redirect()->back();
     }
 
@@ -110,17 +124,17 @@ class KanbanController extends Controller
      */
     public function update(Request $request, Kanban $kanban)
     {
-        //
+        // validate
 
-        $card = KanbanCard::find($request->card_id);
-        $column = KanbanColumn::where("name",$request->column_name)->first();
-
-        $card->update([
-            "kanban_column_id" => $column->id
+        $validated = $request->validate([
+            'card_id' => 'required',
+            'column_name' => 'required',
         ]);
+    
+        $card = $this->kanbanCardRepository->findById($request->card_id);
+        $column = $this->kanbanColumnRepository->findByName($request->column_name);
+        $this->kanbanCardRepository->updateColumn($card,$column);
 
-        
-  
     }
 
     /**
@@ -128,10 +142,12 @@ class KanbanController extends Controller
      */
     public function destroy(Request $request)
     {
-        //
+        // validate
+        $validated = $request->validate([
+            'card' => 'required',
+        ]);
 
-        $card = KanbanCard::where("id",$request->card);
-       $card->delete();
+        $this->kanbanCardRepository->deleteCard($request->card);
         return redirect()->back();
     }
 

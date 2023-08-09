@@ -4,6 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use App\Models\KanbanColumn;
+use App\Models\User;
 
 return new class extends Migration
 {
@@ -17,6 +18,7 @@ return new class extends Migration
             $table->string('title');
             $table->text('description')->nullable();
             $table->foreignIdFor(KanbanColumn::class);
+            $table->foreignIdFor(User::class);
             $table->timestamps();
             $table->softDeletes();
 

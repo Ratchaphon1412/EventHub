@@ -48,30 +48,35 @@ class KanbanSeeder extends Seeder
         $card->title = "Card 1";
         $card->description = "Description 1";
         $card->kanban_column_id = $kanban->columns[0]->id;
+        $card->user_id = 1;
         $card->save();
 
         $card = new KanbanCard();
         $card->title = "Card 2";
         $card->description = "Description 2";
         $card->kanban_column_id = $kanban->columns[0]->id;
+        $card->user_id = 1;
         $card->save();
 
         $card = new KanbanCard();
         $card->title = "Card 3";
         $card->description = "Description 3";
         $card->kanban_column_id = $kanban->columns[1]->id;
+        $card->user_id = 1;
         $card->save();
 
         $card = new KanbanCard();
         $card->title = "Card 4";
         $card->description = "Description 4";
         $card->kanban_column_id = $kanban->columns[1]->id;
+        $card->user_id = 1;
         $card->save();
 
         $card = new KanbanCard();
         $card->title = "Card 5";
         $card->description = "Description 5";
         $card->kanban_column_id = $kanban->columns[2]->id;
+        $card->user_id = 1;
         $card->save();
 
 

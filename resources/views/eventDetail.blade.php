@@ -1,146 +1,113 @@
+
 <x-app-layout>
-    {{-- <div class="image">
-            <img src="https://images.unsplash.com/photo-1501612780327-45045538702b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" 
-            alt="Poster" class="h-auto max-w-lg rounded-lg" style="justify-items: center; margin-left: auto; margin-right: auto;">
-    </div> --}}
-    {{-- <div class="coverImg" >
-            
-    
-        <div class="absolute h-full w-full overflow-hidden bg-fixed" style=" background: solid black">
-            
-            <img class="md:w-screen bg-center " src="https://images.unsplash.com/photo-1501612780327-45045538702b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="coverPage">
-            
-        </div>
-    </div> --}}
-    <div class="h-screen flex-col">
-         <div
-            class="relative overflow-hidden h-1/2  rounded-lg bg-cover bg-no-repeat p-12 md:object-scale-down bg-[url('https://images.unsplash.com/photo-1679926552705-bdac6c004dd9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2071&q=80')]">
-            <div
-                class="absolute bottom-0 left-0 right-0 top-0 h-full w-full overflow-hidden bg-fixed bg-gray-950/[0.6] drop-shadow-lg">
-                <div class="w-full h-full md:flex justify-center items-center">
-                    <div class="flex md:h-3/6 md:w-4/6 justify-start items-center bg-gray-50/[0.6] rounded-lg">
-                        <div class="flex-auto h-5/6 w-fit bg-no-repeat overflow-hidden bg-cover bg-gray-50/[0.6] rounded-lg ml-10 bg-[url('https://images.unsplash.com/photo-1501612780327-45045538702b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80')] ">
-                            
-                        {{-- <h2 class="mb-4 text-4xl font-semibold">Heading</h2>
-                        <h4 class="mb-6 text-xl font-semibold">Subheading</h4>
-                        <button
-                            type="button"
-                            class="rounded border-2 border-neutral-50 px-7 pb-[8px] pt-[10px] text-sm font-medium uppercase leading-normal text-neutral-50 transition duration-150 ease-in-out hover:border-neutral-100 hover:bg-neutral-500 hover:bg-opacity-10 hover:text-neutral-100 focus:border-neutral-100 focus:text-neutral-100 focus:outline-none focus:ring-0 active:border-neutral-200 active:text-neutral-200 dark:hover:bg-neutral-100 dark:hover:bg-opacity-10"
-                            data-te-ripple-init
-                            data-te-ripple-color="light">
-                            Call to action
-                        </button> --}}
-                        </div>
-                        <div class="md:flex-auto items-top h-5/12 w-1/12 bg-gray-50/[0.6] rounded-lg ml-10 mr-20 p-10">
-                            <label class="md:text-2xl">A Night of Musical Magic - The Concert Spectacular! </label>
-                            <h1>Category</h1>
-                            <div class="flex">
-                                <a href="">รับทั้งหมดกี่คน</a>
+    <main class="flex-col justify-center items-center ">
+       
+        <section id="coverImage" class="justify-center items-center  bg-fixed bg-black   w-full  rounded-lg  bg-cover bg-no-repeat bg-[url('https://images.unsplash.com/photo-1501560379-05951a742668?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80')]">
+            <div class="flex flex-col justify-center items-center  rounded-lg relative p-12  h-full w-auto overflow-hidden backdrop-filter backdrop-blur-sm bg-opacity-10  ">
+                <div class="grid grid-cols-1 md:grid-cols-2 backdrop-filter backdrop-blur-sm bg-opacity-80 bg-black text-white  rounded-lg shadow-lg overflow-hidden  w-3/4 drop-shadow-lg">
+                    <img src="https://images.unsplash.com/photo-1501560379-05951a742668?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"  alt="Mountain" 
+                    class="w-full h-full object-cover">
+                    <div id="text Title" class="flex justify-center items-center">
+                        <div id="text" class="p-6 flex-col text-start justify-center items-center space-y-4  gap-4">
+                            <div>
+                                <p class="text-base">Category</p>
+                                <h2 class="text-3xl  font-black">Beautiful Mountain View</h2>
                             </div>
+                            <div class="flex flex-row ">
+                                <i class="bi bi-calendar-week font-bold mr-2"></i>
+                                <p class=" leading-tight  text-base ">
+                                    
+                                29 Sep 2023 17:00 - 30 Sep 2023 17:00
+                                </p>
+                            </div>
+                            <div class="flex flex-row">
+                                <i class="bi bi-geo-alt-fill mr-2"></i>
+                                <p>
+                                    Bitec Bang Na
+                                </p>
+                            </div>
+                            <button type="button" class="py-2.5 px-5 mr-2 mb-2 text-sm font-medium  focus:outline-none text-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Join</button>
 
+                            
                         </div>
                     </div>
                 </div>
+            </div>   
+        </section>
+        <div class="container mx-auto">
+            <div class="mb-4 border-b border-gray-200 sticky top-12 bg-white z-10">
+                <ul class="flex flex-wrap -mb-px text-sm font-medium text-center" >
+                    <li class="mr-2" role="presentation">
+                        <a href="#Detail" class="inline-block p-4 border-b-2 rounded-t-lg"  type="button" >Detail</a>
+                    </li>
+                    <li class="mr-2" role="presentation">
+                        <a href="#Image" class="inline-block p-4 border-b-2 border-transparent rounded-t-lg" type="button">Image</a>
+                    </li>
+                    <li class="mr-2" role="presentation">
+                        <a href="#Location" class="inline-block p-4 border-b-2 border-transparent rounded-t-lg" type="button" >Location</a>
+                    </li>
+                    <li role="presentation">
+                        <a href="#Contact" class="inline-block p-4 border-b-2 border-transparent rounded-t-lg "   type="button">Contacts</a>
+                    </li>
+                </ul>
             </div>
-         </div>
-            <div class="relative h-1/2 md:min-h">
-                <h1 class="flex justify-center items-center mt-20 text-4xl">Detail</h1>
-                <p class="flex  mx-60 text-center justify-center items-center mt-10 md:text-2xl md:min-h">Join us for an unforgettable evening of musical brilliance as we present "A Night of Musical Magic" - a concert extravaganza that promises to leave you spellbound!
-                The stage is set, the lights are dimmed, and the anticipation in the air is palpable. As the audience fills the grand concert hall, whispers of excitement mingle with the gentle hum of anticipation. Tonight is no ordinary night; it is a celebration of artistry and a union of soul-stirring melodies.</p>
-                <hr>
-            </div>
-            
-        </div>
-    </div>
-    {{-- Picture Slide Show --}}
-        <div id="gallery" class="relative w-full" data-carousel="slide">
-            <!-- Carousel wrapper -->
-            <div class="relative h-56 overflow-hidden rounded-lg md:h-96">
-                 <!-- Item 1 -->
-                <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                    <img src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-1.jpg" class="relative block max-w-full h-auto -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="">
-                </div>
-                <!-- Item 2 -->
-                <div class="hidden duration-700 ease-in-out" data-carousel-item="active">
-                    <img src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-2.jpg" class="relative block max-w-full h-auto -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="">
-                </div>
-                <!-- Item 3 -->
-                <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                    <img src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-3.jpg" class="relative block max-w-full h-auto -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="">
-                </div>
-                <!-- Item 4 -->
-                <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                    <img src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-4.jpg" class="relative block max-w-full h-auto -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="">
-                </div>
-                <!-- Item 5 -->
-                <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                    <img src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-5.jpg" class="relative block max-w-full h-auto -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="">
-                </div>
-            </div>
-            <!-- Slider controls -->
-            <button type="button" class="mt-20 absolute top-0 left-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-prev>
-                <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
-                    <svg class="w-4 h-4 text-white dark:text-gray-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 1 1 5l4 4"/>
-                    </svg>
-                    <span class="sr-only">Previous</span>
-
-                          </div>
-                    <div id="Register time" class=" text-center mt-20 text-4xl">
-                            <label>Until Register end date</label>
-                            
-                            <div class="mt-5 grid grid-flow-col gap-5 justify-center text-center auto-cols-max">
-                                <div class="flex flex-col p-2 bg-neutral rounded-box text-neutral-content">
-                                  <span class="countdown font-mono text-5xl">
-                                    <span style="--value:15;"></span>
-                                  </span>
-                                  days
-                                </div> 
-                                <div class="flex flex-col p-2 bg-neutral rounded-box text-neutral-content">
-                                  <span class="countdown font-mono text-5xl">
-                                    <span style="--value:10;"></span>
-                                  </span>
-                                  hours
-                                </div> 
-                                <div class="flex flex-col p-2 bg-neutral rounded-box text-neutral-content">
-                                  <span class="countdown font-mono text-5xl">
-                                    <span style="--value:24;"></span>
-                                  </span>
-                                  min
-                                </div> 
-                                <div class="flex flex-col p-2 bg-neutral rounded-box text-neutral-content">
-                                  <span class="countdown font-mono text-5xl">
-                                    <span style="--value:54;"></span>
-                                  </span>
-                                  sec
-                                </div>
-                              </div>        
-                    </div>
-                    <div id="Announment time"class="mt-20 justify-center text-center text-4xl">
-                        <label>Announment Date</label>
-                        <h1 class="mt-5">Date</h1>
-                    </div>
-                    <div class="relative flex justify-center w-full h-full rounded-xl mt-20">
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15495.430065221823!2d100.55934052016653!3d13.84759001989712!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30e29d1e111be769%3A0x4332e8cd6aec8c31!2sKasetsart%20University!5e0!3m2!1sen!2sth!4v1690953595631!5m2!1sen!2sth" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-                    </div>
-                    <div id="Location"class="mt-20 justify-center text-center text-4xl">
-                        <label>Location</label>
-                        <h1 class="mt-5">location detail</h1>
-                    </div>
-                    <div class="flex justify-end items-end mt-20 mr-20">
-                        <a href="" class="text-indigo-700 border border-indigo-600 py-4 px-6 rounded inline-flex">
-                            Question Page
-                            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                viewBox="0 0 24 24" class="w-8 h-8 ml-4">
-                                <path d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-            </span>
-
- 
     
+            <section id="Title" class="w-full text-center py-10 space-y-4">
+                <h1 class="mt-5 text-2xl md:text-4xl lg:text-5xl">Beautiful Mountain View</h1>
+                <div class="flex flex-row justify-center">
+                    <i class="bi bi-calendar-week font-bold mr-2"></i>
+                    <p class=" leading-tight  text-base ">
+                        
+                    29 Sep 2023 17:00 - 30 Sep 2023 17:00
+                    </p>
+                </div>
+                <div class="flex flex-row  justify-center">
+                    <i class="bi bi-geo-alt-fill mr-2"></i>
+                    <p>
+                        Bitec Bang Na
+                    </p>
+                </div>
+               
+                <hr class="mt-5">
+            </section>
+            <section id="Image" class="flex flex-col justify-center items-center  first-letter w-full">
+                <img src="https://images.unsplash.com/photo-1501560379-05951a742668?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"  alt="Mountain" 
+                    class="w-3/4 h-full object-cover">
+
+            </section>
+            <section id="Detail">
+                <h1 class="mt-5 mx-20 text-2xl md:text-4xl lg:text-5xl">Detail</h1>
+                <p class="mt-5 mx-20 text-sm md:text-base lg:text-lg xl:text-xl">
+                    Join us for an unforgettable evening of musical brilliance as we present "A Night of Musical Magic" - a concert extravaganza that promises to leave you spellbound!
+                    The stage is set, the lights are dimmed, and the anticipation in the air is palpable. As the audience fills the grand concert hall, whispers of excitement mingle with the gentle hum of anticipation. Tonight is no ordinary night; it is a celebration of artistry and a union of soul-stirring melodies.
+                </p>
+            </section>
+
+            <section id="Location" class="flex flex-col justify-center w-full space-y-4" >
+                 <h1 class="mt-5 mx-20 text-2xl md:text-4xl lg:text-5xl">Location</h1>
+                <div class=" mx-20" ><iframe width="100%" height="400" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=1%20Grafton%20Street,%20Dublin,%20Ireland+(My%20Business%20Name)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"><a href="https://www.maps.ie/population/">Population Estimator map</a></iframe></div>
+
+                <section >
+                    <p class="mt-5 mx-20 text-sm md:text-base lg:text-lg xl:text-xl">
+                        Join us for an unforgettable evening of musical brilliance as we present "A Night of Musical Magic" - a concert extravaganza that promises to leave you spellbound!
+                        The stage is set, the lights are dimmed, and the anticipation in the air is palpable. As the audience fills the grand concert hall, whispers of excitement mingle with the gentle hum of anticipation. Tonight is no ordinary night; it is a celebration of artistry and a union of soul-stirring melodies.
+                    </p>
+                </section>
+
+            </section>
+
+            <section id="Contact" class="flex flex-col justify-center w-full space-y-4">
+                <h1 class="mt-5 mx-20 text-2xl md:text-4xl lg:text-5xl">Contact</h1>
+                <p class="mt-5 mx-20 text-sm md:text-base lg:text-lg xl:text-xl">
+                    Join us for an unforgettable evening of musical brilliance as we present "A Night of Musical Magic" - a concert extravaganza that promises to leave you spellbound!
+                    The stage is set, the lights are dimmed, and the anticipation in the air is palpable. As the audience fills the grand concert hall, whispers of excitement mingle with the gentle hum of anticipation. Tonight is no ordinary night; it is a celebration of artistry and a union of soul-stirring melodies.
+                </p>
+            </section>
+
+
+     
+        </div>
+    </main>  
 </x-app-layout>
 
 
