@@ -81,4 +81,9 @@ class User extends Authenticatable
         return $this->hasMany(Team::class);
     }
 
+    public function kanbanCards():HasMany
+    {
+        return $this->hasMany(KanbanCard::class);
+    }
+
 }
