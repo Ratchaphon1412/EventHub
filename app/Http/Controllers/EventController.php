@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Event;
 use App\Models\Category;
+use App\Models\EventImage;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 
 class EventController extends Controller
@@ -41,15 +43,21 @@ class EventController extends Controller
             'datetimeAnnument' => ['required'],
             'startEventDate' => ['required'],
             'endEventDate' => ['required'],
-            'file_input' => ['required'], 
+            'file_input' => ['required'],
+            'poster' => ['required','image','mimes:jpeg,png,jpg','max:2048'],
+            'listImage'
         ]);
+
         $event = new Event();
+        //poster
+
         $event->title = $request->get('title');
         $event->description = $request->get('detail');
 
         $category = Category::where();
         $event->category_id = $category->where('category_name', '=', $request->category)->get()->id;
 
+        $event->poster = $request->get('poster');
         $combinedDTCloseIn = date('Y-m-d H:i:s', strtotime("$request->dateCloseIn $request->datetimeCloseIn"));
         $event->registration_end_date = $combinedDTCloseIn;
 
@@ -60,10 +68,24 @@ class EventController extends Controller
         $event->event_end_date = $request->endEventDate;
         $event->document_payment = $request->file_input;
 
+        // $
+        //Images_event
+        // foreach($request->listImage)
+        // $eventImage = new EventImage();
+        // $event->event_image_id = $eventImage->id;
+        // $listImg = [];
+
+        // $request->get('listImage')->$eventImage;
+
+
+        // $user = Auth::user();
+        // $event->user_id = $user->id;
+
+
+
         // $event->
         return view('home');
     }
-
     /**
      * Display the specified resource.
      */
