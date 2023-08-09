@@ -2,11 +2,11 @@
 
 namespace App\Repositories;
 
-use App\Interfaces\CategoryRepositoryInterface;
+use App\Interfaces\CategoryRepositoryinterface;
 use App\Models\Category;
 
 
-class CategoryRepository implements CategoryRepositoryInterface
+class CategoryRepository implements CategoryRepositoryinterface
 {
     public function getAllCategory()
     {
@@ -16,7 +16,7 @@ class CategoryRepository implements CategoryRepositoryInterface
     public function createCategory($name)
     {
         return Category::create([
-            'name' => $name,
+            'category_name' => $name,
         ]);
     }
 
@@ -24,8 +24,9 @@ class CategoryRepository implements CategoryRepositoryInterface
     {
         return Category::find($category_id);
     }
+    
     public function findCategoryByName($name)
     {
-        return Category::where('name', $name)->first();
+        return Category::where('category_name', $name)->first();
     }
 }
