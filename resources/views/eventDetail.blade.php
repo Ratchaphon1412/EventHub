@@ -3,22 +3,21 @@
     
     <main class="flex-col justify-center items-center ">
        
-        <section id="coverImage" class="justify-center items-center  bg-fixed bg-black   w-full  rounded-lg  bg-cover bg-no-repeat bg-[url('https://images.unsplash.com/photo-1501560379-05951a742668?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80')]">
-            <div class="flex flex-col justify-center items-center  rounded-lg relative p-12  h-full w-auto overflow-hidden backdrop-filter backdrop-blur-sm bg-opacity-10  ">
+        <section id="coverImage" class="justify-center items-center  bg-fixed bg-black   w-full  rounded-lg  bg-cover bg-no-repeat bg-[url({{url('storage/public'.$event->image_poster)}})]" src=>
+            <div class="flex flex-col justify-center items-center  rounded-lg relative p-12  h-full w-auto overflow-hidden backdrop-filter backdrop-blur-sm bg-opacity-10  bg-[url({{url('storage/'.$event->image_poster)}})] ">
                 <div class="grid grid-cols-1 md:grid-cols-2 backdrop-filter backdrop-blur-sm bg-opacity-80 bg-black text-white  rounded-lg shadow-lg overflow-hidden  w-3/4 drop-shadow-lg">
-                    <img src="https://images.unsplash.com/photo-1501560379-05951a742668?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"  alt="Mountain" 
+                    <img src="{{url('storage/'.$event->image_poster)}}"  alt="Mountain" 
                     class="w-full h-full object-cover">
                     <div id="text Title" class="flex justify-center items-center">
                         <div id="text" class="p-6 flex-col text-start justify-center items-center space-y-4  gap-4">
                             <div>
-                                <p class="text-base">Category</p>
-                                <h2 class="text-3xl  font-black">Beautiful Mountain View</h2>
+                                <p class="text-base">{{$event->category->category_name}}</p>
+                                <h2 class="text-3xl  font-black">{{$event->title}}</h2>
                             </div>
                             <div class="flex flex-row ">
                                 <i class="bi bi-calendar-week font-bold mr-2"></i>
                                 <p class=" leading-tight  text-base ">
-                                    
-                                29 Sep 2023 17:00 - 30 Sep 2023 17:00
+                                    {{date('d-m-Y',strtotime($event->registration_start_date))}} - {{date('d-m-Y',strtotime($event->registration_end_date))}}
                                 </p>
                             </div>
                             <div class="flex flex-row">
