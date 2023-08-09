@@ -7,10 +7,29 @@ use App\Models\Category;
 use App\Models\EventImage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Interfaces\EventRepositoryInterface;
+use App\Interfaces\CategoryRepositoryInterface;
+
 
 
 class EventController extends Controller
 {
+
+    private EventRepositoryInterface $eventRepository;
+    private CategoryRepositoryInterface $categoryRepository;
+
+
+    public function __construct(EventRepositoryInterface $eventRepository, CategoryRepositoryInterface $categoryRepository)
+    {
+        $this->eventRepository = $eventRepository;
+        $this->categoryRepository = $categoryRepository;
+    }
+
+
+
+
+
+
     /**
      * Display a listing of the resource.
      */
@@ -24,8 +43,8 @@ class EventController extends Controller
      */
     public function create()
     {
-        $category = Category::all(); 
-        return view('createEvent',['categorys'=>$category]);
+        $categorys = $this->categoryRepository->getAllCategory();
+        return view('createEvent', compact('categorys'));
     }
 
     /**
@@ -33,58 +52,40 @@ class EventController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'title' => ['required','min:1','max:255'],
-            'detail' => ['required','min:1','max:255'],
-            'category' => ['required'],
-            'dateCloseIn' => ['required'],
-            'datetimeCloseIn' => ['required'],
-            'Annumentdate' => ['required'],
-            'datetimeAnnument' => ['required'],
-            'startEventDate' => ['required'],
-            'endEventDate' => ['required'],
-            'file_input' => ['required'],
-            'poster' => ['required','image','mimes:jpeg,png,jpg','max:2048'],
-            'listImage'
-        ]);
+        // $request->validate([
+        //     'title' => ['required', 'min:1', 'max:255'],
+        //     'detail' => ['required', 'min:1', 'max:255'],
+        //     'category' => ['required'],
+        //     'dateCloseIn' => ['required'],
+        //     'datetimeCloseIn' => ['required'],
+        //     'Annumentdate' => ['required'],
+        //     'datetimeAnnument' => ['required'],
+        //     'startEventDate' => ['required'],
+        //     'endEventDate' => ['required'],
+        //     'file_input' => ['required'],
+        //     'poster' => ['required', 'image', 'mimes:jpeg,png,jpg', 'max:2048'],
+        //     'listImage'
+        // ]);
 
-        $event = new Event();
-        //poster
-
-        $event->title = $request->get('title');
-        $event->description = $request->get('detail');
-
-        $category = Category::where();
-        $event->category_id = $category->where('category_name', '=', $request->category)->get()->id;
-
-        $event->poster = $request->get('poster');
-        $combinedDTCloseIn = date('Y-m-d H:i:s', strtotime("$request->dateCloseIn $request->datetimeCloseIn"));
-        $event->registration_end_date = $combinedDTCloseIn;
-
-        $combinedDTAnnumentdate = date('Y-m-d H:i:s', strtotime("$request->Annumentdate $request->datetimeAnnument"));
-        $event->announcement_date = $combinedDTAnnumentdate;
-
-        $event->event_start_date = $request->startEventDate;
-        $event->event_end_date = $request->endEventDate;
-        $event->document_payment = $request->file_input;
-
-        // $
-        //Images_event
-        // foreach($request->listImage)
-        // $eventImage = new EventImage();
-        // $event->event_image_id = $eventImage->id;
-        // $listImg = [];
-
-        // $request->get('listImage')->$eventImage;
-
-
-        // $user = Auth::user();
-        // $event->user_id = $user->id;
-
-
-
-        // $event->
-        return view('home');
+        $category  =  $this->categoryRepository->findCategoryByName($request->category);
+        $user = Auth::user();
+        $image_poster = $request->file('poster')->store('images', 'public');
+        $event = $this->eventRepository->createEvent(
+            $request->title,
+            $request->detail,
+            $category,
+            $image_poster,
+            $request->dateCloseIn,
+            $request->datetimeCloseIn,
+            $request->Annumentdate,
+            $request->datetimeAnnument,
+            $request->startEventDate,
+            $request->endEventDate,
+            $request->latitude,
+            $request->longitude,
+            $request->file('file_input'),
+            $user
+        );
     }
     /**
      * Display the specified resource.
@@ -92,7 +93,7 @@ class EventController extends Controller
     public function show(Event $event)
     {
         // $event_detail = $event;
-        return view('eventDetail',['event'=>$event]);
+        return view('eventDetail', ['event' => $event]);
     }
 
     /**
