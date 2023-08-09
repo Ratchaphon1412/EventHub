@@ -15,10 +15,17 @@ class KanbanCard extends Model
     use HasFactory,SoftDeletes;
 
 
-    protected $fillable = ['title','description','kanban_column_id'];
+    protected $fillable = ['title','description','kanban_column_id','user_id'];
     
     public function kanbanColumn():BelongsTo
     {
         return $this->belongsTo(KanbanColumn::class);
+    }
+
+   
+
+    public function userOwner():BelongsTo
+    {
+        return $this->belongsTo(User::class);
     }
 }

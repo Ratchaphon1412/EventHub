@@ -8,10 +8,25 @@ use App\Models\EventImage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
+use App\Interfaces\EventRepositoryInterface;
+use App\Interfaces\CategoryRepositoryInterface;
+
 
 
 class EventController extends Controller
 {
+
+    private EventRepositoryInterface $eventRepository;
+    private CategoryRepositoryInterface $categoryRepository;
+
+
+    public function __construct(EventRepositoryInterface $eventRepository, CategoryRepositoryInterface $categoryRepository)
+    {
+        $this->eventRepository = $eventRepository;
+        $this->categoryRepository = $categoryRepository;
+    }
+
+
     /**
      * Display a listing of the resource.
      */
@@ -25,8 +40,8 @@ class EventController extends Controller
      */
     public function create()
     {
-        $category = Category::all(); 
-        return view('createEvent',['categorys'=>$category]);
+        $categorys = $this->categoryRepository->getAllCategory();
+        return view('createEvent', compact('categorys'));
     }
 
     /**
@@ -34,103 +49,54 @@ class EventController extends Controller
      */
     public function store(Request $request)
     {
-        // $request->validate([
-        //     'title' => ['required','min:1','max:255'],
-        //     'detail' => ['required','min:1','max:255'],
-        //     'category' => ['required'],
-        //     'dateCloseIn' => ['required'],
-        //     'datetimeCloseIn' => ['required'],
-        //     'Annumentdate' => ['required'],
-        //     'datetimeAnnument' => ['required'],
-        //     'startEventDate' => ['required'],
-        //     'endEventDate' => ['required'],
-        //     'file_input' => ['required'],
-        //     'poster' => ['required','image','mimes:jpeg,png,jpg','max:2048'],
-        //     'listImage'
-        // ]);
         // dd($request->all());
-        $event = new Event();
-        // $timeStamp = ;
+        $request->validate([
+            'title' => ['required','min:1','max:255'],
+            'detail' => ['required','min:1','max:255'],
+            'category' => ['required'],
+            'dateStartIn' => ['required'],
+            'datetimeStartIn' => ['required'],
+            'dateCloseIn' => ['required'],
+            'datetimeCloseIn' => ['required'],
+            // 'Annumentdate' => [],
+            // 'datetimeAnnument' => [],
+            'startEventDate' => ['required'],
+            'endEventDate' => ['required'],
+            'file_input' => ['required'],
+            'poster' => ['required', 'image', 'mimes:jpeg,png,jpg'],
+            'listImage'
+        ]);
+        $category  =  $this->categoryRepository->findCategoryByName($request->category);
+        $user = Auth::user();
 
-        $imageName = time(). '.' . $request->image->extendstopm();
-        $request->image->move(public_path('images',$imageName));
-
-
-        $namePoster = $request->file('poster')->getClientOriginalName();
-        $request->file('poster')->store('public/images/',$namePoster);
+        $imageName = $request->file('poster')->getClientOriginalName();
+        $pathImage = $request->file('poster')->storeAs('images',$imageName,'public');
             
+        $imageNameFile = $request->file('file_input')->getClientOriginalName();
+        $pathFile = $request->file('file_input')->storeAs('images',$imageNameFile,'public');
 
-            
-        //check request file have image 
+        $combinedDTStartIn = date('Y-m-d H:i:s', strtotime("$request->dateStartIn $request->datetimeStartIn"));
+        $combinedDTCloseIn = date('Y-m-d H:i:s', strtotime("$request->dateCloseIn $request->datetimeCloseIn"));
+        $combinedDTAnnumentdate = date('Y-m-d H:i:s', strtotime("$request->Annumentdate $request->datetimeAnnument"));
+        $startEventDate = date('Y-m-d',strtotime("$request->startEventDate"));
+        $endEventDate = date('Y-m-d',strtotime("$request->endEventDate"));
 
-        // if($request->hasFile('poster')){
-            
-        //     $filename = $request->getSchemeAndHttpHost() . '/assets/image/' . time() . '.' . $request->poster->extension();
-        //     $request->poster->move(public_path('/assets/image/'), $filename);
-
-        //     // $name = $request->file('image')->getClientOriginalName();
-        //     // $path = $request->file('image')->storeAs('public/images/', $name);
-        //     // $event->poster = $path;
-
-        //     // $destination_path = 'public/images';
-        //     // $image = $request->file('image');
-        //     // $image_name = $image->getClientOriginalName();
-        //     // $path = $request->file('image')->storeAs($destination_path,$image_name);
-        //     // $input['image'] = $image_name;
-
-
-        //     // $file = $request->file('image');
-        //     // $filename = $file->getClientOriginalName();
-        //     // $file->storage_path('public/' . $filename);
-        // }
-
-        
-        // if($request->file('poster')){
-        //     $path = $request->file('poster')->store('eventImages','public');
-        //     $event->poster = $path;
-        // }
-
-
-
-
-        // $event->title = $request->get('title');
-        // $event->description = $request->get('detail');
-
-        // $category = Category::where();
-        // $event->category_id = $category->where('category_name', '=', $request->category)->get()->id;
-
-        // $event->poster = $request->get('poster');
-        // $request->get('poster')->save('storage/app/test.jpg');
-
-
-        // $combinedDTCloseIn = date('Y-m-d H:i:s', strtotime("$request->dateCloseIn $request->datetimeCloseIn"));
-        // $event->registration_end_date = $combinedDTCloseIn;
-
-        // $combinedDTAnnumentdate = date('Y-m-d H:i:s', strtotime("$request->Annumentdate $request->datetimeAnnument"));
-        // $event->announcement_date = $combinedDTAnnumentdate;
-
-        // $event->event_start_date = $request->startEventDate;
-        // $event->event_end_date = $request->endEventDate;
-        // $event->document_payment = $request->file_input;
-
-        // // $
-        // //Images_event
-        // // foreach($request->listImage)
-        // // $eventImage = new EventImage();
-        // // $event->event_image_id = $eventImage->id;
-        // // $listImg = [];
-
-        // // $request->get('listImage')->$eventImage;
-
-
-        // $user = Auth::user();
-        // $event->user_id = $user->id;
-
-
-
-        // $event->
-        return redirect()->back();
-        // return view('');
+        $event = $this->eventRepository->createEvent(
+            $request->title,
+            $request->detail,
+            $category,
+            $pathImage,
+            $combinedDTStartIn,
+            $combinedDTCloseIn,
+            $combinedDTAnnumentdate,
+            $startEventDate,
+            $endEventDate,
+            $request->latitude,
+            $request->longitude,
+            $pathFile,
+            $user
+        );
+        return $event;
     }
     /**
      * Display the specified resource.
@@ -138,7 +104,7 @@ class EventController extends Controller
     public function show(Event $event)
     {
         // $event_detail = $event;
-        return view('eventDetail',['event'=>$event]);
+        return view('eventDetail', ['event' => $event]);
     }
 
     /**
