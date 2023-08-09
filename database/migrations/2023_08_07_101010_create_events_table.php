@@ -23,7 +23,6 @@ return new class extends Migration
             $table->string('description');
             $table->foreignIdFor(Category::class);
             $table->string("image_poster");
-            $table->dateTime('date_post');
             $table->dateTime('registration_start_date');
             $table->dateTime('registration_end_date');
             $table->dateTime("announcement_date")->nullable();
@@ -33,10 +32,6 @@ return new class extends Migration
             $table->string("event_longitude")->nullable();
             $table->string("document_payment")->nullable();
             $table->foreignIdFor(User::class);
-            
-            
-            
-            
             $table->timestamps();
         });
     }
