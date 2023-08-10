@@ -18,35 +18,24 @@ class QuestionSeeder extends Seeder
     public static function run(): void
     {
 
-        for ($i = 0; $i < 10; $i++) {
-            $questionAnswer = new QuestionAnswer();
-            $questionAnswer->answer = fake()->realText(110);
-            $questionAnswer->save();
+        for ($j = 0; $j < 3; $j++) {
+            $type = ['text', 'image'];
+            $event_id = rand(1, 2);
+            $size = 4;
+            for ($i = 1; $i <= $size; $i++) {
+                $questionName = new QuestionName();
+                $question = new Question();
 
-            $questionName = new QuestionName();
-            $questionName->name = fake()->realText(100);
-            $questionName->save();
+                $questionName->name = fake()->realText(100);
+                $questionName->answer_type = $type[rand(0,1)];
+                $questionName->save();
 
-            $question = new Question();
-            $question->question_answer_id = $questionAnswer->id;
-            $question->question_name_id = $questionName->id;
-            $question->user_id = random_int(1,4);
-            $question->event_id = 1;
-            $question->save();
+                $question->event_id = $event_id;
+                $question->question_name_id = $questionName->id;
+                $question->save();
+            }
         }
 
-        for ($i = 0; $i < 10; $i++) {
-            $questionAnswer = new QuestionAnswer();
-            $questionAnswer->answer = fake()->realText(110);
-            $questionAnswer->save();
-
-            $question = new Question();
-            $question->question_answer_id = $questionAnswer->id;
-            $question->question_name_id = random_int(1,10);
-            $question->user_id = random_int(1,4);
-            $question->event_id = 1;
-            $question->save();
-        }
 
     }
 }
