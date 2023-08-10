@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\AnswerQuestionController;
+use App\Http\Controllers\CreateQuestionController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RegisterStepTwoController;
 use App\Http\Controllers\WelcomeController;
@@ -32,16 +34,31 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified'])-
         Route::post('/kanban/card/delete','destroy')->name('kanban.card.delete');
         Route::post('/kanban/card/edit','edit')->name('kanban.card.edit');
         Route::post('/kanban/card/update','update')->name('kanban.card.update');
-    
-    });
 
     });
 
-    
+    });
+
+
 
     Route::get('register-step-two',[RegisterStepTwoController::class,'create'])->name('register-step-two.view');
     Route::post('register-step-two',[RegisterStepTwoController::class,'store'])->name('register-step-two.store');
 });
+
+Route::controller(CreateQuestionController::class)->group(function (){
+    Route::get('/{event}/create_question', 'index')->name('question.create');
+    Route::post('/{event}/create_question', 'store')->name('question.store');
+});
+
+Route::controller(AnswerQuestionController::class)->group(function (){
+    Route::get('/{event}/answer_question', 'index')->name('question.answer');
+    Route::post('/{event}/answer_question', 'store')->name('question.answer.store');
+});
+
+Route::get('/test', [
+    \App\Http\Controllers\TestController::class
+])->name('test');
+
 
 Route::get('/detail',function (){
     return view('eventDetail');
