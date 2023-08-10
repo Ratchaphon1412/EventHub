@@ -85,8 +85,6 @@
                 <livewire:card-event-image title="{{$event->title}}" image="{{url('storage/'.$event->image_poster)}}" status="Upcomming" category="{{$event->category->category_name}}" description="{{$event->description}}"/>
             </a>
             @endforeach
-            
-            
         </div>
     </section>
     <!-- Section Information-->
