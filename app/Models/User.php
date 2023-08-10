@@ -82,16 +82,13 @@ class User extends Authenticatable
         return $this->hasMany(Team::class);
     }
 
-<<<<<<< HEAD
-    public function kanbanCards():HasMany
+    public function kanbanCards(): HasMany
     {
         return $this->hasMany(KanbanCard::class);
     }
 
-=======
     public function approveEvents(): BelongsToMany
     {
         return $this->belongsToMany(Event::class, 'user_event_approve', 'user_id', 'event_id')->withPivot('status');
     }
->>>>>>> feature/approveRegister
 }
