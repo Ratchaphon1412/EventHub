@@ -11,6 +11,7 @@ use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
 
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class User extends Authenticatable
 {
@@ -69,21 +70,25 @@ class User extends Authenticatable
         'profile_photo_url',
     ];
 
-    
-    public function eventOwner():HasMany
+
+    public function eventOwner(): HasMany
     {
         return $this->hasMany(Event::class);
     }
 
 
-    public function teamJoined():HasMany
+    public function teamJoined(): HasMany
     {
         return $this->hasMany(Team::class);
     }
 
-    public function kanbanCards():HasMany
+    public function kanbanCards(): HasMany
     {
         return $this->hasMany(KanbanCard::class);
     }
 
+    public function approveEvents(): BelongsToMany
+    {
+        return $this->belongsToMany(Event::class, 'user_event_approve', 'user_id', 'event_id')->withPivot('status');
+    }
 }
