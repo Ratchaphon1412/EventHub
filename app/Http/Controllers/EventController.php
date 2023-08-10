@@ -112,7 +112,8 @@ class EventController extends Controller
      */
     public function edit(Event $event)
     {
-        //
+        $categorys = $this->categoryRepository->getAllCategory();
+        return view('editEvent',['event' => $event, 'categorys' => $categorys]);
     }
 
     /**
@@ -120,7 +121,60 @@ class EventController extends Controller
      */
     public function update(Request $request, Event $event)
     {
-        //
+        $request->validate([
+            'title' => ['required','min:1','max:255'],
+            'detail' => ['required','min:1','max:255'],
+            'category' => ['required'],
+            'dateStartIn' => ['required'],
+            'datetimeStartIn' => ['required'],
+            'dateCloseIn' => ['required'],
+            'datetimeCloseIn' => ['required'],
+            'Annumentdate' => ['required'],
+            'datetimeAnnument' => ['required'],
+            'startEventDate' => ['required'],
+            'endEventDate' => ['required'],
+            // 'file_input' => ['required'],
+            'poster' => ['required','image', 'mimes:jpeg,png,jpg'],
+            'listImage'
+        ]);
+
+        if($request->hasFile('poster')){
+            Storage::delete($event->poster_image);
+
+            $imageName = $request->file('poster')->getClientOriginalName();
+            $pathImage = $request->file('poster')->storeAs('images',$imageName,'public');
+        }   
+        $category  =  $this->categoryRepository->findCategoryByName($request->category);
+        $user = Auth::user();
+
+        // $imageName = $request->file('poster')->getClientOriginalName();
+        // $pathImage = $request->file('poster')->storeAs('images',$imageName,'public');
+            
+        $imageNameFile = $request->file('file_input')->getClientOriginalName();
+        $pathFile = $request->file('file_input')->storeAs('images',$imageNameFile,'public');
+
+        $combinedDTStartIn = date('Y-m-d H:i:s', strtotime("$request->dateStartIn $request->datetimeStartIn"));
+        $combinedDTCloseIn = date('Y-m-d H:i:s', strtotime("$request->dateCloseIn $request->datetimeCloseIn"));
+        $combinedDTAnnumentdate = date('Y-m-d H:i:s', strtotime("$request->Annumentdate $request->datetimeAnnument"));
+        $startEventDate = date('Y-m-d',strtotime("$request->startEventDate"));
+        $endEventDate = date('Y-m-d',strtotime("$request->endEventDate"));
+
+        $this->eventRepository->updateEvent(
+            $event,
+            $request->title,
+            $request->detail,
+            $category,
+            $pathImage,
+            $combinedDTStartIn,
+            $combinedDTCloseIn,
+            $combinedDTAnnumentdate,
+            $startEventDate,
+            $endEventDate,
+            $request->latitude,
+            $request->longitude,
+            $pathFile
+        );
+        return redirect()->route('teamEvent.index');
     }
 
     /**
