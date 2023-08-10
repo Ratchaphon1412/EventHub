@@ -6,61 +6,124 @@
           <h1 class="text-white text-5xl font-semibold mt-20 mb-10">
               Approve Register
           </h1>
-          {{-- <span class="text-center font-bold my-20 text-white/90">
-              <a
-                  href="https://egoistdeveloper.github.io/twcss-to-sass-playground/"
-                  target="_blank"
-                  class="text-white/90 hover:text-white">
-                  Convetert to SASS
-              </a>
-  
-              <hr class="my-4" />
-  
-              <a
-                  href="https://unsplash.com/photos/8Pm_A-OHJGg"
-                  target="_blank"
-                  class="text-white/90 hover:text-white">
-                  Image Source
-              </a>
-  
-              <hr class="my-4" />
-  
-              <p>
-                  <a
-                      href="https://github.com/EgoistDeveloper/my-tailwind-components/blob/main/src/templates/parallax-landing-page.html"
-                      target="_blank"
-                      class="text-white/90 hover:text-white">
-                      Source Code
-                  </a>
-                  |
-                  <a
-                      href="https://egoistdeveloper.github.io/my-tailwind-components/./src/templates/parallax-landing-page.html"
-                      target="_blank"
-                      class="text-white/90 hover:text-white">
-                      Full Preview
-                  </a>
-              </p>
-          </span> --}}
+      
    </section>
-   <section id="Applicants" class="flex flex-col w-full h-[600px] rounded-xl bg-cover bg-fixed bg-center  bg-slate-400">
-       <div>
-            <h1 class="md:text-2xl p-4">Applicants</h1>
-            <div id="list">
-                <x-list-card>
 
-                </x-list-card>
-            </div>
-       </div>
-   </section>
-   <section id="Applicants" class="flex flex-col w-full h-[600px] rounded-xl bg-slate-400">
-        <div id="lock จอเลื่อนขึ้นเลื่อนลง">
-            <h1 class="md:text-2xl p-4">Approve</h1>
-            <ul id="list" class="flex justify-center items-center">
-                <x-list-card>
-                    
-                </x-list-card>
-            </ul>
-        </div>
-   </section>
 </section>
+
+<div class="">
+    <section class="w-full flex flex-col justify-center items-center container space-y-4 mt-2">
+        <div class="w-full flex flex-row justify-center">
+            <h1 class="text-2xl text-black">Approve User Event</h1>
+        </div>
+    
+        <div class="w-full max-w-4xl p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8">
+            <div class="flex items-center justify-between mb-4">
+                <h5 class="text-xl font-bold leading-none text-gray-900 dark:text-white">Latest Customers</h5>
+          
+           </div>
+           <div class="flow-root">
+                <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
+                    <li class="py-3 sm:py-4">
+                        <div class="flex items-center space-x-4">
+                            <div class="flex-shrink-0">
+                                <img class="w-8 h-8 rounded-full" src="/docs/images/people/profile-picture-1.jpg" alt="Neil image">
+                            </div>
+                            <div class="flex-1 min-w-0">
+                                <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+                                    Neil Sims
+                                </p>
+                                <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+                                    email@windster.com
+                                </p>
+                            </div>
+                      <dir class="flex flex-row space-x-2">
+                        <x-button>
+                            Reject
+                        </x-button>
+                        <x-button>
+                            Approve
+                        </x-button>
+                        <x-button>
+                            Answer
+                        </x-button>
+                        </div>
+                      </dir>
+                    </li>
+    
+                </ul>
+           </div>
+        </div>
+    </section>
+    
+    <section class="w-full flex flex-col justify-center items-center container space-y-4 mt-2">
+        <div class="w-full flex flex-row justify-center">
+            <h1 class="text-2xl text-black">Approved User</h1>
+        </div>
+    
+        <div class="w-full max-w-4xl p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8">
+            <div class="flex items-center justify-between mb-4">
+                <h5 class="text-xl font-bold leading-none text-gray-900 dark:text-white">Latest Customers</h5>
+          
+           </div>
+           <div class="flow-root">
+                <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
+                    <li class="py-3 sm:py-4">
+                        <div class="flex items-center space-x-4">
+                            <div class="flex-shrink-0">
+                                <img class="w-8 h-8 rounded-full" src="/docs/images/people/profile-picture-1.jpg" alt="Neil image">
+                            </div>
+                            <div class="flex-1 min-w-0">
+                                <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+                                    Neil Sims
+                                </p>
+                                <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+                                    email@windster.com
+                                </p>
+                            </div>
+     
+                      </div>
+                    </li>
+    
+                </ul>
+           </div>
+        </div>
+    </section>
+
+    <section class="w-full flex flex-col justify-center items-center container space-y-4 mt-2">
+        <div class="w-full flex flex-row justify-center">
+            <h1 class="text-2xl text-black">Reject User</h1>
+        </div>
+    
+        <div class="w-full max-w-4xl p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8">
+            <div class="flex items-center justify-between mb-4">
+                <h5 class="text-xl font-bold leading-none text-gray-900 dark:text-white">Latest Customers</h5>
+          
+           </div>
+           <div class="flow-root">
+                <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
+                    <li class="py-3 sm:py-4">
+                        <div class="flex items-center space-x-4">
+                            <div class="flex-shrink-0">
+                                <img class="w-8 h-8 rounded-full" src="/docs/images/people/profile-picture-1.jpg" alt="Neil image">
+                            </div>
+                            <div class="flex-1 min-w-0">
+                                <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+                                    Neil Sims
+                                </p>
+                                <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+                                    email@windster.com
+                                </p>
+                            </div>
+     
+                      </div>
+                    </li>
+    
+                </ul>
+           </div>
+        </div>
+    </section>
+    
+</div>
+
 @endsection
