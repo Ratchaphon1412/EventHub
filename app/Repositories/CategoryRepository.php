@@ -2,11 +2,11 @@
 
 namespace App\Repositories;
 
-use App\Interfaces\CategoryRepositoryinterface;
+use App\Interfaces\CategoryRepositoryInterface;
 use App\Models\Category;
 
 
-class CategoryRepository implements CategoryRepositoryinterface
+class CategoryRepository implements CategoryRepositoryInterface
 {
     public function getAllCategory()
     {
