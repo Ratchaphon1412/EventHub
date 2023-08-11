@@ -14,6 +14,9 @@ class Kanban extends Model
 {
     use HasFactory,SoftDeletes;
 
+    protected $fillable = [
+        'name','event_id'
+    ];
 
     public function columns():HasMany
     {
