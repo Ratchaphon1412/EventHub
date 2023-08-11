@@ -6,7 +6,7 @@ use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\KanbanController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EventController;
-use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
+use App\Http\Controllers\TeamEventController;
 
 /*
 |--------------------------------------------------------------------------
@@ -60,6 +60,9 @@ Route::controller(EventController::class)->group(function () {
     Route::get('/event/detail/{event}', [EventController::class, 'show'])->name('event.detail.show');
     Route::post('/event/create', [EventController::class, 'store'])->name('event.create.store');
     Route::get('/event/create', [EventController::class, 'create'])->name('event.create.view');
+    Route::get('/event/edit/{event}', [EventController::class, 'edit'])->name('event.create.edit');
+    Route::put('/event/update/{event}', [EventController::class, 'update'])->name('event.create.update');
+    Route::delete('/event/delete/{event}', [EventController::class, 'destroy'])->name('event.delete');
 });
 
 
@@ -75,3 +78,5 @@ Route::get('/createEvent', function () {
 Route::get('/event/approve', function () {
     return view('approveEvent');
 })->name('approveEvent');
+
+Route::get('/team', [TeamEventController::class, 'index'])->name('teamEvent.index');
