@@ -5,42 +5,35 @@
     <!-- Parallax Background -->
     <section class="flex flex-col w-full h-[200px] bg-cover bg-fixed bg-center  justify-center items-center bg-[url('https://images.unsplash.com/photo-1642427749670-f20e2e76ed8c?auto=format&fit=crop&w=880&q=80')]">
       <h1 class="text-white text-5xl font-semibold mt-20 mb-10">
-          This is Parallax Effect
+          My Owner Event On Event Hub
       </h1>
 
    
   </section>
-  <main class="container mt-4">
-    <section class="container">
-      <h1 class="font-bold text-2xl text-gray-600">Dashboard</h1>
-      <hr class="mt-4 mb-4 border-gray-200">
-    </section>
 
-    <section>
-      <h1 class="font-bold text-xl text-gray-600 mb-2">Active Events กิจกรรมที่กำลังดำเนินการอยู่ในปัจจุบัน</h1>
-      <div class="flex flex-wrap">
-        @foreach($events as $event)
-        <livewire:card-event-image title="{{$event->title}}" image="{{$event->image_poster}}" status="Upcomming" category="{{$event->category->category_name}}" description="{{$event->description}}"/>
-        @endforeach
-      </div>
+  <section class="flex flex-col justify-start container m-4">
+    <h1 class=" text-gray-900 font-bold text-2xl ">My Owner Event</h1>
 
-    </section>
+  </section>
 
 
-    <section>
-      <h1 class="font-bold text-xl text-gray-600 mb-2">Pending Events รอประกาศผล</h1>
-      <div class="flex flex-wrap">
-        @foreach($events as $event)
-        <livewire:card-event-image title="{{$event->title}}" image="{{$event->image_poster}}" status="Upcomming" category="{{$event->category->category_name}}" description="{{$event->description}}"/>
-        @endforeach
-      </div>
+  <div class="grid md:grid-cols-3 sm:grid-cols-1 justify-center gap-4 ">
+    <div class="group bg-gray-900/30 py-20 px-4 flex flex-col space-y-2 items-center  justify-center cursor-pointer rounded-md hover:bg-gray-900/40 hover:smooth-hover">
+      <a class="bg-gray-900/70 text-white/50 group-hover:text-white group-hover:smooth-hover flex w-20 h-20 rounded-full items-center justify-center" href="#">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+        </svg>
+      </a>
+      <a class="text-white/50 group-hover:text-white group-hover:smooth-hover text-center" href="#">Create group</a>
+    </div>
+    @foreach ($user->eventOwner as $event)
+    <a href="{{route('event.detail.show' , ['event'=>$event])}}">
+        <livewire:card-event-image title="{{$event->title}}" image="{{url('storage/'.$event->image_poster)}}" status="Upcomming" category="{{$event->category->category_name}}" description="{{$event->description}}"/>
+    </a>
+    @endforeach
 
-    </section>
-
-
-
-
-  </main>
+  </div>
+ 
 
   
 @endsection

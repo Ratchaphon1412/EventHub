@@ -35,80 +35,68 @@
             </div>   
         </section>
         <div class="container mx-auto">
-            <div class="mb-4 border-b border-gray-200 sticky top-12 bg-white z-10">
-                <ul class="flex flex-wrap -mb-px text-sm font-medium text-center" >
+         
+            <div class="sticky top-12 z-10 bg-white mb-4 border-b border-gray-200 dark:border-gray-700">
+                <ul class="flex flex-wrap -mb-px text-sm font-medium text-center" id="myTab" data-tabs-toggle="#myTabContent" role="tablist">
                     <li class="mr-2" role="presentation">
-                        <a href="#Detail" class="inline-block p-4 border-b-2 rounded-t-lg"  type="button" >Detail</a>
-                    </li>
-                    <li class="mr-2" role="presentation">
-                        <a href="#Image" class="inline-block p-4 border-b-2 border-transparent rounded-t-lg" type="button">Image</a>
+                        <button class="inline-block p-4 border-b-2 rounded-t-lg" id="detail-tab" data-tabs-target="#detail" type="button" role="tab" aria-controls="detail" aria-selected="false">Detail</button>
                     </li>
                     <li class="mr-2" role="presentation">
-                        <a href="#Location" class="inline-block p-4 border-b-2 border-transparent rounded-t-lg" type="button" >Location</a>
+                        <a href="#Image" class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300" data-tabs-target="#detail" type="button" role="tab" aria-controls="detail" aria-selected="false">Image</a>
                     </li>
-                    <li role="presentation">
-                        <a href="#Contact" class="inline-block p-4 border-b-2 border-transparent rounded-t-lg "   type="button">Contacts</a>
+                    <li class="mr-2" role="presentation">
+                        <a href="#Location" class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300" data-tabs-target="#detail" type="button" role="tab" aria-controls="detail" aria-selected="false">Location</a>
                     </li>
+                    <li class="mr-2" role="presentation">
+                        <a href="#Contact" class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300" data-tabs-target="#detail" type="button" role="tab" aria-controls="detail" aria-selected="false">Contact</a>
+                    </li>
+                    <li class="mr-2" role="presentation">
+                        <button class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300" id="manage-tab" data-tabs-target="#manage" type="button" role="tab" aria-controls="manage" aria-selected="false">Manange</button>
+                    </li>
+                    <li class="mr-2" role="presentation">
+                        <button class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300" id="team-tab" data-tabs-target="#team" type="button" role="tab" aria-controls="team" aria-selected="false">Team</button>
+                    </li>
+                    <li class="mr-2" role="presentation">
+                        <button class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300" id="kanban-tab" data-tabs-target="#kanban" type="button" role="tab" aria-controls="kanban" aria-selected="false">Kanban</button>
+                    </li>
+                    <li class="mr-2" role="presentation">
+                        <button class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300" id="approve-tab" data-tabs-target="#approve" type="button" role="tab" aria-controls="approve" aria-selected="false">Approve</button>
+                    </li>
+            
+            
                 </ul>
             </div>
-    
-            <section id="Title" class="w-full text-center py-10 space-y-4">
-                <h1 class="mt-5 text-2xl md:text-4xl lg:text-5xl">{{$event->title}}</h1>
-                <div class="flex flex-row justify-center">
-                    <i class="bi bi-calendar-week font-bold mr-2"></i>
-                    <p class=" leading-tight  text-base ">
-                    {{date('d-m-Y',strtotime($event->registration_start_date))}} - {{date('d-m-Y',strtotime($event->registration_end_date))}}
-                    </p>
+            <div id="myTabContent">
+                <div class="hidden" id="detail" role="tabpanel" aria-labelledby="detail-tab">
+            
+                    <x-events.event-detail-view :event="$event"/>
+                    
+
                 </div>
-                <div class="flex flex-row  justify-center">
-                    <i class="bi bi-geo-alt-fill mr-2"></i>
-                    <p>
-                        Bitec Bang Na // Location
-                    </p>
+                
+                <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="manage" role="tabpanel" aria-labelledby="manage-tab">
+                    <p class="text-sm text-gray-500 dark:text-gray-400">This is some placeholder content the <strong class="font-medium text-gray-800 dark:text-white">Dashboard tab's associated content</strong>. Clicking another tab will toggle the visibility of this one for the next. The tab JavaScript swaps classes to control the content visibility and styling.</p>
                 </div>
+                <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="team" role="tabpanel" aria-labelledby="team-tab">
+                    <p class="text-sm text-gray-500 dark:text-gray-400">This is some placeholder content the <strong class="font-medium text-gray-800 dark:text-white">Dashboard tab's associated content</strong>. Clicking another tab will toggle the visibility of this one for the next. The tab JavaScript swaps classes to control the content visibility and styling.</p>
+                </div>
+                <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="kanban" role="tabpanel" aria-labelledby="kanban-tab">
+                    @include('kanban',['kanban'=>$event->kanban,'todo'=>$event->kanban->columns[0]->cards,'working'=>$event->kanban->columns[1]->cards,'done'=>$event->kanban->columns[2]->cards])
+                </div>
+                <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="approve" role="tabpanel" aria-labelledby="approve-tab">
+                    <p class="text-sm text-gray-500 dark:text-gray-400">This is some placeholder content the <strong class="font-medium text-gray-800 dark:text-white">Dashboard tab's associated content</strong>. Clicking another tab will toggle the visibility of this one for the next. The tab JavaScript swaps classes to control the content visibility and styling.</p>
+                </div>
+
+
                
-                <hr class="mt-5">
-            </section>
-            <section id="Image" class="flex flex-col justify-center items-center  first-letter w-full">
-                <img src="{{url('storage/'.$event->image_poster)}}"  alt="Mountain" 
-                    class="w-3/4 h-full object-cover">
+            </div>
 
-            </section>
-            <section id="Detail">
-                <h1 class="mt-5 mx-20 text-2xl md:text-4xl lg:text-5xl">Detail</h1>
-                <p class="mt-5 mx-20 text-sm md:text-base lg:text-lg xl:text-xl">
-                    {{$event->description}}
-                </p>
-            </section>
+    
 
-            <section id="Location" class="flex flex-col justify-center w-full space-y-4" >
-                 <h1 class="mt-5 mx-20 text-2xl md:text-4xl lg:text-5xl">Location</h1>
-                <div class=" mx-20" ><iframe width="100%" height="400" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=1%20Grafton%20Street,%20Dublin,%20Ireland+(My%20Business%20Name)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"><a href="https://www.maps.ie/population/">Population Estimator map</a></iframe></div>
-
-                <section >
-                    <p class="mt-5 mx-20 text-sm md:text-base lg:text-lg xl:text-xl">
-                        Join us for an unforgettable evening of musical brilliance as we present "A Night of Musical Magic" - a concert extravaganza that promises to leave you spellbound!
-                        The stage is set, the lights are dimmed, and the anticipation in the air is palpable. As the audience fills the grand concert hall, whispers of excitement mingle with the gentle hum of anticipation. Tonight is no ordinary night; it is a celebration of artistry and a union of soul-stirring melodies.
-                    </p>
-                </section>
-
-            </section>
-
-            <section id="Contact" class="flex flex-col justify-center w-full space-y-4">
-                <h1 class="mt-5 mx-20 text-2xl md:text-4xl lg:text-5xl">Contact</h1>
-                <p class="mt-5 mx-20 text-sm md:text-base lg:text-lg xl:text-xl">
-                    {{$event->user->name}} <br>
-                    {{$event->user->email}} <br>
-                    {{$event->user->phone}} <br>
-                    {{$event->user->facebook}} <br>
-                    {{$event->user->instagram}} <br>
-                    {{$event->user->line}} <br>
-                </p>
-            </section>
-
-
-     
         </div>
+
+
+
     </main>  
 </x-app-layout>
 

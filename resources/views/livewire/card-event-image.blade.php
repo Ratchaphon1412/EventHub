@@ -5,7 +5,7 @@
       {{$title}}
         <div class="badge badge-secondary">{{$status}}</div>
       </h2>
-      <p >{{$description}}</p>
+      <p class="line-clamp-3">{{$description}}</p>
       <div class="card-actions justify-end">
         <div class="badge badge-outline">{{$category}}</div> 
       
