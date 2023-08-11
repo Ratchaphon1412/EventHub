@@ -67,8 +67,9 @@ class  EventRepository implements EventRepositoryInterface
         
     }
 
-    public function deleteEvent()
+    public function deleteEvent($event)
     {
+        $event->delete();
     }
 
     public function updateEvent($event,$title,
@@ -87,7 +88,7 @@ class  EventRepository implements EventRepositoryInterface
         $updateEvent = Event::find($event->id);
         $updateEvent->title = $title;  
         $updateEvent->description = $description;
-        $updateEvent->categoty = $category;
+        $updateEvent->category_id = $category->id;
         $updateEvent->image_poster = $image_poster;
         $updateEvent->registration_start_date = $registration_start_date;
         $updateEvent->announcement_date =$announcement_date;
@@ -95,6 +96,7 @@ class  EventRepository implements EventRepositoryInterface
         $updateEvent->event_end_date =$event_end_date;
         $updateEvent->event_latitude =$event_latitude;
         $updateEvent->event_longitude =$event_longitude;
-        $updateEvent->document_paymen =$document_payment;        
+        $updateEvent->document_payment =$document_payment; 
+        $updateEvent->save();       
     }
 }

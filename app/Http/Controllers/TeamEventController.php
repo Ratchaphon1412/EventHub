@@ -10,7 +10,6 @@ class TeamEventController extends Controller
     public function index()
     {
         $events = Event::all();
-
         return view('teamEvent',compact('events'));
     }
 }
