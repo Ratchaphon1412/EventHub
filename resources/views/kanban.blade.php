@@ -28,7 +28,6 @@
           </div>
        
           <x-button>Submit</x-button>
-        
       </form>
     </x-modal-form>
 
@@ -73,7 +72,6 @@
         <x-button onclick="confirmEdit()" >Submit</x-button>
       
     </form>
-
 
     </x-modal-form>
   
