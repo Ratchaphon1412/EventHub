@@ -52,9 +52,8 @@ Route::controller(EventController::class)->group(function () {
     Route::get('/event/detail/{event}', [EventController::class, 'show'])->name('event.detail.show');
     Route::post('/event/create', [EventController::class, 'store'])->name('event.create.store');
     Route::get('/event/create', [EventController::class, 'create'])->name('event.create.view');
-    Route::get('/event/create/edit/{event}', [EventController::class, 'edit'])->name('event.create.edit');
-    Route::post('/event/create/edit', [EventController::class, 'update'])->name('event.create.update');
-
+    Route::get('/event/create/{event}/event', [EventController::class, 'edit'])->name('event.create.edit');
+    Route::put('/event/create/{event}/event', [EventController::class, 'update'])->name('event.create.update');
 });
 
 
