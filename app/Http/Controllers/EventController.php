@@ -133,19 +133,19 @@ class EventController extends Controller
             'datetimeAnnument' => ['required'],
             'startEventDate' => ['required'],
             'endEventDate' => ['required'],
-            // 'file_input' => ['required'],
+            'file_input' => ['required'],
             'poster' => ['required','image', 'mimes:jpeg,png,jpg'],
             'listImage'
         ]);
-
+        // $user = Auth::user();
+        // $event->user_id = $
+        // return dd($event->all());
         if($request->hasFile('poster')){
-            Storage::delete($event->poster_image);
-
+            // Storage::delete($event->poster_image);
             $imageName = $request->file('poster')->getClientOriginalName();
             $pathImage = $request->file('poster')->storeAs('images',$imageName,'public');
         }   
         $category  =  $this->categoryRepository->findCategoryByName($request->category);
-        $user = Auth::user();
 
         // $imageName = $request->file('poster')->getClientOriginalName();
         // $pathImage = $request->file('poster')->storeAs('images',$imageName,'public');
@@ -182,6 +182,8 @@ class EventController extends Controller
      */
     public function destroy(Event $event)
     {
-        //
+        // $event->delete();
+        $this->eventRepository->deleteEvent($event);
+        return redirect()->route('teamEvent.index');
     }
 }
