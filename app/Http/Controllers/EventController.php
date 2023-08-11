@@ -10,7 +10,8 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 use App\Interfaces\EventRepositoryInterface;
 use App\Interfaces\CategoryRepositoryInterface;
-
+use App\Interfaces\KanbanRepositoryInterface;
+use App\Interfaces\KanbanColumnsRepositoryInterface;
 
 
 class EventController extends Controller
@@ -18,12 +19,16 @@ class EventController extends Controller
 
     private EventRepositoryInterface $eventRepository;
     private CategoryRepositoryInterface $categoryRepository;
+    private KanbanRepositoryInterface $kanbanRepository;
+    private KanbanColumnsRepositoryInterface $kanbanColumnRepository;
 
 
-    public function __construct(EventRepositoryInterface $eventRepository, CategoryRepositoryInterface $categoryRepository)
+    public function __construct(EventRepositoryInterface $eventRepository, CategoryRepositoryInterface $categoryRepository,KanbanRepositoryInterface $kanbanRepository,KanbanColumnsRepositoryInterface $kanbanColumnRepository)
     {
         $this->eventRepository = $eventRepository;
         $this->categoryRepository = $categoryRepository;
+        $this->kanbanRepository = $kanbanRepository;
+        $this->kanbanColumnRepository = $kanbanColumnRepository;
     }
 
 
@@ -80,7 +85,8 @@ class EventController extends Controller
         $combinedDTAnnumentdate = date('Y-m-d H:i:s', strtotime("$request->Annumentdate $request->datetimeAnnument"));
         $startEventDate = date('Y-m-d',strtotime("$request->startEventDate"));
         $endEventDate = date('Y-m-d',strtotime("$request->endEventDate"));
-
+        
+        
         $event = $this->eventRepository->createEvent(
             $request->title,
             $request->detail,
@@ -96,7 +102,13 @@ class EventController extends Controller
             $pathFile,
             $user
         );
-        return $event;
+
+        //create Kanban board
+        $kanban = $this->kanbanRepository->createKanban($event);
+        $columnTodo = $this->kanbanColumnRepository->createKanbanColumn($kanban,"Todo");
+        $columnWorking = $this->kanbanColumnRepository->createKanbanColumn($kanban,"Working");
+        $columnDone = $this->kanbanColumnRepository->createKanbanColumn($kanban,"Done");
+        return [$event,$kanban,$columnTodo,$columnWorking,$columnDone];
     }
     /**
      * Display the specified resource.
@@ -158,7 +170,6 @@ class EventController extends Controller
         $combinedDTAnnumentdate = date('Y-m-d H:i:s', strtotime("$request->Annumentdate $request->datetimeAnnument"));
         $startEventDate = date('Y-m-d',strtotime("$request->startEventDate"));
         $endEventDate = date('Y-m-d',strtotime("$request->endEventDate"));
-
         $this->eventRepository->updateEvent(
             $event,
             $request->title,
