@@ -2,8 +2,10 @@
 
 @section('content')
     <main class="flex-col justify-center items-center ">
-        <form action="{{route('event.create.update', ['event' => $event]) }}" method="POST" enctype="multipart/form-data" class="flex flex-col justify-start container lg:px-24 space-x-2 space-y-4">
+        <form action= "{{route('event.create.update', ['event' => $event]) }}" method="POST" enctype="multipart/form-data" class="flex flex-col justify-start container lg:px-24 space-x-2 space-y-4">
             @csrf
+            @method('PUT')
+            
             <h3 class="text-3xl text-gray-900 mb-2 mt-2">Create Event</h3>
             <section id="Form" class="text-gray-900">
 
