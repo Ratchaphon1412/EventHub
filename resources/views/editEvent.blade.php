@@ -258,7 +258,11 @@
             <button type="submit" class="block w-full bg-blue-500 text-white font-bold p-4 rounded-lg">Update Form</button>
 
         </form>
-
+        <form action="{{route('event.delete',['event' => $event])}}" enctype="multipart/form-data" method="POST" class="flex flex-col justify-start container lg:px-24 space-x-2 space-y-4">
+            @csrf
+            @method('DELETE')
+            <button type="submit" class="block w-full bg-red-500 text-white font-bold p-4 rounded-lg">Delete Item</button>
+        </form>             
     </main>
 
 @endsection   
