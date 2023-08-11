@@ -17,44 +17,15 @@
     <main class="flex flex-col justify-center items-center">
 
     <!-- Parallax Background -->
-    <section class="flex flex-col w-full h-[400px] bg-cover bg-fixed bg-center  justify-center items-center bg-[url('https://images.unsplash.com/photo-1642427749670-f20e2e76ed8c?auto=format&fit=crop&w=880&q=80')]">
-        <h1 class="text-white text-5xl font-semibold mt-20 mb-10">
-            This is Parallax Effect
+    <section class="flex flex-col w-full h-[400px] bg-cover bg-fixed bg-center  justify-center items-center " style="background-image:url({{url('storage/assets/images/background/landing.jpg')}})">
+        <h1 class="text-white text-5xl font-black mt-20 ">
+            <span class="text-gray-800 font-bold">Event</span> <span class="text-yellow-400">Hub</span> Thailand
         </h1>
 
-        <span class="text-center font-bold my-20 text-white/90">
-            <a
-                href="https://egoistdeveloper.github.io/twcss-to-sass-playground/"
-                target="_blank"
-                class="text-white/90 hover:text-white">
-                Convetert to SASS
-            </a>
-
-            <hr class="my-4" />
-
-            <a
-                href="https://unsplash.com/photos/8Pm_A-OHJGg"
-                target="_blank"
-                class="text-white/90 hover:text-white">
-                Image Source
-            </a>
-
-            <hr class="my-4" />
-
+        <span class="text-center font-bold my-10 text-white/90 container flex flex-col w-3/4">
+           
             <p>
-                <a
-                    href="https://github.com/EgoistDeveloper/my-tailwind-components/blob/main/src/templates/parallax-landing-page.html"
-                    target="_blank"
-                    class="text-white/90 hover:text-white">
-                    Source Code
-                </a>
-                |
-                <a
-                    href="https://egoistdeveloper.github.io/my-tailwind-components/./src/templates/parallax-landing-page.html"
-                    target="_blank"
-                    class="text-white/90 hover:text-white">
-                    Full Preview
-                </a>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod provident ullam suscipit quas, at quos non. Ipsum sunt quasi vitae quia ut. Recusandae illum non maiores delectus quod earum blanditiis?
             </p>
         </span>
     </section>
@@ -62,12 +33,16 @@
     <section class="flex flex-col w-full container">
         <div class="flex flex-row justify-between m-4">
             <h1 class="font-bold text-xl text-black"> Category</h1>
-            <x-button> Show More</x-button>
+            
         </div>
-        <div class="flex flex-row justify-around">
+        <div class="flex flex-row justify-around space-x-4">
 
             @foreach ($categories as $category)
-            <livewire:card-background-image image="{{$category->category_photo_path}}" title="{{$category->name}}" description=""/>
+           
+            <livewire:card-background-image route="{{route('category.view',['category'=>$category])}}" image="{{url('storage/'.$category->category_photo_path)}}" title="{{$category->category_name}}" description=""/>
+
+        
+           
             @endforeach
         
     
@@ -77,7 +52,7 @@
     <section class="flex flex-col w-full container">
         <div class="flex flex-row justify-between m-4">
             <h1 class="font-bold text-xl text-black"> Upcoming</h1>
-            <x-button> Show More</x-button>
+  
         </div>
         <div class="flex flex-row justify-between flex-wrap">
             @foreach ($events as $event)
@@ -87,6 +62,10 @@
             @endforeach
             
             
+        </div>
+
+        <div class="">
+            {{$events->links()}}
         </div>
     </section>
     <!-- Section Information-->

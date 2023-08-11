@@ -11,7 +11,8 @@ export default {
         './resources/views/**/*.blade.php',
         "./resources/**/*.js",
         "./resources/**/*.vue",
-        "./node_modules/flowbite/**/*.js"
+        "./node_modules/flowbite/**/*.js",
+        
     ],
 
     theme: {
@@ -19,6 +20,10 @@ export default {
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
             },
+            backgroundImage: {
+                'landing': "url('/storage/assets/images/background/landing.jpg')",
+                
+              }
         },
     },
 

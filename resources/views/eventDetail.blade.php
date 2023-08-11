@@ -3,8 +3,8 @@
     
     <main class="flex-col justify-center items-center ">
        
-        <section id="coverImage" class="justify-center items-center  bg-fixed bg-black   w-full  rounded-lg  bg-cover bg-no-repeat bg-[url({{url('storage/public'.$event->image_poster)}})]" src=>
-            <div class="flex flex-col justify-center items-center  rounded-lg relative p-12  h-full w-auto overflow-hidden backdrop-filter backdrop-blur-sm bg-opacity-10  bg-[url({{url('storage/'.$event->image_poster)}})] ">
+        <section id="coverImage" class="justify-center items-center  bg-fixed w-full  rounded-lg  bg-cover bg-no-repeat " style="background-image:url('{{url('storage/'.$event->image_poster)}}')" >
+            <div class="flex flex-col justify-center items-center  bg-black rounded-lg relative p-12  h-full w-auto overflow-hidden backdrop-filter backdrop-blur-sm bg-opacity-10  bg-[url('{{url('storage/'.$event->image_poster)}}')] ">
                 <div class="grid grid-cols-1 md:grid-cols-2 backdrop-filter backdrop-blur-sm bg-opacity-80 bg-black text-white  rounded-lg shadow-lg overflow-hidden  w-3/4 drop-shadow-lg">
                     <img src="{{url('storage/'.$event->image_poster)}}"  alt="Mountain" 
                     class="w-full h-full object-cover">

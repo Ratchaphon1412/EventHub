@@ -6,6 +6,7 @@ use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\KanbanController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EventController;
+use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,7 +19,15 @@ use App\Http\Controllers\EventController;
 |
 */
 
-Route::get('/', [WelcomeController::class, 'index'])->name('home');
+Route::controller(WelcomeController::class)->group(
+    function () {
+        Route::get('/', 'index')->name('home');
+        Route::get('/category/{category}', 'categoryView')->name('category.view');
+    }
+
+);
+
+
 
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])->group(function () {
 
@@ -43,9 +52,9 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     Route::post('register-step-two', [RegisterStepTwoController::class, 'store'])->name('register-step-two.store');
 });
 
-// Route::get('/detail',function (){
-//     return view('eventDetail');
-// })->name("EventDetail");
+
+
+
 
 Route::controller(EventController::class)->group(function () {
     Route::get('/event/detail/{event}', [EventController::class, 'show'])->name('event.detail.show');

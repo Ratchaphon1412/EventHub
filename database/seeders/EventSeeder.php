@@ -30,7 +30,7 @@ class EventSeeder extends Seeder
         $event->event_start_date = fake()->dateTime();
         $event->event_end_date = fake()->dateTime();
         $event->user_id = User::find(1)->get()[0]->id;
-     
+
         $event->save();
 
 
@@ -45,8 +45,145 @@ class EventSeeder extends Seeder
         $event->event_start_date = fake()->dateTime();
         $event->event_end_date = fake()->dateTime();
         $event->user_id = User::find(1)->get()[0]->id;
-     
+
+        $event->save();
+        $event = new Event();
+        $event->title = fake()->name();
+        $event->description = fake()->text();
+        $category = Category::find(1)->get()[0];
+        $event->category_id = $category->id;
+        $event->image_poster = fake()->imageUrl(640, 480, 'events', true);
+        $event->registration_start_date = fake()->dateTime();
+        $event->registration_end_date = fake()->dateTime();
+        $event->event_start_date = fake()->dateTime();
+        $event->event_end_date = fake()->dateTime();
+        $event->user_id = User::find(1)->get()[0]->id;
+
+        $event->save();
+        $event = new Event();
+        $event->title = fake()->name();
+        $event->description = fake()->text();
+        $category = Category::find(1)->get()[0];
+        $event->category_id = $category->id;
+        $event->image_poster = fake()->imageUrl(640, 480, 'events', true);
+        $event->registration_start_date = fake()->dateTime();
+        $event->registration_end_date = fake()->dateTime();
+        $event->event_start_date = fake()->dateTime();
+        $event->event_end_date = fake()->dateTime();
+        $event->user_id = User::find(1)->get()[0]->id;
+
+        $event->save();
+        $event = new Event();
+        $event->title = fake()->name();
+        $event->description = fake()->text();
+        $category = Category::find(1)->get()[0];
+        $event->category_id = $category->id;
+        $event->image_poster = fake()->imageUrl(640, 480, 'events', true);
+        $event->registration_start_date = fake()->dateTime();
+        $event->registration_end_date = fake()->dateTime();
+        $event->event_start_date = fake()->dateTime();
+        $event->event_end_date = fake()->dateTime();
+        $event->user_id = User::find(1)->get()[0]->id;
+
+        $event->save();
+        $event = new Event();
+        $event->title = fake()->name();
+        $event->description = fake()->text();
+        $category = Category::find(1)->get()[0];
+        $event->category_id = $category->id;
+        $event->image_poster = fake()->imageUrl(640, 480, 'events', true);
+        $event->registration_start_date = fake()->dateTime();
+        $event->registration_end_date = fake()->dateTime();
+        $event->event_start_date = fake()->dateTime();
+        $event->event_end_date = fake()->dateTime();
+        $event->user_id = User::find(1)->get()[0]->id;
+
+        $event->save();
+        $event = new Event();
+        $event->title = fake()->name();
+        $event->description = fake()->text();
+        $category = Category::find(1)->get()[0];
+        $event->category_id = $category->id;
+        $event->image_poster = fake()->imageUrl(640, 480, 'events', true);
+        $event->registration_start_date = fake()->dateTime();
+        $event->registration_end_date = fake()->dateTime();
+        $event->event_start_date = fake()->dateTime();
+        $event->event_end_date = fake()->dateTime();
+        $event->user_id = User::find(1)->get()[0]->id;
+
+        $event->save();
+        $event = new Event();
+        $event->title = fake()->name();
+        $event->description = fake()->text();
+        $category = Category::find(1)->get()[0];
+        $event->category_id = $category->id;
+        $event->image_poster = fake()->imageUrl(640, 480, 'events', true);
+        $event->registration_start_date = fake()->dateTime();
+        $event->registration_end_date = fake()->dateTime();
+        $event->event_start_date = fake()->dateTime();
+        $event->event_end_date = fake()->dateTime();
+        $event->user_id = User::find(1)->get()[0]->id;
+
         $event->save();
 
+
+        $event = new Event();
+        $event->title = fake()->name();
+        $event->description = fake()->text();
+        $category = Category::find(1)->get()[0];
+        $event->category_id = $category->id;
+        $event->image_poster = fake()->imageUrl(640, 480, 'events', true);
+        $event->registration_start_date = fake()->dateTime();
+        $event->registration_end_date = fake()->dateTime();
+        $event->event_start_date = fake()->dateTime();
+        $event->event_end_date = fake()->dateTime();
+        $event->user_id = User::find(1)->get()[0]->id;
+
+        $event->save();
+
+
+        $event = new Event();
+        $event->title = fake()->name();
+        $event->description = fake()->text();
+        $category = Category::find(1)->get()[0];
+        $event->category_id = $category->id;
+        $event->image_poster = fake()->imageUrl(640, 480, 'events', true);
+        $event->registration_start_date = fake()->dateTime();
+        $event->registration_end_date = fake()->dateTime();
+        $event->event_start_date = fake()->dateTime();
+        $event->event_end_date = fake()->dateTime();
+        $event->user_id = User::find(1)->get()[0]->id;
+
+        $event->save();
+
+
+        $event = new Event();
+        $event->title = fake()->name();
+        $event->description = fake()->text();
+        $category = Category::find(1)->get()[0];
+        $event->category_id = $category->id;
+        $event->image_poster = fake()->imageUrl(640, 480, 'events', true);
+        $event->registration_start_date = fake()->dateTime();
+        $event->registration_end_date = fake()->dateTime();
+        $event->event_start_date = fake()->dateTime();
+        $event->event_end_date = fake()->dateTime();
+        $event->user_id = User::find(1)->get()[0]->id;
+
+        $event->save();
+
+
+        $event = new Event();
+        $event->title = fake()->name();
+        $event->description = fake()->text();
+        $category = Category::find(1)->get()[0];
+        $event->category_id = $category->id;
+        $event->image_poster = fake()->imageUrl(640, 480, 'events', true);
+        $event->registration_start_date = fake()->dateTime();
+        $event->registration_end_date = fake()->dateTime();
+        $event->event_start_date = fake()->dateTime();
+        $event->event_end_date = fake()->dateTime();
+        $event->user_id = User::find(1)->get()[0]->id;
+
+        $event->save();
     }
 }
