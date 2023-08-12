@@ -28,7 +28,7 @@ class AnswerQuestionController
     public function store(Request $request, Event $event)
     {
         $questionsNameOfEvent = $this->findQuestionsNameFrom($event);
-        $size = sizeof($request->keys()) - 1;
+        $size = sizeof($questionsNameOfEvent);
         for ($i = 1; $i <= $size; $i++) {
 
             $answer_str = 'answer'.$i;
@@ -53,7 +53,9 @@ class AnswerQuestionController
             $question->question_name_id = $questionsNameOfEvent->get($i-1)->id;
             $question->question_answer_id = $questionAnswer->id;
             $question->save();
-
+        }
+        if ($event->userEventApprove()->find(Auth::user()) == null){
+            $event->userEventApprove()->attach(Auth::user());
         }
 
 
