@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -42,6 +43,15 @@ class Event extends Model
     public function question():BelongsToMany
     {
         return $this->belongsToMany(Question::class);
+    }
+
+    public function userEventApprove(): BelongsToMany
+    {
+        return $this->belongsToMany(User::class, 'user_event_approve', 'event_id', 'user_id')->withPivot('status');
+    }
+
+    public function getApplicants(): Collection{
+        return Question::getUsersByEvent($this);
     }
 
 
