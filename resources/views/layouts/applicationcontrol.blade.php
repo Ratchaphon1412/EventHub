@@ -17,6 +17,8 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
         !-<- Styles -->
+       
+        
         @livewireStyles
     </head>
     <body class="font-sans antialiased">

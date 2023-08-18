@@ -8,8 +8,8 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 backdrop-filter backdrop-blur-sm bg-opacity-80 bg-black text-white  rounded-lg shadow-lg overflow-hidden  w-3/4 drop-shadow-lg">
                     <img src="{{url('storage/'.$event->image_poster)}}"  alt="Mountain" 
                     class="w-full h-full object-cover">
-                    <div id="text Title" class="flex justify-center items-center">
-                        <div id="text" class="p-6 flex-col text-start justify-center items-center space-y-4  gap-4">
+                    <div id="text Title" class="flex justify-center items-center ">
+                        <div id="text" class="p-6 flex-col  justify-center items-center space-y-4  gap-4">
                             <div>
                                 <p class="text-base">{{$event->category->category_name}}</p>
                                 <h2 class="text-3xl  font-black">{{$event->title}}</h2>
@@ -22,8 +22,9 @@
                             </div>
                             <div class="flex flex-row">
                                 <i class="bi bi-geo-alt-fill mr-2"></i>
-                                <p>
-                                    Bitec Bang Na // Location
+                                <p class="w-3/4">
+                                    {{$event->location_name}}
+                                    
                                 </p>
                             </div>
                             <button type="button" class="py-2.5 px-5 mr-2 mb-2 text-sm font-medium  focus:outline-none text-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Join</button>
