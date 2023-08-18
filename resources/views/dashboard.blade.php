@@ -8,7 +8,7 @@
           My Owner Event On Event Hub
       </h1>
 
-   
+
   </section>
 
   <section class="flex flex-col justify-start container m-4">
@@ -36,7 +36,19 @@
     @endforeach
 
   </div>
- 
 
-  
+
+
+    <a href="{{ route('question.create', ['event' => $event]) }}">
+        <h3 class="text-lg font-medium text-gray-800">Add Question</h3>
+        <p class="text-gray-600 text-base"></p>
+    </a>
+    <a href="{{ route('question.answer', ['event' => $event]) }}">
+        <h3 class="text-lg font-medium text-gray-800">Answer Question</h3>
+        <p class="text-gray-600 text-base"></p>
+    </a>
+    <a href="{{ route('approve.register', ['event' => $event]) }}">
+        <h3 class="text-lg font-medium text-gray-800">Approve Register</h3>
+        <p class="text-gray-600 text-base"></p>
+    </a>
 @endsection
