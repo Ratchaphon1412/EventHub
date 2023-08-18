@@ -45,26 +45,23 @@ class Event extends Model
     {
         return $this->hasOne(Kanban::class);
     }
-<<<<<<< HEAD
-=======
     public function question():BelongsToMany
     {
         return $this->belongsToMany(Question::class);
     }
->>>>>>> 3f7c3bcb61640c9adf02869bbc88069fba4dd91e
 
     public function userEventApprove(): BelongsToMany
     {
         return $this->belongsToMany(User::class, 'user_event_approve', 'event_id', 'user_id')->withPivot('status');
     }
 
-<<<<<<< HEAD
     public function userTeam(): BelongsToMany
     {
         return $this->belongsToMany(User::class, 'Team_Event','event_id', 'user_id');
-=======
-    public function getApplicants(): Collection{
+    }
+    
+    public function getApplicants(): Collection
+    {
         return Question::getUsersByEvent($this);
->>>>>>> 3f7c3bcb61640c9adf02869bbc88069fba4dd91e
     }
 }
