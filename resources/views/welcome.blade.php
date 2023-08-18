@@ -40,9 +40,6 @@
             @foreach ($categories as $category)
            
             <livewire:card-background-image route="{{route('category.view',['category'=>$category])}}" image="{{url('storage/'.$category->category_photo_path)}}" title="{{$category->category_name}}" description=""/>
-
-        
-           
             @endforeach
         
     
