@@ -17,11 +17,10 @@ return new class extends Migration
             $table->id();
             $table->foreignIdFor(User::class);
             $table->foreignIdFor(Event::class);
-
             $table->timestamps();
         });
     }
-
+    
     /**
      * Reverse the migrations.
      */
