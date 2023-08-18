@@ -102,3 +102,4 @@ Route::get('/event/approve', function () {
 
 Route::get('/team', [TeamEventController::class, 'index'])->name('teamEvent.index');
 Route::put('/team', [TeamEventController::class, 'update'])->name('teamEvent.update');
+Route::post('/team/rejectMember',[TeamEventController::class, 'destory'])->name('teamEvent.delete');
