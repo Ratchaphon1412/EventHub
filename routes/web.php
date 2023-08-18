@@ -46,15 +46,9 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
         });
     });
 
-
-
     Route::get('register-step-two', [RegisterStepTwoController::class, 'create'])->name('register-step-two.view');
     Route::post('register-step-two', [RegisterStepTwoController::class, 'store'])->name('register-step-two.store');
 });
-
-
-
-
 
 Route::controller(EventController::class)->group(function () {
     Route::get('/event/detail/{event}', [EventController::class, 'show'])->name('event.detail.show');
@@ -63,8 +57,8 @@ Route::controller(EventController::class)->group(function () {
     Route::get('/event/edit/{event}', [EventController::class, 'edit'])->name('event.create.edit');
     Route::put('/event/update/{event}', [EventController::class, 'update'])->name('event.create.update');
     Route::delete('/event/delete/{event}', [EventController::class, 'destroy'])->name('event.delete');
-});
 
+});
 
 // Route::group(['middleware'=>['auth']],function (){
 //     Route::get('register-step-two',[RegisterStepTwoController::class,'create'])->name('register-step-two.view');
@@ -80,3 +74,4 @@ Route::get('/event/approve', function () {
 })->name('approveEvent');
 
 Route::get('/team', [TeamEventController::class, 'index'])->name('teamEvent.index');
+Route::put('/team', [TeamEventController::class, 'update'])->name('teamEvent.update');
