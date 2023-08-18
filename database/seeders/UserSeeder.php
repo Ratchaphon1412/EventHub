@@ -19,7 +19,7 @@ class UserSeeder extends Seeder
         if(User::count() > 0){
 
             echo "Have some user in database \n";
-            
+
             return;
         }
         $user = new User();
@@ -52,6 +52,14 @@ class UserSeeder extends Seeder
         $user->gender = 'Male';
         $user->save();
 
-
+        $user = new User();
+        $user->name = 'FolkXa';
+        $user->email = 'jirakit11619@gmail.com';
+        $user->password = bcrypt('123456789');
+        $user->first_name = 'Jirakit';
+        $user->last_name = 'Chanaklang';
+        $user->phone = '555 555 5555';
+        $user->gender = 'Male';
+        $user->save();
     }
 }
