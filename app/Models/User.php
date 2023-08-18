@@ -93,4 +93,7 @@ class User extends Authenticatable
     public function getSubmitEvents(){ //get all event that this user submit answer
         return Question::where('user_id', $this->id)->select('event_id')->distinct()->get();
     }
+    public function getImageUrlFromPath() {
+        return url('storage/'.$this->profile_photo_path);
+    }
 }

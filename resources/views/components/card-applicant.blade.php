@@ -6,7 +6,7 @@
             @if($applicant->profile_photo_path == null)
                 <img src="{{$applicant->profile_photo_url}}" alt="picture avatar" class="object-cover h-full w-full bg-cover rounded-full overflow-hidden shadow" />
             @else
-                <img src="{{$applicant->profile_photo_path}}" alt="picture avatar" class="object-cover h-full w-full bg-cover rounded-full overflow-hidden shadow" />
+                <img src="{{$applicant->getImageUrlFromPath()}}" alt="picture avatar" class="object-cover h-full w-full bg-cover rounded-full overflow-hidden shadow" />
             @endif
         </div>
     </div>
