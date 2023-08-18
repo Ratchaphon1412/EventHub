@@ -72,7 +72,9 @@ class  EventRepository implements EventRepositoryInterface
         $event->delete();
     }
 
-    public function updateEvent($event,$title,
+    public function updateEvent(
+    $event,
+    $title,
     $description,
     $category,
     $image_poster,
