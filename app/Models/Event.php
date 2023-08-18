@@ -33,7 +33,6 @@ class Event extends Model
 
     public function user(): BelongsTo
     {
-
         return $this->belongsTo(User::class);
     }
 
@@ -47,9 +46,13 @@ class Event extends Model
         return $this->hasOne(Kanban::class);
     }
 
-
     public function userEventApprove(): BelongsToMany
     {
         return $this->belongsToMany(User::class, 'user_event_approve', 'event_id', 'user_id')->withPivot('status');
+    }
+
+    public function userTeam(): BelongsToMany
+    {
+        return $this->belongsToMany(User::class, 'Team_Event','event_id', 'user_id');
     }
 }

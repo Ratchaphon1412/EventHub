@@ -76,7 +76,6 @@ class User extends Authenticatable
         return $this->hasMany(Event::class);
     }
 
-
     public function teamJoined(): HasMany
     {
         return $this->hasMany(Team::class);
@@ -90,5 +89,10 @@ class User extends Authenticatable
     public function approveEvents(): BelongsToMany
     {
         return $this->belongsToMany(Event::class, 'user_event_approve', 'user_id', 'event_id')->withPivot('status');
+    }
+
+    public function joinedTeam(): BelongsToMany
+    {
+        return $this->belongsToMany(Event::class,'Team_Event','user_id','event_id');
     }
 }
