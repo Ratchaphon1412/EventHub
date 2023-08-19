@@ -38,10 +38,11 @@ class  EventRepository implements EventRepositoryInterface
         $event_latitude,
         $event_longitude,
         $document_payment,
+        $certificate_file,
         $user,
         $location_detail,
         $contact,
-        $location_name
+        $location_name,
     ) {
         return Event::create([
             'title' => $title,
@@ -56,6 +57,7 @@ class  EventRepository implements EventRepositoryInterface
             'event_latitude' => $event_latitude,
             'event_longitude' => $event_longitude,
             'document_payment' => $document_payment,
+            'certificate_file' => $certificate_file,
             'user_id' => $user->id,
             'location_detail' => $location_detail,
             'contact' => $contact,
@@ -113,7 +115,6 @@ class  EventRepository implements EventRepositoryInterface
             'location_detail' => $location_detail,
             'contact' => $contact,
             'location_name' => $location_name
-
         ]);
     }
 

@@ -252,8 +252,18 @@
                     <div id="imageListPreview" class="flex flex-col justify-center items-center gap-4 mt-4">
                     
                 </div>
-
             </div>
+            <!-- upload Certificate File -->
+            <section id="upload Certificate File">
+                    <label class="block mb-2 text-2xl font-medium text-gray-900 dark:text-white" for="file_certificate">Upload Certificate File</label>
+                    @error('file_certificate')
+                        <div class="text-red-600">
+                            {{ $message }}
+                        </div>
+                    @enderror
+                    <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" 
+                    id="file_certificate" type="file" name="file_certificate">
+            </section>
             
         
             <!-- Google Map -->
