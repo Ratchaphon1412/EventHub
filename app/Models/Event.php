@@ -18,7 +18,7 @@ class Event extends Model
     protected $fillable = [
         'title', 'description', 'category_id', 'image_poster', 'date_post', 'registration_start_date',
         'registration_end_date', 'announcement_date', 'event_start_date', 'event_end_date',
-        'event_latitude', 'event_longitude', 'document_payment', 'user_id'
+        'event_latitude', 'event_longitude', 'document_payment', 'user_id', 'location_detail', 'contact', 'location_name'
     ];
 
 

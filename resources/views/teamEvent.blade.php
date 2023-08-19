@@ -1,4 +1,4 @@
-<main>
+
   <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="team" role="tabpanel" aria-labelledby="team-tab">
     <section class="flex flex-col gap-6">
       <div class="w-full flex flex-row justify-between container">
@@ -65,7 +65,8 @@
                 </tr>
               </thead>
               <tbody class="text-gray-500">
-              @foreach($event->userTeam as $user)
+                @if($event->userTeam->count() > 0)
+                @foreach($event->userTeam as $user)
                 <tr>
                   <td class="border-b border-gray-200 bg-white px-5 py-5 text-sm">
                     <p class="whitespace-no-wrap">{{$user->id}}</p>
@@ -94,6 +95,8 @@
                   </td>
                 </tr>
               @endforeach
+
+                @endif
               </tbody>
             </table>
           </div>
@@ -107,4 +110,3 @@
     </section>
   </div>
 
-</main>

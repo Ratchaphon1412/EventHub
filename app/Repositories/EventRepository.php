@@ -3,8 +3,8 @@
 namespace App\Repositories;
 
 use App\Interfaces\EventRepositoryInterface;
-use Illuminate\Support\Facades\Auth;
 use App\Models\Event;
+use App\Models\EventImage;
 
 
 
@@ -38,7 +38,10 @@ class  EventRepository implements EventRepositoryInterface
         $event_latitude,
         $event_longitude,
         $document_payment,
-        $user
+        $user,
+        $location_detail,
+        $contact,
+        $location_name
     ) {
         return Event::create([
             'title' => $title,
@@ -54,6 +57,9 @@ class  EventRepository implements EventRepositoryInterface
             'event_longitude' => $event_longitude,
             'document_payment' => $document_payment,
             'user_id' => $user->id,
+            'location_detail' => $location_detail,
+            'contact' => $contact,
+            'location_name' => $location_name
         ]);
     }
 
@@ -64,7 +70,6 @@ class  EventRepository implements EventRepositoryInterface
 
     public function editEvent($event)
     {
-        
     }
 
     public function deleteEvent($event)
@@ -73,32 +78,51 @@ class  EventRepository implements EventRepositoryInterface
     }
 
     public function updateEvent(
-    $event,
-    $title,
-    $description,
-    $category,
-    $image_poster,
-    $registration_start_date,
-    $registration_end_date,
-    $announcement_date,
-    $event_start_date,
-    $event_end_date,
-    $event_latitude,
-    $event_longitude,
-    $document_payment)
+        $event,
+        $title,
+        $description,
+        $category,
+        $image_poster,
+        $registration_start_date,
+        $registration_end_date,
+        $announcement_date,
+        $event_start_date,
+        $event_end_date,
+        $event_latitude,
+        $event_longitude,
+        $document_payment,
+        $user,
+        $location_detail,
+        $contact,
+        $location_name
+    ) {
+        return Event::where('id', $event->id)->update([
+            'title' => $title,
+            'description' => $description,
+            'category_id' => $category->id,
+            'image_poster' => $image_poster,
+            'registration_start_date' => $registration_start_date,
+            'registration_end_date' => $registration_end_date,
+            'announcement_date' => $announcement_date,
+            'event_start_date' => $event_start_date,
+            'event_end_date' => $event_end_date,
+            'event_latitude' => $event_latitude,
+            'event_longitude' => $event_longitude,
+            'document_payment' => $document_payment,
+            'user_id' => $user->id,
+            'location_detail' => $location_detail,
+            'contact' => $contact,
+            'location_name' => $location_name
+
+        ]);
+    }
+
+    public function addEventImage($event, $image)
     {
-        $updateEvent = Event::find($event->id);
-        $updateEvent->title = $title;  
-        $updateEvent->description = $description;
-        $updateEvent->category_id = $category->id;
-        $updateEvent->image_poster = $image_poster;
-        $updateEvent->registration_start_date = $registration_start_date;
-        $updateEvent->announcement_date =$announcement_date;
-        $updateEvent->event_start_date =$event_start_date;
-        $updateEvent->event_end_date =$event_end_date;
-        $updateEvent->event_latitude =$event_latitude;
-        $updateEvent->event_longitude =$event_longitude;
-        $updateEvent->document_payment =$document_payment; 
-        $updateEvent->save();       
+
+        return EventImage::create([
+            'event_id' => $event->id,
+            'event_image' => $image,
+        ]);
     }
 }

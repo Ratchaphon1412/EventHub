@@ -25,27 +25,19 @@
       class="text-white/50 group-hover:text-white group-hover:smooth-hover text-center">
         Create event
       </a>
+     
     </div>
-    @foreach ($user->eventOwner as $event)
-    <a href="{{route('event.detail.show' , ['event'=>$event])}}">
-        <livewire:card-event-image title="{{$event->title}}" image="{{url('storage/'.$event->image_poster)}}" status="Upcomming" category="{{$event->category->category_name}}" description="{{$event->description}}"/>
-    </a>
-    @endforeach
+      @if($events != null)
+        @foreach ($events as $event)
+        <a href="{{route('event.detail.show' , ['event'=>$event])}}">
+            <livewire:card-event-image title="{{$event->title}}" image="{{url('storage/'.$event->image_poster)}}" status="Upcomming" category="{{$event->category->category_name}}" description="{{$event->description}}"/>
+        </a>
+        @endforeach
+    @endif
 
   </div>
 
 
 
-    <a href="{{ route('question.create', ['event' => $event]) }}">
-        <h3 class="text-lg font-medium text-gray-800">Add Question</h3>
-        <p class="text-gray-600 text-base"></p>
-    </a>
-    <a href="{{ route('question.answer', ['event' => $event]) }}">
-        <h3 class="text-lg font-medium text-gray-800">Answer Question</h3>
-        <p class="text-gray-600 text-base"></p>
-    </a>
-    <a href="{{ route('approve.register', ['event' => $event]) }}">
-        <h3 class="text-lg font-medium text-gray-800">Approve Register</h3>
-        <p class="text-gray-600 text-base"></p>
-    </a>
+
 @endsection

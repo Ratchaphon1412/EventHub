@@ -1,5 +1,7 @@
 
     <main class="flex-col justify-center items-center ">
+        <script src="/js/google/map.js"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_API') }}&libraries=places&callback=initialize" async defer></script>
         <form action= "{{route('event.create.update', ['event' => $event]) }}" method="POST" enctype="multipart/form-data" class="flex flex-col justify-start container lg:px-24 space-x-2 space-y-4">
             @csrf
             @method('PUT')
@@ -206,14 +208,23 @@
                         {{ $message }}
                     </div>
                 @enderror
-                <div id="preview"class="flex items-center justify-center w-full my-8">
+                <div class="flex items-center justify-center w-full my-8">
                     <img src="{{url('storage/'.$event->image_poster)}}" alt="">
                 </div>
                 <a></a>
-                <input id="dropzone-file" name="poster" type="file" 
+                <input id="poster" name="poster" type="file" 
                     class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" /> 
 
               </section>
+
+              <div class="w-full flex flex-col justify-center items-center mb-3" >
+                <div class="flex flex-col justify-start items-start w-full">
+                     <h3 class="text-xl font-bold text-gray-900 mt-4"  id="preview_section" style="display:none;">Image Poster Preview</h3>
+                </div>
+                
+                     <img id="preview" src="" alt="your image" class="mt-3 mb-3 w-1/2 h-1/2 " style="display:none;"/>
+                 
+             </div>
 
                 <section id="upload payment">
                     <label class="block mb-2 text-2xl font-medium text-gray-900 dark:text-white" for="file_input">Upload Payment File</label>
@@ -222,11 +233,24 @@
                             {{ $message }}
                         </div>
                     @enderror
+                    <a href="{{url('storage/'.$event->document_payment)}}" class="text-red-500">Click to View Old Payment File</a>
                     <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" 
                     id="file_input" type="file" name="file_input">
+                    
                 </section>
+
+
         
             </section>
+
+            <section class="flex flex-col justify-center items-center gap-4">
+                <label class="block mb-2 text-2xl font-medium text-gray-900 dark:text-white" >Image Event</label>
+                @foreach ( $event->eventImage as $image)
+                <img src="{{url('storage/'.$image->event_image)}}" class="w-3/4 h-full object-cover" alt="">
+            @endforeach
+
+            </section>
+
                 
             <div class="container mt-6">
                 <!-- <button id="addImage" type="button" class="px-4 py-2 bg-blue-500 text-white rounded">Add Image</button> -->
@@ -237,20 +261,55 @@
                             {{ $message }}
                         </div>
                     @enderror
-                    <input type="file" name="listImage" multiple class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400">
+                    <input type="file" id="listImage" name="listImage[]" multiple class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400">
                     <!-- Dynamically added input fields will go here -->
                 </div>
+                <div id="imageListPreview" class="flex flex-col justify-center items-center gap-4 mt-4">
             </div>
             
         
-            <!-- Google Map -->
-            <section id="map" class ="relative flex-col rounded-xl mt-10">
-                <label class="flex-inline text-xl text-black w-full">Location Map</label>
-                <div class="relative flex justify-center  rounded-xl p-10">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15495.430065221823!2d100.55934052016653!3d13.84759001989712!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30e29d1e111be769%3A0x4332e8cd6aec8c31!2sKasetsart%20University!5e0!3m2!1sen!2sth!4v1690953595631!5m2!1sen!2sth" 
-                        width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-                </div>
-            </section>  
+                      <!-- Google Map -->
+                      <section id="map" class ="relative flex-col rounded-xl mt-10">
+                
+                        <div class="mb-6 form-group">
+                            @error('location_name')
+                                <div class="text-red-600">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                            <label for="address-input" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Search Location</label>
+                            <input type="text" id="address-input" name="location_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 form-control map-input" value="{{$event->location_name}}">
+                            <input type="hidden" name="address_latitude" id="address-latitude" value="{{$event->event_latitude}}" />
+                            <input type="hidden" name="address_longitude" id="address-longitude" value="{{$event->event_longitude}}" />
+                        </div>
+                      
+                        <div id="address-map-container" style="width:100%;height:400px; ">
+                            <div style="width: 100%; height: 100%" id="address-map"></div>
+                        </div>
+                       
+                    </section>  
+        
+                    <section  class="flex flex-col mt-2 mb-2">
+                        <label for="locationDetial" class=" text-xl">Location</label>
+                        @error('location_detail')
+                            <div class="text-red-600">
+                                {{ $message }}
+                            </div>
+                        @enderror
+                        <textarea id='locationDetial' name='location_detail' rows="4" class="@error('location_detail') border-red-600 @enderror block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg  focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Write your thoughts here..." >{{$event->location_detail}}</textarea>
+                       
+                    </section>
+        
+                    <section  class="flex flex-col mt-2 mb-2">
+                        <label for="contact" class=" text-xl">Contact</label>
+                        @error('contact')
+                            <div class="text-red-600">
+                                {{ $message }}
+                            </div>
+                        @enderror
+                        <textarea id='contact' name='contact' rows="4" class="@error('location_detail') border-red-600 @enderror block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg  focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Write your thoughts here...">{{$event->contact}}</textarea>
+                       
+                    </section>
 
         
             <button type="submit" class="block w-full bg-blue-500 text-white font-bold p-4 rounded-lg">Update Form</button>
@@ -261,4 +320,52 @@
             <button type="submit" class="block w-full bg-red-500 text-white font-bold p-4 rounded-lg">Delete Item</button>
         </form>             
     </main>
+
+    <script>
+        
+        let poster = document.getElementById("poster");
+
+        poster.addEventListener("change", function(e){
+            preview = document.getElementById('preview');
+            preview.style.display = 'block';
+
+            preview_section = document.getElementById('preview_section');
+            preview_section.style.display = 'block';
+
+            const [file] = poster.files
+            if (file) {
+                preview.src = URL.createObjectURL(file)
+            }
+
+            
+        });
+
+        let listImage = document.getElementById("listImage");
+        let  imageListPreview = document.getElementById("imageListPreview");
+
+        listImage.addEventListener('change',function(){
+            const files = listImage.files
+           
+            
+         
+            for (let i = 0; i < files.length; i++) {
+                const items = files[i];
+                let imageTag = document.createElement('img');
+                imageTag.src = URL.createObjectURL(items);
+                imageListPreview.appendChild(imageTag);
+
+            }
+
+
+                
+           
+          
+                
+            
+           
+        });
+    
+
+  
+    </script>
 

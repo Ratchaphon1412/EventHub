@@ -8,8 +8,8 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 backdrop-filter backdrop-blur-sm bg-opacity-80 bg-black text-white  rounded-lg shadow-lg overflow-hidden  w-3/4 drop-shadow-lg">
                     <img src="{{url('storage/'.$event->image_poster)}}"  alt="Mountain" 
                     class="w-full h-full object-cover">
-                    <div id="text Title" class="flex justify-center items-center">
-                        <div id="text" class="p-6 flex-col text-start justify-center items-center space-y-4  gap-4">
+                    <div id="text Title" class="flex justify-center items-center ">
+                        <div id="text" class="p-6 flex-col  justify-center items-center space-y-4  gap-4">
                             <div>
                                 <p class="text-base">{{$event->category->category_name}}</p>
                                 <h2 class="text-3xl  font-black">{{$event->title}}</h2>
@@ -22,8 +22,9 @@
                             </div>
                             <div class="flex flex-row">
                                 <i class="bi bi-geo-alt-fill mr-2"></i>
-                                <p>
-                                    Bitec Bang Na // Location
+                                <p class="w-3/4">
+                                    {{$event->location_name}}
+                                    
                                 </p>
                             </div>
                             <button type="button" class="py-2.5 px-5 mr-2 mb-2 text-sm font-medium  focus:outline-none text-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Join</button>
@@ -60,15 +61,24 @@
                         <button class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300" id="kanban-tab" data-tabs-target="#kanban" type="button" role="tab" aria-controls="kanban" aria-selected="false">Kanban</button>
                     </li>
                     <li class="mr-2" role="presentation">
+                        <button class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300" id="question-tab" data-tabs-target="#question" type="button" role="tab" aria-controls="question" aria-selected="false">Question</button>
+                    </li>
+                    <li class="mr-2" role="presentation">
                         <button class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300" id="approve-tab" data-tabs-target="#approve" type="button" role="tab" aria-controls="approve" aria-selected="false">Approve</button>
                     </li>
+            
                 </ul>
             </div>
             <div id="myTabContent">
                 <div class="hidden" id="detail" role="tabpanel" aria-labelledby="detail-tab">
                     <x-events.event-detail-view :event="$event"/>
                 </div>
-                
+                <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="approve" role="tabpanel" aria-labelledby="approve-tab">
+                    
+                    @include('approve-register',['event'=>$event])
+ 
+                 </div>
+
                 <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="manage" role="tabpanel" aria-labelledby="manage-tab">
                     
                     @include('editEvent',['categorys'=>App\Models\Category::all()])
@@ -79,9 +89,15 @@
                 <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="kanban" role="tabpanel" aria-labelledby="kanban-tab">
                     @include('kanban',['kanban'=>$event->kanban,'todo'=>$event->kanban->columns[0]->cards,'working'=>$event->kanban->columns[1]->cards,'done'=>$event->kanban->columns[2]->cards])
                 </div>
-                <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="approve" role="tabpanel" aria-labelledby="approve-tab">
-                    <p class="text-sm text-gray-500 dark:text-gray-400">This is some placeholder content the <strong class="font-medium text-gray-800 dark:text-white">Dashboard tab's associated content</strong>. Clicking another tab will toggle the visibility of this one for the next. The tab JavaScript swaps classes to control the content visibility and styling.</p>
+                <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="question" role="tabpanel" aria-labelledby="question-tab">
+                    @include('create-question',['event'=>$event])
                 </div>
+
+        
+            
+               
+
+               
 
 
                
