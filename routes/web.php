@@ -62,6 +62,7 @@ Route::get('/{event}/approve_register/{applicant}', [
 Route::controller(CreateQuestionController::class)->group(function (){
     Route::get('/{event}/create_question', 'index')->name('question.create');
     Route::post('/{event}/create_question', 'store')->name('question.store');
+    Route::get('/{event}/create_question/{questionName}', 'delete')->name('question.delete');
 });
 
 Route::controller(AnswerQuestionController::class)->group(function (){

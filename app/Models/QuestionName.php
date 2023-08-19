@@ -13,14 +13,15 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class QuestionName extends Model
 {
     use HasFactory, SoftDeletes;
-    public function question(): HasMany{
-        return $this->hasMany(Question::class);
-    }
+
+    protected $fillable = [
+        'name', 'answer_type'
+    ];
     public function event(): BelongsToMany{
-        return $this->belongsToMany(Event::class);
+        return $this->belongsToMany(Event::class, 'questions', 'question_name_id', 'event_id');
     }
 
     public function questionAnswer(): HasMany{
-        return $this->hasMany(QuestionName::class);
+        return $this->hasMany(QuestionAnswer::class);
     }
 }
