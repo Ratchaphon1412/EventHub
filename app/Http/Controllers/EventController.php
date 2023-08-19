@@ -74,7 +74,7 @@ class EventController extends Controller
             'poster' => ['required', 'image', 'mimes:jpeg,png,jpg'],
             'location_detail' => ['required'],
             'contact' => ['required'],
-
+            'file_certificate' => ['required'],
         ]);
         $category  =  $this->categoryRepository->findCategoryByName($request->category);
         $user = Auth::user();
@@ -85,15 +85,14 @@ class EventController extends Controller
         $imageNameFile = $request->file('file_input')->getClientOriginalName();
         $pathFile = $request->file('file_input')->storeAs('events/files', $imageNameFile, 'public');
 
+        $certificateFile = $request->file('file_certificate')->getClientOriginalName();
+        $pathCertificateFile = $request->file('file_certificate')->storeAs('events/files', $certificateFile , 'public');
+
         $combinedDTStartIn = date('Y-m-d H:i:s', strtotime("$request->dateStartIn $request->datetimeStartIn"));
         $combinedDTCloseIn = date('Y-m-d H:i:s', strtotime("$request->dateCloseIn $request->datetimeCloseIn"));
         $combinedDTAnnumentdate = date('Y-m-d H:i:s', strtotime("$request->Annumentdate $request->datetimeAnnument"));
         $startEventDate = date('Y-m-d', strtotime("$request->startEventDate"));
         $endEventDate = date('Y-m-d', strtotime("$request->endEventDate"));
-
-
-
-
 
         $event = $this->eventRepository->createEvent(
             $request->title,
@@ -108,10 +107,11 @@ class EventController extends Controller
             $request->address_latitude,
             $request->address_longitude,
             $pathFile,
+            $pathCertificateFile,
             $user,
             $request->location_detail,
             $request->contact,
-            $request->location_name
+            $request->location_name,
         );
 
         //Multiple Image
@@ -151,7 +151,7 @@ class EventController extends Controller
      */
     public function update(Request $request, Event $event)
     {
-     
+        // dd($request->all());
         $request->validate([
             'title' => ['required', 'min:1', 'max:255'],
             'detail' => ['required', 'min:1'],
@@ -171,6 +171,7 @@ class EventController extends Controller
             'poster' => ['required', 'image', 'mimes:jpeg,png,jpg'],
             'location_detail' => ['required'],
             'contact' => ['required'],
+            'file_certificate' => ['required'],
         ]);
         $category  =  $this->categoryRepository->findCategoryByName($request->category);
         $user = Auth::user();
@@ -181,11 +182,16 @@ class EventController extends Controller
         $imageNameFile = $request->file('file_input')->getClientOriginalName();
         $pathFile = $request->file('file_input')->storeAs('events/files', $imageNameFile, 'public');
 
+        $certificateFile = $request->file('file_certificate')->getClientOriginalName();
+        $pathCertificateFile = $request->file('file_certificate')->storeAs('events/files', $certificateFile , 'public');
+        
+        
         $combinedDTStartIn = date('Y-m-d H:i:s', strtotime("$request->dateStartIn $request->datetimeStartIn"));
         $combinedDTCloseIn = date('Y-m-d H:i:s', strtotime("$request->dateCloseIn $request->datetimeCloseIn"));
         $combinedDTAnnumentdate = date('Y-m-d H:i:s', strtotime("$request->Annumentdate $request->datetimeAnnument"));
         $startEventDate = date('Y-m-d', strtotime("$request->startEventDate"));
         $endEventDate = date('Y-m-d', strtotime("$request->endEventDate"));
+
 
    
         $this->eventRepository->updateEvent($event,
@@ -204,7 +210,8 @@ class EventController extends Controller
             $user,
             $request->location_detail,
             $request->contact,
-            $request->location_name
+            $request->location_name,
+            $pathCertificateFile,
         );
         return redirect()->route('teamEvent.index');
     }
