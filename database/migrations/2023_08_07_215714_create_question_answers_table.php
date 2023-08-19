@@ -14,7 +14,8 @@ return new class extends Migration
         Schema::create('question_answers', function (Blueprint $table) {
             $table->id();
             $table->string("answer")->nullable();
-            $table->foreignIdFor(\App\Models\Question::class)->nullable();
+            $table->foreignIdFor(\App\Models\QuestionName::class)->nullable();
+            $table->foreignIdFor(\App\Models\User::class)->nullable();
             $table->string('image_name')->nullable();
             $table->string('image_path')->nullable();
             $table->timestamps();

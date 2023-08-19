@@ -25,7 +25,7 @@
       class="text-white/50 group-hover:text-white group-hover:smooth-hover text-center">
         Create event
       </a>
-     
+
     </div>
       @if($events != null)
         @foreach ($events as $event)
@@ -36,6 +36,7 @@
     @endif
 
   </div>
+
 
 
 

@@ -53,16 +53,18 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
 Route::controller(ApproveRegisterController::class)->group(function (){
     Route::get('/{event}/approve_register', 'index')->name('approve.register');
     Route::post('/{event}/approve_register', 'update')->name('approve.update');
+    Route::get('/{event}/approve_register', 'join')->name('approve.join');
 });
 
 
-Route::get('/{event}/approve_register/{applicant}', [
+Route::get('/{event}/approve_register/{user}', [
     ApplicantAnswerController::class, 'index'
 ])->name('applicant.answer');
 
 Route::controller(CreateQuestionController::class)->group(function (){
     Route::get('/{event}/create_question', 'index')->name('question.create');
     Route::post('/{event}/create_question', 'store')->name('question.store');
+    Route::get('/{event}/create_question/{questionName}', 'delete')->name('question.delete');
 });
 
 Route::controller(AnswerQuestionController::class)->group(function (){
@@ -112,4 +114,3 @@ Route::get('/certificate/show',[CertificateController::class,'show'])->name('cer
 Route::get('/event/joined',function(){
     return view('eventJoined');
 })->name('eventJoined');
-

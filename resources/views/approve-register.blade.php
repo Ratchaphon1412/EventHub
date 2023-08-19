@@ -13,8 +13,8 @@
               </tr>
             </thead>
             <tbody class="text-gray-500">
-              @if($event->userTeam->count() > 0)
-              @foreach($event->userTeam as $user)
+              @if(sizeof($event->userEventApprove) > 0)
+              @foreach($event->userEventApprove as $user)
               <tr>
                 <td class="border-b border-gray-200 bg-white px-5 py-5 text-sm">
                   <p class="whitespace-no-wrap">{{$user->id}}</p>
@@ -32,23 +32,23 @@
                 <td class="border-b border-gray-200 bg-white px-5 py-5 text-sm">
                   <p class="whitespace-no-wrap">{{$user->last_name}}</p>
                 </td>
-    
+
                 <td class="border-b border-gray-200 bg-white px-5 py-5 text-sm">
                     <select id="status" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
                         <option selected>Choose a Status</option>
-                        <option value="pending">Panding</option>
+                        <option value="pending">Pending</option>
                         <option value="accept">Accept</option>
                         <option value="reject">Reject</option>
-                        <option value="notcomplate">Not Complate</option>
-                    
+                        <option value="notcomplate">Not Complete</option>
+
                     </select>
                 </td>
                 <td class="border-b border-gray-200 bg-white px-5 py-5 text-sm flex justify-center">
-                  <livewire:button-link link="" text="View AnsQuestion"/>
+                  <livewire:button-link link="{{route('applicant.answer', ['event' => $event, 'user' => $user])}}" text="View AnsQuestion"/>
                 </td>
               </tr>
             @endforeach
-    
+
               @endif
             </tbody>
         </table>

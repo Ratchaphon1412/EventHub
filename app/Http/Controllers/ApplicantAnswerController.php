@@ -6,26 +6,15 @@ use App\Models\Event;
 use App\Models\Question;
 use App\Models\QuestionAnswer;
 use App\Models\User;
+use function Symfony\Component\String\u;
 
 class ApplicantAnswerController
 {
-    public function index(Event $event, User $applicant)
+    public function index(Event $event, User $user)
     {
-        $allQuestionName = Question::getQuestionsNameByEvent($event); // collection of id with question name
-        $itemSize = sizeof($allQuestionName);
-
-        $allMapId = Question::where('user_id', $applicant->id)->get();
-
-        $questionsName = [$itemSize+1];
-        $questionsAnswer = [$itemSize+1];
-        for ($i = 0; $i < $itemSize; $i++) {
-            $questionsName[$i] = $allQuestionName->get($i)->questionName;
-            $questionsAnswer[$i] = Question::where('question_name_id', $questionsName[$i]->id)->where('question_answer_id', '!=', null)->first();
-            if ($questionsAnswer[$i] != null) $questionsAnswer[$i] = QuestionAnswer::find($questionsAnswer[$i]->question_answer_id);
-        }
+        $applicant = $user;
+        $questionName = $event->questionName;
         return view('applicant-answer', [ 'event'=>$event,
-                                                'applicant'=> $applicant,
-                                                'questionsName'=>$questionsName,
-                                                'questionsAnswer'=>$questionsAnswer]);
+                                                'applicant'=> $applicant]);
     }
 }

@@ -11,12 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('question', function (Blueprint $table) {
+        Schema::create('questions', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(\App\Models\QuestionName::class)->nullable();
-            $table->foreignIdFor(\App\Models\QuestionAnswer::class)->nullable();
-            $table->foreignIdFor(\App\Models\User::class)->nullable();
             $table->foreignIdFor(\App\Models\Event::class)->nullable();
+            $table->foreignIdFor(\App\Models\QuestionName::class)->nullable();
             $table->timestamps();
         });
     }

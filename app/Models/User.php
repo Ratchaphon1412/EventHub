@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
@@ -81,9 +82,9 @@ class User extends Authenticatable
         return $this->hasMany(Team::class);
     }
 
-    public function question():BelongsToMany
+    public function questionAnswer(): HasMany
     {
-        return $this->belongsToMany(Question::class);
+        return $this->hasMany(QuestionAnswer::class);
     }
     public function kanbanCards():HasMany
     {
@@ -102,8 +103,29 @@ class User extends Authenticatable
     public function getSubmitEvents(){ //get all event that this user submit answer
         return Question::where('user_id', $this->id)->select('event_id')->distinct()->get();
     }
-    
+
     public function getImageUrlFromPath() {
         return url('storage/'.$this->profile_photo_path);
+    }
+
+    public function getContacts(): String {
+        $contact = '';
+        $count = 0;
+        if ($this->phone != null) {
+            $contact = "phone : ".$this->phone;
+            $count++;
+        }
+        if ($this->facebook != null) {
+            $contact = $contact. "\nfacebook : ".$this->facebook;
+            $count++;
+        }
+        if ($this->instagram != null and $count < 2) {
+            $contact = "\ninstagram : ".$this->instagram;
+            $count++;
+        }
+        if ($this->line != null and $count < 2) {
+            $contact = "\nline : ".$this->line;
+        }
+        return $contact;
     }
 }

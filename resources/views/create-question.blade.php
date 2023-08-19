@@ -1,6 +1,6 @@
 
     <div class="bg-white w-full h-full" xmlns:livewire="http://www.w3.org/1999/html">
-       
+
         <div class="w-full flex flex-col justify-end items-end">
             <div class="flex flex-col justify-center items-center">
                 <label for="toggle" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Open or Close Question</label>
@@ -15,24 +15,22 @@
               <h2 class="text-lg lg:text-2xl font-bold text-gray-900 ">Question</h2>
           </div>
           <form class="mb-6" action="{{ route('question.store', ['event' => $event]) }}" enctype="multipart/form-data" method="POST">
-                @csrf
+              @csrf
               <div class="py-2 px-4 mb-4 bg-white rounded-lg rounded-t-lg border border-gray-200 ">
                   <label for="comment" class="sr-only">Question</label>
                   <textarea id="comment" rows="6" name="question"
                       class="px-0 w-full text-sm text-gray-900 border-0 focus:ring-0 focus:outline-none "
-                      placeholder="Write a comment..." required></textarea>
+                      placeholder="Write a question..." required></textarea>
               </div>
               <section  class="  ml-3 mb-5">
                 <!-- Dropdown menu -->
-              
-
                 <label for="type" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select an option type</label>
-                <select id="type" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
+                <select name="type" id="type" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
                     <option selected>Choose a Type</option>
                     <option value="Text">Text</option>
                     <option value="File">File</option>
                     <option value="Video">Video</option>
-                
+
                 </select>
 
             </section>
@@ -42,7 +40,10 @@
               </button>
           </form>
 
+            @if(sizeof($event->questionName) > 0)
+                @foreach($event->questionName as $questionName)
           <article class="p-6 mb-6 text-base bg-white rounded-lg dark:bg-gray-900">
+
             <footer class="flex justify-between items-center mb-2">
                 <div class="flex items-center">
                     <p class="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white"><img
@@ -52,7 +53,7 @@
                     <p class="text-sm text-gray-600 dark:text-gray-400"><time pubdate datetime="2022-02-08"
                             title="February 8th, 2022">Feb. 8, 2022</time></p>
                 </div>
-        
+
                 <button id="dropdownComment1Button" data-dropdown-toggle="dropdownComment1"
                     class="inline-flex items-center p-2 text-sm font-medium text-center text-gray-400 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-50 dark:bg-gray-900 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
                     type="button">
@@ -69,26 +70,28 @@
                     class="hidden z-10 w-36 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
                     <ul class="py-1 text-sm text-gray-700 dark:text-gray-200"
                         aria-labelledby="dropdownMenuIconHorizontalButton">
-                 
+
                         <li>
-                            <a href="#"
+                            <a href="{{ route('question.delete', ['event' => $event, 'questionName' => $questionName]) }}"
                                 class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Remove</a>
                         </li>
-                
+
                     </ul>
                 </div>
             </footer>
-            <p class="text-gray-500 dark:text-gray-400">Very straight-to-point article. Really worth time reading. Thank you! But tools are just the
-                instruments for the UX designers. The knowledge of the design tools are as important as the
-                creation of the design strategy.</p>
-            <div class="flex items-center mt-4 space-x-4">
-                <button type="button"
-                    class="flex items-center text-sm text-gray-500 hover:underline dark:text-gray-400">
-                    <i class="bi bi-file-earmark-medical mr-2" ></i>
-                    Required Input Text
-                </button>
-            </div>
+                      <p class="text-gray-500 dark:text-gray-400">
+                          {{$questionName->name}}
+                      </p>
+                      <div class="flex items-center mt-4 space-x-4">
+                          <button type="button"
+                                  class="flex items-center text-sm text-gray-500 hover:underline dark:text-gray-400">
+                              <i class="bi bi-file-earmark-medical mr-2" ></i>
+                              Required Input {{$questionName->answer_type}}
+                          </button>
+                      </div>
           </article>
+                    @endforeach
+            @endif
 
 
     </div>
