@@ -31,6 +31,7 @@ return new class extends Migration
             $table->double("event_latitude")->nullable();
             $table->double("event_longitude")->nullable();
             $table->string("document_payment")->nullable();
+            $table->string("certificate_file");
             $table->text("location_detail");
             $table->text("contact")->nullable();
             $table->text("location_name")->nullable();
