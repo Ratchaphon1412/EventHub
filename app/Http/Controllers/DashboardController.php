@@ -18,7 +18,6 @@ class DashboardController extends Controller
         $user = Auth::user();
         $events = $user->eventOwner;
 
-       
         return view('dashboard', ['events' => $events, 'user' => $user]);
     }
 }
