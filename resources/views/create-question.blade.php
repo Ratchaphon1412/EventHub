@@ -1,6 +1,4 @@
-@extends('layouts.applicationcontrol')
 
-@section('content')
     <div class="bg-white w-full h-full" xmlns:livewire="http://www.w3.org/1999/html">
         <form action="{{ route('question.store', ['event' => $event]) }}" enctype="multipart/form-data" method="POST" class="flex flex-row justify-between flex-wrap w-full">
             <p class="items-center text-center w-full text-4xl font-bold text-black w-16">Create Question</p>
@@ -31,4 +29,4 @@
 
         </form>
     </div>
-@endsection
+

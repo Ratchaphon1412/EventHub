@@ -20,6 +20,8 @@ class CreateQuestionController
 
     public function store(Request $request, Event $event)
     {
+
+
         $size = $this->getRequestSize($request);
         for ($i = 1; $i <= $size; $i++) {
             $questionName = new QuestionName();
