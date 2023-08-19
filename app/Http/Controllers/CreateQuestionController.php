@@ -9,8 +9,9 @@ use Illuminate\Http\Request;
 
 class CreateQuestionController
 {
-    public function index(Event $event){
-        return view('create-question', ['event'=>$event]);
+    public function index(Event $event)
+    {
+        return view('create-question', ['event' => $event]);
     }
 
     private function getRequestSize(Request $request): float|int
@@ -30,11 +31,13 @@ class CreateQuestionController
         $questionName->save();
 
         $event->questionName()->attach($questionName);
-        return view('eventDetail', ['event'=> $event]);
+        return view('eventDetail', ['event' => $event]);
     }
 
-    public function delete(Event $event, QuestionName $questionName) {
-
-        return $questionName;
+    public function delete(Event $event, QuestionName $questionName)
+    {
+        $event->questionName()->detach($questionName);
+        $questionName->delete();
+        return view('eventDetail', ['event' => $event]);
     }
 }
