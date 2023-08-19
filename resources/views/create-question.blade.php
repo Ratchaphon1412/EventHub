@@ -72,8 +72,11 @@
                         aria-labelledby="dropdownMenuIconHorizontalButton">
 
                         <li>
-                            <a href="{{ route('question.delete', ['event' => $event, 'questionName' => $questionName]) }}"
-                                class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Remove</a>
+                            <form action="{{ route('question.delete', [$event, $questionName]) }}" method="POST">
+                                @csrf
+                                <button type="submit"
+                                class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Remove</button>
+                            </form>
                         </li>
 
                     </ul>
@@ -98,8 +101,34 @@
 
 
     <script>
+        let enableQuestion = {!!json_encode($event->question)!!};
         let toggle = document.getElementById('toggle');
+
+        toggle.checked = enableQuestion;
+       
         toggle.addEventListener('click', function (e) {
+            let token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+            $.ajax({
+                headers: {
+                  "Content-Type": "application/json",
+                  "Accept": "application/json, text-plain, */*",
+                  "X-Requested-With": "XMLHttpRequest",
+                  "X-CSRF-TOKEN": token
+                  },
+                type: "POST",
+                url:'/event/enable/question/',
+                data: JSON.stringify({
+                    "id": {!!json_encode($event->id)!!},
+                    "enable": toggle.checked
+                
+                }),
+                success:function(msg){
+                  window.location.reload(true);
+
+                }
+              })
+
 
             console.log(toggle.checked);
         });

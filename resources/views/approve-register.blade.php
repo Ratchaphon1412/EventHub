@@ -10,7 +10,9 @@
                
                 <th class="px-5 py-3">Last Name</th>
                 <th class="px-5 py-3">Status</th>
+                @if($event->question)
                 <th class="px-5 py-3"> Question</th>
+                @endif
               </tr>
             </thead>
             <tbody class="text-gray-500">
@@ -44,9 +46,11 @@
                     
                     </select>
                 </td>
+                @if($event->question)
                 <td class="border-b border-gray-200 bg-white px-5 py-5 text-sm flex justify-center">
                   <livewire:button-link link="" text="View AnsQuestion"/>
                 </td>
+                @endif
               </tr>
             @endforeach
     

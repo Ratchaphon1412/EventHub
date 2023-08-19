@@ -49,7 +49,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     });
 });
 
-Route::controller(ApproveRegisterController::class)->group(function (){
+Route::controller(ApproveRegisterController::class)->group(function () {
     Route::get('/{event}/approve_register', 'index')->name('approve.register');
     Route::post('/{event}/approve_register', 'update')->name('approve.update');
 });
@@ -59,19 +59,19 @@ Route::get('/{event}/approve_register/{applicant}', [
     ApplicantAnswerController::class, 'index'
 ])->name('applicant.answer');
 
-Route::controller(CreateQuestionController::class)->group(function (){
+Route::controller(CreateQuestionController::class)->group(function () {
     Route::get('/{event}/create_question', 'index')->name('question.create');
     Route::post('/{event}/create_question', 'store')->name('question.store');
-    Route::get('/{event}/create_question/{questionName}', 'delete')->name('question.delete');
+    Route::post('/{event}/delete_question/{questionName}', 'delete')->name('question.delete');
 });
 
-Route::controller(AnswerQuestionController::class)->group(function (){
+Route::controller(AnswerQuestionController::class)->group(function () {
     Route::get('/{event}/answer_question', 'index')->name('question.answer');
     Route::post('/{event}/answer_question', 'store')->name('question.answer.store');
 });
 
 
-Route::get('/detail',function (){
+Route::get('/detail', function () {
     return view('eventDetail');
 })->name("EventDetail");
 
@@ -85,7 +85,7 @@ Route::controller(EventController::class)->group(function () {
     Route::get('/event/edit/{event}', [EventController::class, 'edit'])->name('event.create.edit');
     Route::put('/event/update/{event}', [EventController::class, 'update'])->name('event.create.update');
     Route::delete('/event/delete/{event}', [EventController::class, 'destroy'])->name('event.delete');
-
+    Route::post('/event/enable/question/',  'questionEnable')->name('event.enable.question');
 });
 
 // Route::group(['middleware'=>['auth']],function (){
@@ -103,12 +103,12 @@ Route::get('/event/approve', function () {
 
 Route::get('/team', [TeamEventController::class, 'index'])->name('teamEvent.index');
 Route::put('/team', [TeamEventController::class, 'update'])->name('teamEvent.update');
-Route::post('/team/rejectMember',[TeamEventController::class, 'destory'])->name('teamEvent.delete');
+Route::post('/team/rejectMember', [TeamEventController::class, 'destory'])->name('teamEvent.delete');
 
-Route::get('/cerficate',function(){
+Route::get('/cerficate', function () {
     return view('cerficate');
 })->name('cerficateUser');
 
-Route::get('/event/joined',function(){
+Route::get('/event/joined', function () {
     return view('eventJoined');
 })->name('eventJoined');
