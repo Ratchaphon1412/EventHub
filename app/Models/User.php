@@ -10,6 +10,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
+use App\Models\Question;
 
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
@@ -75,7 +76,6 @@ class User extends Authenticatable
         return $this->hasMany(Event::class);
     }
 
-
     public function teamJoined(): HasMany
     {
         return $this->hasMany(Team::class);
@@ -93,9 +93,16 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Event::class, 'user_event_approve', 'user_id', 'event_id')->withPivot('status');
     }
+
+    public function joinedTeam(): BelongsToMany
+    {
+        return $this->belongsToMany(Event::class,'Team_Event','user_id','event_id');
+    }
+
     public function getSubmitEvents(){ //get all event that this user submit answer
         return Question::where('user_id', $this->id)->select('event_id')->distinct()->get();
     }
+    
     public function getImageUrlFromPath() {
         return url('storage/'.$this->profile_photo_path);
     }

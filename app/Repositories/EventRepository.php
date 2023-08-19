@@ -77,7 +77,8 @@ class  EventRepository implements EventRepositoryInterface
         $event->delete();
     }
 
-    public function updateEvent($event,
+    public function updateEvent(
+        $event,
         $title,
         $description,
         $category,
@@ -95,7 +96,7 @@ class  EventRepository implements EventRepositoryInterface
         $contact,
         $location_name
     ) {
-        return Event::where('id',$event->id)->update([
+        return Event::where('id', $event->id)->update([
             'title' => $title,
             'description' => $description,
             'category_id' => $category->id,

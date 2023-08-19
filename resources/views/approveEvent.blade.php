@@ -37,7 +37,7 @@
                                     email@windster.com
                                 </p>
                             </div>
-                      <dir class="flex flex-row space-x-2">
+                      <div class="flex flex-row space-x-2">
                         <x-button>
                             Reject
                         </x-button>
@@ -48,7 +48,7 @@
                             Answer
                         </x-button>
                         </div>
-                      </dir>
+                      </div>
                     </li>
     
                 </ul>

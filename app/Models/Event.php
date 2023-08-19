@@ -33,7 +33,6 @@ class Event extends Model
 
     public function user(): BelongsTo
     {
-
         return $this->belongsTo(User::class);
     }
 
@@ -56,7 +55,13 @@ class Event extends Model
         return $this->belongsToMany(User::class, 'user_event_approve', 'event_id', 'user_id')->withPivot('status');
     }
 
-    public function getApplicants(): Collection{
+    public function userTeam(): BelongsToMany
+    {
+        return $this->belongsToMany(User::class, 'Team_Event','event_id', 'user_id');
+    }
+    
+    public function getApplicants(): Collection
+    {
         return Question::getUsersByEvent($this);
     }
 }
