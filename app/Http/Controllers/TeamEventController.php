@@ -18,8 +18,6 @@ class TeamEventController extends Controller
 
     public function update(Request $request,Event $event)
     {
-        $event_from_id = Event::find($request->get('event')); 
-        // return $event_from_id;
         // dd($request->all());
         // $allUser = User::all();
         // $status = User::where('email',);
@@ -27,13 +25,32 @@ class TeamEventController extends Controller
         //     'Email' => ['required','email',Rule::exists('users','email')],
         // ]);
         // dd($request->all());
+        if(User::where('email', '=', $request->get('email'))->exists())
+        {
+            $event_from_id = Event::find($request->get('event')); 
+            // return $event_from_id->all();
+            $user = User::where('email','=',$request->get('email'))->get();
+            // return $user;
+            // $user = User::find('email',$request->get('Email'));
+            // return $user;
+            $event_from_id->userTeam()->attach($user);
+            return redirect()->back();
+        }
+        else
+        {
+            $request->validate([
+            'Email' => ['required','email',Rule::exists('users','email')],
+            ]);
+            // return "Not have in database";
+        }
+    }
 
-        $user = User::where('email','=',$request->get('email'))->get();
-        // return $user;
-        // $user = User::find('email',$request->get('Email'));
-        // return $user;
-        $event_from_id->userTeam()->attach($user);
-        
+    public function destory(Request $request,Event $event,User $user){
+        // dd($request->all());
+        $event_from_id = Event::find($request->get('event')); 
+        $user_form_id = User::find($request->get('user'));
+
+        $event_from_id->userTeam()->detach($user_form_id);
         return redirect()->back();
     }
 }

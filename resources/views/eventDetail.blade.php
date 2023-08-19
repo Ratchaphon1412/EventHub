@@ -71,10 +71,7 @@
             </div>
             <div id="myTabContent">
                 <div class="hidden" id="detail" role="tabpanel" aria-labelledby="detail-tab">
-            
                     <x-events.event-detail-view :event="$event"/>
-                    
-
                 </div>
                 <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="approve" role="tabpanel" aria-labelledby="approve-tab">
                     
@@ -87,8 +84,8 @@
                     @include('editEvent',['categorys'=>App\Models\Category::all()])
 
                 </div>
-                    @include('teamEvent',['event'=>$event])
-                
+                    @include('teamEvent',['event'=> $event])
+                </div>
                 <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="kanban" role="tabpanel" aria-labelledby="kanban-tab">
                     @include('kanban',['kanban'=>$event->kanban,'todo'=>$event->kanban->columns[0]->cards,'working'=>$event->kanban->columns[1]->cards,'done'=>$event->kanban->columns[2]->cards])
                 </div>

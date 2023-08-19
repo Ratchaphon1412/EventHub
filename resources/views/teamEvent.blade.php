@@ -8,16 +8,11 @@
 
       </div>
       <x-modal-form title="Add Member" idmodal="authentication-member">
-        <form class="space-y-6" action="{{ route('teamEvent.update', ['event' => $event]) }}" method="POST" enctype="multipart/form-data">
+        <form class="space-y-6" action="{{ route('teamEvent.update',['event' => $event]) }}" method="POST" enctype="multipart/form-data">
           @csrf
           @method('PUT')
           <div>
             <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
-            @error('email')
-            <div class="text-red-600">
-              {{ $message }}
-            </div>
-            @enderror
             <input type="email" name="email" id="email" class="@error('Email') border-red-600 bg-red-200 @enderror bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" requeired>
           </div>
 
@@ -57,7 +52,7 @@
           </div>
         </div>
         <!-- Table -->
-        <div class="overflow-y-hidden rounded-lg border">
+        <div class="overflow-y-hidden rounded-lg border ">
           <div class="overflow-x-auto">
             <table class="w-fit">
               <thead>
@@ -66,6 +61,7 @@
                   <th class="px-5 py-3">First Name</th>
                   <!-- <th class="px-5 py-3">User Role</th> -->
                   <th class="px-5 py-3">Last Name</th>
+                  <th class="px-5 py-3">Reject</th>
                 </tr>
               </thead>
               <tbody class="text-gray-500">
@@ -88,9 +84,14 @@
                   <td class="border-b border-gray-200 bg-white px-5 py-5 text-sm">
                     <p class="whitespace-no-wrap">{{$user->last_name}}</p>
                   </td>
-
-                  <td class="border-b border-gray-200 bg-white px-5 py-5 text-sm">
-
+                  <td>
+                    <form action="{{route('teamEvent.delete',['event' => $event,'user' => $user])}}" enctype="multipart/form-data" method="POST"  >
+                    @csrf
+                    @method('post')  
+                    <button type="submit" class="block w-full bg-red-500 text-white font-bold p-2 rounded-lg">
+                          reject
+                      </button>
+                    </form>
                   </td>
                 </tr>
               @endforeach
