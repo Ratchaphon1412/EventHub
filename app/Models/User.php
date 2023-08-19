@@ -107,4 +107,25 @@ class User extends Authenticatable
     public function getImageUrlFromPath() {
         return url('storage/'.$this->profile_photo_path);
     }
+
+    public function getContacts(): String {
+        $contact = '';
+        $count = 0;
+        if ($this->phone != null) {
+            $contact = "phone : ".$this->phone;
+            $count++;
+        }
+        if ($this->facebook != null) {
+            $contact = $contact. "\nfacebook : ".$this->facebook;
+            $count++;
+        }
+        if ($this->instagram != null and $count < 2) {
+            $contact = "\ninstagram : ".$this->instagram;
+            $count++;
+        }
+        if ($this->line != null and $count < 2) {
+            $contact = "\nline : ".$this->line;
+        }
+        return $contact;
+    }
 }

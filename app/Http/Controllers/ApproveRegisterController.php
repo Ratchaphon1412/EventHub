@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Event;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ApproveRegisterController
 {
@@ -21,5 +22,12 @@ class ApproveRegisterController
         } else $event->userEventApprove()->updateExistingPivot($applicant->id, ['status' => 'approved']);
 
         return $this->index($event);
+    }
+
+    public function join(Event $event) {
+        if ($event->userEventApprove()->find(Auth::user()) == null){
+            $event->userEventApprove()->attach(Auth::user());
+        }
+        return redirect()->back();
     }
 }
