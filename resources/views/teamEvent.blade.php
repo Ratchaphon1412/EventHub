@@ -69,7 +69,8 @@
                 </tr>
               </thead>
               <tbody class="text-gray-500">
-              @foreach($event->userTeam as $user)
+                @if($event->userTeam->count() > 0)
+                @foreach($event->userTeam as $user)
                 <tr>
                   <td class="border-b border-gray-200 bg-white px-5 py-5 text-sm">
                     <p class="whitespace-no-wrap">{{$user->id}}</p>
@@ -93,6 +94,8 @@
                   </td>
                 </tr>
               @endforeach
+
+                @endif
               </tbody>
             </table>
           </div>
