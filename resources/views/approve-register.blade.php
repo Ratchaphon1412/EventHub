@@ -7,10 +7,9 @@
               <tr class=" bg-blue-600 text-center  text-xs font-semibold uppercase tracking-widest text-white ">
                 <th class="px-5 py-3">ID</th>
                 <th class="px-5 py-3">First Name</th>
-               
                 <th class="px-5 py-3">Last Name</th>
                 <th class="px-5 py-3">Status</th>
-                <th class="px-5 py-3"> Question</th>
+                <th class="px-5 py-3">Question</th>
               </tr>
             </thead>
             <tbody class="text-gray-500">
