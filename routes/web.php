@@ -56,7 +56,7 @@ Route::controller(ApproveRegisterController::class)->group(function (){
 });
 
 
-Route::get('/{event}/approve_register/{answer}', [
+Route::get('/{event}/approve_register/{user}', [
     ApplicantAnswerController::class, 'index'
 ])->name('applicant.answer');
 

@@ -14,24 +14,24 @@
               </tr>
             </thead>
             <tbody class="text-gray-500">
-              @if(sizeof($event->questionName->get(0)->questionAnswer) > 0)
-              @foreach($event->questionName->get(0)->questionAnswer as $answer)
+              @if(sizeof($event->userEventApprove) > 0)
+              @foreach($event->userEventApprove as $user)
               <tr>
                 <td class="border-b border-gray-200 bg-white px-5 py-5 text-sm">
-                  <p class="whitespace-no-wrap">{{$answer->user->id}}</p>
+                  <p class="whitespace-no-wrap">{{$user->id}}</p>
                 </td>
                 <td class="border-b border-gray-200 bg-white px-5 py-5 text-sm">
                   <div class="flex items-center">
                     <div class="h-10 w-10 flex-shrink-0">
-                      <img class="h-full w-full rounded-full" src="{{$answer->user->profile_photo_url}}" alt="" />
+                      <img class="h-full w-full rounded-full" src="{{$user->profile_photo_url}}" alt="" />
                     </div>
                     <div class="ml-3">
-                      <p class="whitespace-no-wrap">{{$answer->user->first_name}}</p>
+                      <p class="whitespace-no-wrap">{{$user->first_name}}</p>
                     </div>
                   </div>
                 </td>
                 <td class="border-b border-gray-200 bg-white px-5 py-5 text-sm">
-                  <p class="whitespace-no-wrap">{{$answer->user->last_name}}</p>
+                  <p class="whitespace-no-wrap">{{$user->last_name}}</p>
                 </td>
 
                 <td class="border-b border-gray-200 bg-white px-5 py-5 text-sm">
@@ -45,7 +45,7 @@
                     </select>
                 </td>
                 <td class="border-b border-gray-200 bg-white px-5 py-5 text-sm flex justify-center">
-                  <livewire:button-link link="{{route('applicant.answer', ['event' => $event, 'answer' => $answer])}}" text="View AnsQuestion"/>
+                  <livewire:button-link link="{{route('applicant.answer', ['event' => $event, 'user' => $user])}}" text="View AnsQuestion"/>
                 </td>
               </tr>
             @endforeach
