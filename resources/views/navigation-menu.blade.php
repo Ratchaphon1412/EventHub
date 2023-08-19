@@ -4,9 +4,9 @@
             <div class="flex justify-between h-16">
                 <div class="flex">
                     <!-- Logo -->
-                    <div class="shrink-0 flex items-center">
+                    <div class="shrink-0 flex items-center gap-6">
                         <a href="{{ route('home') }}">
-                            <x-application-mark class="block h-9 w-auto mr-4" />
+                            <x-application-mark class="block h-9 w-auto mr-10" />
                         </a>
                         <span class="self-center text-2xl font-semibold whitespace-nowrap">Event Hub</span>
                     </div>
@@ -41,11 +41,17 @@
                                 <div class="block px-4 py-2 text-xs text-gray-400">
                                     {{ __('Manage Account') }}
                                 </div>
+                                <x-responsive-nav-link href="{{ route('home') }}">
+                                    {{ __('home') }}
+                                </x-responsive-nav-link>
 
                                 <x-dropdown-link href="{{ route('profile.show') }}">
                                     {{ __('Profile') }}
                                 </x-dropdown-link>
-
+                                
+                                <x-responsive-nav-link href="{{ route('dashboard') }}">
+                                    {{ __('dashboard') }}
+                                </x-responsive-nav-link>
                                 @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
                                     <x-dropdown-link href="{{ route('api-tokens.index') }}">
                                         {{ __('API Tokens') }}
@@ -129,8 +135,6 @@
                     <x-responsive-nav-link href="{{ route('profile.show') }}" :active="request()->routeIs('profile.show')">
                         {{ __('Profile') }}
                     </x-responsive-nav-link>
-
-
 
                     <!-- Authentication -->
                     <form method="POST" action="{{ route('logout') }}" x-data>
