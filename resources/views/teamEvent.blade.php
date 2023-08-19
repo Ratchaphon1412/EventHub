@@ -42,7 +42,7 @@
           </div>
         </div>
       </div>
-      <div class="mx-auto max-w-screen-lg px-4 py-8 sm:px-8">
+      <div class="mx-auto w-full px-4 py-8 sm:px-8">
         <div class="flex items-center justify-between pb-6">
           <div>
             <h2 class="font-semibold text-gray-700">User Accounts</h2>
@@ -52,9 +52,9 @@
           </div>
         </div>
         <!-- Table -->
-        <div class="overflow-y-hidden rounded-lg border ">
+        <div class="overflow-y-hidden w-full rounded-lg border ">
           <div class="overflow-x-auto">
-            <table class="w-fit">
+            <table class="w-full">
               <thead>
                 <tr class=" bg-blue-600 text-center  text-xs font-semibold uppercase tracking-widest text-white ">
                   <th class="px-5 py-3">ID</th>
@@ -106,7 +106,7 @@
               <button class="h-12 w-12 rounded-full border text-sm font-semibold text-gray-600 transition duration-150 hover:bg-gray-100">Next</button>
             </div>
           </div> -->
-        </div>
+      </div>
     </section>
   </div>
 
