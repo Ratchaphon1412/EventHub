@@ -207,7 +207,7 @@ class EventController extends Controller
             $request->contact,
             $request->location_name
         );
-        return redirect()->route('teamEvent.index');
+        return view('eventDetail', ['event' => $event]);
     }
 
     /**

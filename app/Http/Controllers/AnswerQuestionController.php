@@ -16,10 +16,11 @@ class AnswerQuestionController
     public function index(Event $event)
     {
         $questions_name = $this->findQuestionsNameFrom($event);
-        return view('answer-question', ['event'=>$event, 'questions_name'=>$questions_name]);
+        return view('answer-question', ['event' => $event, 'questions_name' => $questions_name]);
     }
 
-    private function findQuestionsNameFrom(Event $event){
+    private function findQuestionsNameFrom(Event $event)
+    {
         $questions = Question::where('event_id', $event->id)->get('question_name_id');
         $questions_name = QuestionName::find($questions);
         return $questions_name;
@@ -29,10 +30,12 @@ class AnswerQuestionController
     {
         $questionsNameOfEvent = $this->findQuestionsNameFrom($event);
         $size = sizeof($questionsNameOfEvent);
+        $user = Auth::user();
+
         for ($i = 1; $i <= $size; $i++) {
 
-            $answer_str = 'answer'.$i;
-            $image_str = 'image'.$i;
+            $answer_str = 'answer' . $i;
+            $image_str = 'image' . $i;
 
             $questionAnswer = new QuestionAnswer();
             if ($request->get($answer_str) != null) {
@@ -46,19 +49,20 @@ class AnswerQuestionController
 
 
 
-            $question = new Question();
+            // $question = new Question();
 
-            $question->event_id = $event->id;
-            $question->user_id = Auth::user()->getAuthIdentifier();
-            $question->question_name_id = $questionsNameOfEvent->get($i-1)->id;
-            $question->question_answer_id = $questionAnswer->id;
-            $question->save();
-        }
-        if ($event->userEventApprove()->find(Auth::user()) == null){
-            $event->userEventApprove()->attach(Auth::user());
-        }
+            // $question->event_id = $event->id;
 
-        $user = Auth::user();
+            // $question->user_id = $user->id;
+            // $question->question_name_id = $questionsNameOfEvent->get($i - 1)->id;
+            // $question->question_answer_id = $questionAnswer->id;
+            // $question->save();
+        }
+        // if ($event->userEventApprove()->find(Auth::user()) == null) {
+        //     $event->userEventApprove()->attach(Auth::user());
+        // }
+
+
 
 
         return view('dashboard', ['event' => $event, 'user' => $user]);

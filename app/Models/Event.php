@@ -61,8 +61,8 @@ class Event extends Model
         return Question::getUsersByEvent($this);
     }
 
-    public function questionName(): BelongsToMany
-    {
-        return  $this->belongsToMany(QuestionName::class, 'questions', 'event_id', 'question_name_id');
-    }
+    // public function questionName(): BelongsToMany
+    // {
+    //     return  $this->belongsToMany(QuestionName::class, 'questions', 'event_id', 'question_name_id');
+    // }
 }

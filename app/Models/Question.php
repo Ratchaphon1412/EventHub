@@ -15,31 +15,42 @@ class Question extends Model
 {
     use HasFactory;
 
-    public function user():BelongsToMany{
-        return $this->belongsToMany(User::class);
+    protected $fillable = [
+        'question_name_id', 'event_id', 'user_id', 'question_answer_id'
+    ];
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
     }
 
-    public function event():BelongsToMany{
+    public function event(): BelongsToMany
+    {
         return $this->belongsToMany(Event::class);
     }
 
-    public function questionAnswer():HasOne{
+    public function questionAnswer(): HasOne
+    {
         return $this->hasOne(QuestionAnswer::class);
     }
 
-    public function questionName(): BelongsTo{
+    public function questionName(): BelongsTo
+    {
         return $this->belongsTo(QuestionName::class);
     }
 
-    public static function getUsersIdByEvent(Event $event): Collection{
-        return Question::where('event_id', $event->id)->where('user_id', '!=' ,null)->distinct()->get('user_id');
+    public static function getUsersIdByEvent(Event $event): Collection
+    {
+        return Question::where('event_id', $event->id)->where('user_id', '!=', null)->distinct()->get('user_id');
     }
 
-    public static function getUsersByEvent(Event $event){
+    public static function getUsersByEvent(Event $event)
+    {
         return User::find(Question::getUsersIdByEvent($event));
     }
 
-    public static function getQuestionsNameByEvent(Event $event){ //return collection of question with question name
+    public static function getQuestionsNameByEvent(Event $event)
+    { //return collection of question with question name
         return Question::where('event_id', 2)->where('question_answer_id', null)->with('questionName')->get();
     }
 }

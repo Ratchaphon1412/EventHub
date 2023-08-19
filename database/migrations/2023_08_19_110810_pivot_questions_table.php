@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->foreignIdFor(\App\Models\Event::class)->nullable();
             $table->foreignIdFor(\App\Models\QuestionName::class)->nullable();
+            $table->foreignIdFor(\App\Models\QuestionAnswer::class)->nullable();
+            $table->foreignIdFor(\App\Models\User::class)->nullable();
             $table->timestamps();
         });
     }
