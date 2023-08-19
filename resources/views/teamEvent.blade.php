@@ -1,4 +1,4 @@
-<main>
+
   <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="team" role="tabpanel" aria-labelledby="team-tab">
     <section class="flex flex-col gap-6">
       <div class="w-full flex flex-row justify-between container">
@@ -109,4 +109,3 @@
     </section>
   </div>
 
-</main>
