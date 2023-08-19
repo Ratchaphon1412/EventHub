@@ -3,6 +3,7 @@
 use App\Http\Controllers\AnswerQuestionController;
 use App\Http\Controllers\ApplicantAnswerController;
 use App\Http\Controllers\ApproveRegisterController;
+use App\Http\Controllers\CertificateController;
 use App\Http\Controllers\CreateQuestionController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RegisterStepTwoController;
@@ -104,10 +105,11 @@ Route::get('/team', [TeamEventController::class, 'index'])->name('teamEvent.inde
 Route::put('/team', [TeamEventController::class, 'update'])->name('teamEvent.update');
 Route::post('/team/rejectMember',[TeamEventController::class, 'destory'])->name('teamEvent.delete');
 
-Route::get('/cerficate',function(){
-    return view('cerficate');
-})->name('cerficateUser');
+Route::get('/certificate',[CertificateController::class,'index'])->name('certificate.index');
+Route::get('/certificate/show',[CertificateController::class,'show'])->name('certificate.show');
+
 
 Route::get('/event/joined',function(){
     return view('eventJoined');
 })->name('eventJoined');
+
