@@ -62,16 +62,11 @@
                     <li class="mr-2" role="presentation">
                         <button class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300" id="approve-tab" data-tabs-target="#approve" type="button" role="tab" aria-controls="approve" aria-selected="false">Approve</button>
                     </li>
-            
-            
                 </ul>
             </div>
             <div id="myTabContent">
                 <div class="hidden" id="detail" role="tabpanel" aria-labelledby="detail-tab">
-            
                     <x-events.event-detail-view :event="$event"/>
-                    
-
                 </div>
                 
                 <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="manage" role="tabpanel" aria-labelledby="manage-tab">
