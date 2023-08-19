@@ -151,7 +151,7 @@ class EventController extends Controller
      */
     public function update(Request $request, Event $event)
     {
-     
+
         $request->validate([
             'title' => ['required', 'min:1', 'max:255'],
             'detail' => ['required', 'min:1'],
@@ -187,8 +187,9 @@ class EventController extends Controller
         $startEventDate = date('Y-m-d', strtotime("$request->startEventDate"));
         $endEventDate = date('Y-m-d', strtotime("$request->endEventDate"));
 
-   
-        $this->eventRepository->updateEvent($event,
+
+        $this->eventRepository->updateEvent(
+            $event,
             $request->title,
             $request->detail,
             $category,
@@ -218,5 +219,12 @@ class EventController extends Controller
         // $event->delete();
         $this->eventRepository->deleteEvent($event);
         return redirect()->route('teamEvent.index');
+    }
+
+    public function questionEnable(Request $request)
+    {
+        $event = $this->eventRepository->findById($request->id);
+        $event->question = $request->enable;
+        $event->save();
     }
 }
