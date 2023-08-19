@@ -52,10 +52,11 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
 Route::controller(ApproveRegisterController::class)->group(function (){
     Route::get('/{event}/approve_register', 'index')->name('approve.register');
     Route::post('/{event}/approve_register', 'update')->name('approve.update');
+    Route::get('/{event}/approve_register', 'join')->name('approve.join');
 });
 
 
-Route::get('/{event}/approve_register/{applicant}', [
+Route::get('/{event}/approve_register/{answer}', [
     ApplicantAnswerController::class, 'index'
 ])->name('applicant.answer');
 
