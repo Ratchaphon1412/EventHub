@@ -24,8 +24,9 @@
 
         <span class="text-center font-bold my-10 text-white/90 container flex flex-col w-3/4">
            
-            <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod provident ullam suscipit quas, at quos non. Ipsum sunt quasi vitae quia ut. Recusandae illum non maiores delectus quod earum blanditiis?
+            <p class="text-xl text-slate-950">
+            An event website is a dynamic online platform that curates and delivers essential information, seamless registration processes, and interactive features, fostering an engaging digital space for event 
+            attendees and participants to connect, explore, and make the most of their event experience.
             </p>
         </span>
     </section>
@@ -67,9 +68,10 @@
     <section class="bg-white ">
         <div class="gap-16 items-center py-8 px-4 mx-auto max-w-screen-xl lg:grid lg:grid-cols-2 lg:py-16 lg:px-6">
             <div class="font-light text-gray-500 sm:text-lg">
-                <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 ">We didn't reinvent the wheel</h2>
-                <p class="mb-4">We are strategists, designers and developers. Innovators and problem solvers. Small enough to be simple and quick, but big enough to deliver the scope you want at the pace you need. Small enough to be simple and quick, but big enough to deliver the scope you want at the pace you need.</p>
-                <p>We are strategists, designers and developers. Innovators and problem solvers. Small enough to be simple and quick.</p>
+                <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 ">The website that collects the most news about the event.</h2>
+                <p class="mb-4">
+                    Experience seamless event management and engagement like never before with our innovative event website, where you can effortlessly access crucial information, register with ease, and connect with fellow participants to make the most of your event journey.
+                </p>
             </div>
             <div class="grid grid-cols-2 gap-4 mt-8">
                 <img class="w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/content/office-long-2.png" alt="office content 1">
@@ -78,12 +80,12 @@
         </div>
     </section>
 
-    <section class="flex flex-col w-full h-[400px] bg-cover bg-fixed bg-center  justify-center items-center bg-[url('https://images.unsplash.com/photo-1642427749670-f20e2e76ed8c?auto=format&fit=crop&w=880&q=80')]">
+    <section class="flex flex-col w-full h-[400px] bg-cover bg-fixed bg-center  justify-center items-center bg-[url('https://img.freepik.com/free-photo/fuji-mountain-with-milky-way-night_335224-104.jpg?w=1480&t=st=1692457261~exp=1692457861~hmac=03a5c86bfa55147cfe66528d7c2720965992f7189601655c9d214184a5edb7e1')]">
         <h1 class="text-white text-5xl font-semibold mt-20 mb-10">
-            This is Parallax Effect
+            Join us for a joyous celebration and create lasting memories together.
         </h1>
 
-        <span class="text-center font-bold my-20 text-white/90">
+        <!-- <span class="text-center font-bold my-20 text-white/90">
             <a
                 href="https://egoistdeveloper.github.io/twcss-to-sass-playground/"
                 target="_blank"
@@ -117,7 +119,7 @@
                     Full Preview
                 </a>
             </p>
-        </span>
+        </span> -->
     </section>
 </main>
        </x-app-layout>
