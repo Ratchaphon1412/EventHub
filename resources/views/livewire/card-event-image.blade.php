@@ -1,4 +1,4 @@
-<div class="card w-96  shadow-xl m-4">
+<div class="card w-96 h-96  shadow-xl m-4">
     <figure><img src="{{$image}}" alt="Shoes" /></figure>
     <div class="card-body text-black">
       <h2 class="card-title">
