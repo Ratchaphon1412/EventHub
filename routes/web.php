@@ -12,6 +12,7 @@ use App\Http\Controllers\KanbanController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\TeamEventController;
+use Laravel\Jetstream\Rules\Role;
 
 /*
 |--------------------------------------------------------------------------
@@ -80,9 +81,6 @@ Route::get('/detail', function () {
     return view('eventDetail');
 })->name("EventDetail");
 
-
-
-
 Route::controller(EventController::class)->group(function () {
     Route::get('/event/detail/{event}', [EventController::class, 'show'])->name('event.detail.show');
     Route::post('/event/create', [EventController::class, 'store'])->name('event.create.store');
@@ -92,6 +90,9 @@ Route::controller(EventController::class)->group(function () {
     Route::delete('/event/delete/{event}', [EventController::class, 'destroy'])->name('event.delete');
     Route::post('/event/enable/question/',  'questionEnable')->name('event.enable.question');
     Route::post('/event/result','result')->name('event.result');
+    Route::get('/event/Team','isInTeam')->name('event.isInTeam');
+    Route::get('/event/joined','isJoinedEvent')->name('event.isJoinedEvent');
+
 });
 
 Route::group(['middleware'=>['auth']],function (){
@@ -112,9 +113,4 @@ Route::put('/team', [TeamEventController::class, 'update'])->name('teamEvent.upd
 Route::post('/team/rejectMember', [TeamEventController::class, 'destory'])->name('teamEvent.delete');
 
 Route::get('/certificate', [CertificateController::class, 'index'])->name('certificate.index');
-Route::get('/certificate/show', [CertificateController::class, 'show'])->name('certificate.show');
 
-
-Route::get('/event/joined', function () {
-    return view('eventJoined');
-})->name('eventJoined');
