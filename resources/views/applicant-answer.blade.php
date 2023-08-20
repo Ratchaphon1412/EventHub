@@ -3,8 +3,8 @@
 @section('content')
     <div class="w-full">
                 <!-- Parallax Background -->
-        <section class="flex flex-col w-full h-[200px] bg-cover bg-fixed bg-center  rounded-2xl justify-center items-center bg-[url('https://images.unsplash.com/photo-1642427749670-f20e2e76ed8c?auto=format&fit=crop&w=880&q=80')]">
-        <h1 class="text-white text-5xl font-semibold mt-20 mb-10">
+        <section class="flex flex-col w-full h-[200px] bg-cover bg-fixed bg-center  rounded-2xl justify-center items-center bg-[url('https://images.unsplash.com/photo-1470252649378-9c29740c9fa8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80')]">
+        <h1 class="text-black text-5xl font-semibold mt-20 mb-10">
             My Owner Event On Event Hub
         </h1>
         </section>
