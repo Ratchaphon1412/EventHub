@@ -12,6 +12,9 @@ use App\Interfaces\EventRepositoryInterface;
 use App\Interfaces\CategoryRepositoryInterface;
 use App\Interfaces\KanbanRepositoryInterface;
 use App\Interfaces\KanbanColumnsRepositoryInterface;
+use Illuminate\Support\Facades\Notification;
+
+use App\Notifications\EventUpdateNotification;
 
 
 class EventController extends Controller
@@ -212,6 +215,15 @@ class EventController extends Controller
             $request->location_name,
             $pathCertificateFile,
         );
+
+        //Notification
+
+        $team = $event->userTeam; //[ {user1}, {user2}, {user3} ] 
+
+        foreach ($team as $member) {
+            Notification::send($member, new EventUpdateNotification());
+        }
+
         return view('eventDetail', ['event' => $event]);
     }
 
