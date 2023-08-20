@@ -115,26 +115,4 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Event::class, 'questions', 'user_id', 'event_id');
     }
-
-    public function getContacts(): String
-    {
-        $contact = '';
-        $count = 0;
-        if ($this->phone != null) {
-            $contact = "phone : " . $this->phone;
-            $count++;
-        }
-        if ($this->facebook != null) {
-            $contact = $contact . "\nfacebook : " . $this->facebook;
-            $count++;
-        }
-        if ($this->instagram != null and $count < 2) {
-            $contact = "\ninstagram : " . $this->instagram;
-            $count++;
-        }
-        if ($this->line != null and $count < 2) {
-            $contact = "\nline : " . $this->line;
-        }
-        return $contact;
-    }
 }

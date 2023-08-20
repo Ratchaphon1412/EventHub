@@ -40,7 +40,7 @@
               </button>
           </form>
 
-            @if(sizeof($event->questionName) > 0)
+            @if( $event->questionName != null and sizeof($event->questionName) > 0)
                 @foreach($event->questionName as $questionName)
           <article class="p-6 mb-6 text-base bg-white rounded-lg dark:bg-gray-900">
 
@@ -105,7 +105,7 @@
         let toggle = document.getElementById('toggle');
 
         toggle.checked = enableQuestion;
-       
+
         toggle.addEventListener('click', function (e) {
             let token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
@@ -121,7 +121,7 @@
                 data: JSON.stringify({
                     "id": {!!json_encode($event->id)!!},
                     "enable": toggle.checked
-                
+
                 }),
                 success:function(msg){
                   window.location.reload(true);
