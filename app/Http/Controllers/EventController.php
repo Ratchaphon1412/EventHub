@@ -17,8 +17,10 @@ use App\Interfaces\EventRepositoryInterface;
 use App\Interfaces\CategoryRepositoryInterface;
 use App\Interfaces\KanbanRepositoryInterface;
 use App\Interfaces\KanbanColumnsRepositoryInterface;
-use Illuminate\Support\Facades\Redirect;
-use Symfony\Component\VarDumper\Caster\RedisCaster;
+
+
+use App\Notifications\EventUpdateNotification;
+
 
 class EventController extends Controller
 {

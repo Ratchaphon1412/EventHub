@@ -13,8 +13,10 @@ use Ramsey\Collection\Collection;
 
 class AnswerQuestionController
 {
-    public function index(Event $event)
+    public function index(Event $event, User $user)
     {
+        return $user;
+        return view('applicant-answer', ['event'=>$event, 'user'=>$user]);
     }
 
     public function store(Request $request, Event $event)

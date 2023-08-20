@@ -70,7 +70,7 @@ class Event extends Model
     {
         foreach ($this->questionName as $questionName) {
             if ($questionName == null) return false;
-            if ($questionName->where('user_id', $user->id)) return true;
+            if ($questionName->questionAnswer->where('user_id', $user->id)->count() > 0) return true;
         }
         return false;
     }

@@ -27,10 +27,10 @@
 
                                 </p>
                             </div>
-                            <a href="{{route('approve.join', ['event'=>$event])}}" methods="GET" class="py-2.5 px-5 mr-2 mb-2  text-sm font-medium  focus:outline-none text-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
+                            <button id="joinButton"  class="py-2.5 px-5 mr-2 mb-2  text-sm font-medium  focus:outline-none text-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
                                 Join
 
-                            </a>
+                            </button>
 
 
                         </div>
@@ -108,3 +108,27 @@
 </x-app-layout>
 
 
+<script>
+    let joinButton = document.getElementById('joinButton');
+    let userjoin = {!!json_encode($event->userEventApprove()->find(Auth::user()))!!};
+    let eventQuestion = {!!json_encode($event->question)!!};
+    if (userjoin != null){
+            joinButton.innerHTML = "Joined";
+    }else{
+        joinButton.innerHTML = "Join";
+    }
+
+
+    
+    joinButton.addEventListener('click', function() {
+         if(userjoin != null){
+           window.location.href = "{{route('approve.unjoin',['event'=>$event])}}";
+         }else{
+            window.location.href = "{{route('approve.join',['event'=>$event])}}";
+         }
+
+
+    
+        
+    })
+</script>

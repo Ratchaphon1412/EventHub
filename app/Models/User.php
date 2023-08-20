@@ -106,6 +106,13 @@ class User extends Authenticatable
         return Question::where('user_id', $this->id)->select('event_id')->distinct()->get();
     }
 
+    public function getImageUrl() {
+        if ($this->profile_photo_path != null) {
+            return $this->getImageUrlFromPath();
+        }
+        return $this->profile_photo_url;
+    }
+
     public function getImageUrlFromPath()
     {
         return url('storage/' . $this->profile_photo_path);
