@@ -40,6 +40,7 @@ class User extends Authenticatable
         'line',
         'first_name',
         'last_name',
+
     ];
 
     /**
@@ -86,7 +87,7 @@ class User extends Authenticatable
     {
         return $this->hasMany(QuestionAnswer::class);
     }
-    public function kanbanCards():HasMany
+    public function kanbanCards(): HasMany
     {
         return $this->hasMany(KanbanCard::class);
     }
@@ -97,34 +98,42 @@ class User extends Authenticatable
 
     public function joinedTeam(): BelongsToMany
     {
-        return $this->belongsToMany(Event::class,'Team_Event','user_id','event_id');
+        return $this->belongsToMany(Event::class, 'Team_Event', 'user_id', 'event_id');
     }
 
-    public function getSubmitEvents(){ //get all event that this user submit answer
+    public function getSubmitEvents()
+    { //get all event that this user submit answer
         return Question::where('user_id', $this->id)->select('event_id')->distinct()->get();
     }
 
-    public function getImageUrlFromPath() {
-        return url('storage/'.$this->profile_photo_path);
+    public function getImageUrlFromPath()
+    {
+        return url('storage/' . $this->profile_photo_path);
     }
 
-    public function getContacts(): String {
+    public function answerQuestionEvent()
+    {
+        return $this->belongsToMany(Event::class, 'questions', 'user_id', 'event_id');
+    }
+
+    public function getContacts(): String
+    {
         $contact = '';
         $count = 0;
         if ($this->phone != null) {
-            $contact = "phone : ".$this->phone;
+            $contact = "phone : " . $this->phone;
             $count++;
         }
         if ($this->facebook != null) {
-            $contact = $contact. "\nfacebook : ".$this->facebook;
+            $contact = $contact . "\nfacebook : " . $this->facebook;
             $count++;
         }
         if ($this->instagram != null and $count < 2) {
-            $contact = "\ninstagram : ".$this->instagram;
+            $contact = "\ninstagram : " . $this->instagram;
             $count++;
         }
         if ($this->line != null and $count < 2) {
-            $contact = "\nline : ".$this->line;
+            $contact = "\nline : " . $this->line;
         }
         return $contact;
     }
