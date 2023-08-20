@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('question_answers', function (Blueprint $table) {
             $table->id();
-            $table->string("answer")->nullable();
+            $table->text("answer")->nullable();
             $table->foreignIdFor(\App\Models\QuestionName::class)->nullable();
             $table->foreignIdFor(\App\Models\User::class)->nullable();
             $table->string('image_name')->nullable();

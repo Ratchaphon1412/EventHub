@@ -118,14 +118,15 @@
         joinButton.innerHTML = "Join";
     }
 
-    joinButton.addEventListener('click', function() {
-        // window.location.href = "{{route('approve.join',['event'=>$event])}}";
 
-        if(eventQuestion){
-            window.location.href = "{{route('question.answer',['event'=>$event])}}"
-        }else{
+    
+    joinButton.addEventListener('click', function() {
+         if(userjoin != null){
+           window.location.href = "{{route('approve.unjoin',['event'=>$event])}}";
+         }else{
             window.location.href = "{{route('approve.join',['event'=>$event])}}";
-        }
+         }
+
 
     
         
