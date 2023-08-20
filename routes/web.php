@@ -56,6 +56,7 @@ Route::controller(ApproveRegisterController::class)->group(function () {
     Route::get('/{event}/approve_register', 'join')->name('approve.join');
     Route::post('/approve/status', 'status')->name("approve.status");
     Route::get('/{event}/unjoin', 'unJoin')->name('approve.unjoin');
+    Route::get('/{event}/notComplate','notComplateQuestion')->name('approve.notComplate');
 });
 
 

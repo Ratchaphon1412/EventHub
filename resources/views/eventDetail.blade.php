@@ -111,9 +111,16 @@
 <script>
     let joinButton = document.getElementById('joinButton');
     let userjoin = {!!json_encode($event->userEventApprove()->find(Auth::user()))!!};
+    console.log(userjoin);
+
     let eventQuestion = {!!json_encode($event->question)!!};
     if (userjoin != null){
-            joinButton.innerHTML = "Joined";
+            
+            if(userjoin.pivot.status=="notcomplate"){
+                joinButton.innerHTML = "Not Complete Answer Question"
+            }else{
+                joinButton.innerHTML = "Joined";
+            }
     }else{
         joinButton.innerHTML = "Join";
     }
@@ -122,7 +129,13 @@
     
     joinButton.addEventListener('click', function() {
          if(userjoin != null){
-           window.location.href = "{{route('approve.unjoin',['event'=>$event])}}";
+  
+           if(userjoin.pivot.status == "notcomplate"){
+            window.location.href = "{{route('approve.notComplate',['event'=>$event])}}"
+           }else{
+            window.location.href = "{{route('approve.unjoin',['event'=>$event])}}";
+           }
+
          }else{
             window.location.href = "{{route('approve.join',['event'=>$event])}}";
          }
