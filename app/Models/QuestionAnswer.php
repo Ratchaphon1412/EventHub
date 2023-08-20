@@ -20,4 +20,8 @@ class QuestionAnswer extends Model
     public function questionName(): BelongsTo{
         return $this->belongsTo(QuestionName::class);
     }
+
+    public function getFileUrl() {
+        return url('storage/' . $this->image_path);
+    }
 }

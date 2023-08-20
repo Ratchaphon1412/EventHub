@@ -13,106 +13,93 @@
                     <div class="flex mx-auto sm:mr-10 sm:m-0">
                       <div class="items-center justify-center w-20 h-20 m-auto mr-4 sm:w-32 sm:h-32">
                         <img alt="profil"
-                          src="https://images.unsplash.com/photo-1564564321837-a57b7070ac4f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8bWFufGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
+                          src="{{$user->getImageUrl()}}"
                           class="object-cover w-20 h-20 mx-auto rounded-full sm:w-32 sm:h-32" />
                       </div>
                     </div>
                     <div class="flex flex-col pt-4 mx-auto my-auto sm:pt-0 sm:mx-0">
                       <div class="flex flex-col mx-auto sm:flex-row sm:mx-0 ">
-                        <h2 class="flex pr-4 text-xl font-light text-gray-900 sm:text-3xl">AlexNoah7</h2>
-               
+                        <h2 class="flex pr-4 text-xl font-light text-gray-900 sm:text-3xl">{{$user->name}}</h2>
+
                       </div>
                         <div class="flex flex-row gap-4 justify-between mt-2">
-                            <i class="bi bi-facebook"></i>
-                            <i class="bi bi-instagram"></i>
-                            <i class="bi bi-line"></i>
+                            <i class="bi bi-facebook"> {{$user->facebook}}</i>
+                            <i class="bi bi-instagram"> {{$user->instagram}}</i>
+                            <i class="bi bi-line"> {{$user->line}}</i>
                         </div>
                     </div>
                   </div>
                   <div class="w-full pt-5">
-                    <h1 class="text-lg font-semibold text-gray-800 sm:text-xl">Alexander Noah</h1>
-                    <p class="text-sm text-gray-500 md:text-base">Fotografer</p>
-                    <p class="text-sm text-gray-800 md:text-base">Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                      Cupiditate, quam?</p>
+                    <h1 class="text-lg font-semibold text-gray-800 sm:text-xl">{{$user->first_name. ' '. $user->last_name}}</h1>
+                    <p class="text-sm text-gray-500 md:text-base">{{$user->gender}}</p>
+                    <p class="text-sm text-gray-800 md:text-base">{{$user->email}}</p>
                   </div>
                 </div>
             </div>
+            @if($event->questionName != null)
+                @foreach($event->questionName as $questionName)
+                    <article class="p-6 mb-6 text-base bg-white rounded-lg dark:bg-gray-900 min-w-full">
+                        <footer class="flex justify-between items-center mb-2">
+                            <div class="flex items-center">
+                                <p class="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white"><img
+                                        class="mr-2 w-6 h-6 rounded-full"
+                                        src="{{url('storage/' . $event->eventImage->get(0)->event_image)}}"
+                                        alt="Michael Gough">{{$event->title}}</p>
+                                <p class="text-sm text-gray-600 dark:text-gray-400"><time pubdate datetime="2022-02-08"
+                                                                                          title="February 8th, 2022">{{$event->event_start_date}}</time></p>
+                            </div>
 
-            <article class="p-6 mb-6 text-base bg-white rounded-lg dark:bg-gray-900">
-                <footer class="flex justify-between items-center mb-2">
-                    <div class="flex items-center">
-                        <p class="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white"><img
-                                class="mr-2 w-6 h-6 rounded-full"
-                                src="https://flowbite.com/docs/images/people/profile-picture-2.jpg"
-                                alt="Michael Gough">Michael Gough</p>
-                        <p class="text-sm text-gray-600 dark:text-gray-400"><time pubdate datetime="2022-02-08"
-                                title="February 8th, 2022">Feb. 8, 2022</time></p>
-                    </div>
-       
-           
-                </footer>
-                <p class="text-gray-500 dark:text-gray-400">Very straight-to-point article. Really worth time reading. Thank you! But tools are just the
-                    instruments for the UX designers. The knowledge of the design tools are as important as the
-                    creation of the design strategy.</p>
-                <div class="flex items-center mt-4 space-x-4">
-                    <button type="button"
-                        class="flex items-center text-sm text-gray-500 hover:underline dark:text-gray-400">
-                        <svg aria-hidden="true" class="mr-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path></svg>
-                        Reply
-                    </button>
-                </div>
-            </article>
-            <article class="p-6 mb-6 ml-6 lg:ml-12 text-base bg-white rounded-lg dark:bg-gray-900 w-full">
-                <footer class="flex justify-between items-center mb-2">
-                    <div class="flex items-center">
-                        <p class="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white"><img
-                                class="mr-2 w-6 h-6 rounded-full"
-                                src="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
-                                alt="Jese Leos">Jese Leos</p>
-                        <p class="text-sm text-gray-600 dark:text-gray-400"><time pubdate datetime="2022-02-12"
-                                title="February 12th, 2022">Feb. 12, 2022</time></p>
-                    </div>
 
-                
-                </footer>
-                <p class="text-gray-500 dark:text-gray-400">Much appreciated! Glad you liked it ☺️</p>
+                        </footer>
+                        <p class="text-gray-500 dark:text-gray-400">{{$questionName->name}}</p>
+                        <div class="flex items-center mt-4 space-x-4">
+                            <button type="button"
+                                    class="flex items-center text-sm text-gray-500 hover:underline dark:text-gray-400">
+                                <svg aria-hidden="true" class="mr-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path></svg>
+                                Answer Type : {{$questionName->answer_type}}
+                            </button>
+                        </div>
+                    </article>
+                        {{-- Text Answer --}}
+                        <article class="p-6 mb-6 ml-6 lg:ml-12 text-base bg-white rounded-lg dark:bg-gray-900 w-full">
+                            <footer class="flex justify-between items-center mb-2">
+                                <div class="flex items-center">
+                                    <p class="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white"><img
+                                            class="mr-2 w-6 h-6 rounded-full"
+                                            src="{{$user->getImageUrl()}}"
+                                            alt="Jese Leos">{{$user->name}}</p>
+                                    <p class="text-sm text-gray-600 dark:text-gray-400"></p>
+                                </div>
 
-            </article>
-            <article class="p-6 mb-6 ml-6 lg:ml-12 text-base bg-white rounded-lg dark:bg-gray-900 w-full">
-                <footer class="flex justify-between items-center mb-2">
-                    <div class="flex items-center">
-                        <p class="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white"><img
-                                class="mr-2 w-6 h-6 rounded-full"
-                                src="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
-                                alt="Jese Leos">Jese Leos</p>
-                        <p class="text-sm text-gray-600 dark:text-gray-400"><time pubdate datetime="2022-02-12"
-                                title="February 12th, 2022">Feb. 12, 2022</time></p>
-                    </div>
 
-                
-                </footer>
-               <img src="https://images.unsplash.com/photo-1692482386532-7a3c6a051144?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" class="h-full w-auto object-cover" alt="">
+                            </footer>
+                            @if($questionName->answer_type == 'Text')
+                                @if($questionName->questionAnswer->where('user_id', $user->id)->last()->answer == null)
+                                    <p class="text-gray-500 dark:text-gray-400">No answer</p>
+                                @else
+                                    <p class="text-gray-500 dark:text-gray-400">{{$questionName->questionAnswer->where('user_id', $user->id)->last()->answer}}</p>
+                                @endif
+                            @elseif($questionName->answer_type == 'File')
+                                @if($questionName->questionAnswer->where('user_id', $user->id)->last()->image_path == null)
+                                    <p class="text-gray-500 dark:text-gray-400">No answer</p>
+                                @else
+                                    <img src="{{$questionName->questionAnswer->where('user_id', $user->id)->last()->getFileUrl()}}" class="h-full w-auto object-cover" alt="This User Doesn't submit file">
+                                @endif
+                            @elseif($questionName->answer_type == 'Video')
+                                @if($questionName->questionAnswer->where('user_id', $user->id)->last()->image_path == null)
+                                    <p class="text-gray-500 dark:text-gray-400">No answer</p>
+                                @else
+                                    <video controls>
+                                        <source src="{{$questionName->questionAnswer->where('user_id', $user->id)->last()->getFileUrl()}}" type="video/mp4" alt="No answer">
+                                    </video>
+                                @endif
 
-            </article>
-            <article class="p-6 mb-6 ml-6 lg:ml-12 text-base bg-white rounded-lg dark:bg-gray-900 w-full">
-                <footer class="flex justify-between items-center mb-2">
-                    <div class="flex items-center">
-                        <p class="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white"><img
-                                class="mr-2 w-6 h-6 rounded-full"
-                                src="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
-                                alt="Jese Leos">Jese Leos</p>
-                        <p class="text-sm text-gray-600 dark:text-gray-400"><time pubdate datetime="2022-02-12"
-                                title="February 12th, 2022">Feb. 12, 2022</time></p>
-                    </div>
+                            @endif
 
-                
-                </footer>
-                <video controls>
-                    <source src="http://techslides.com/demos/sample-videos/small.ogv" type="video/ogg">
-                </video>
-                  
+                        </article>
+                @endforeach
+            @endif
 
-            </article>
 
 
         </div>
