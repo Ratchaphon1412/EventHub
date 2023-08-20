@@ -26,7 +26,8 @@ class ApproveRegisterController
     }
 
     public function join(Event $event)
-    {
+    {   
+        // user not in approve
         if ($event->userEventApprove()->find(Auth::user()) == null) {
             if ($event->question and $event->questionName->count() > 0) {
                 $questions_name = $event->questionName;
@@ -48,5 +49,20 @@ class ApproveRegisterController
         $event = Event::find($request->get('event_id'));
         $user = User::find($request->get('user_id'));
         $event->userEventApprove()->updateExistingPivot($user->id, ['status' => $request->get('status')]);
+        
+
+    }
+    public function notComplateQuestion(Event $event){
+        
+            //user in approve but not complate Question
+            if($event->userEventApprove()->find(Auth::user())->pivot->status == "notcomplate"){
+                $questions_name = $event->questionName;
+                return view('answer-question', ['event' => $event, 'questions_name' => $questions_name]);
+            }
+
+            
+        
+
+
     }
 }

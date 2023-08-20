@@ -2,12 +2,23 @@
 
 @section('content')
     <div class="w-full">
-        <div class="p-10 mx-auto flex flex-col justify-center items-center">
+                <!-- Parallax Background -->
+        <section class="flex flex-col w-full h-[200px] bg-cover bg-fixed bg-center  rounded-2xl justify-center items-center bg-[url('https://images.unsplash.com/photo-1642427749670-f20e2e76ed8c?auto=format&fit=crop&w=880&q=80')]">
+        <h1 class="text-white text-5xl font-semibold mt-20 mb-10">
+            My Owner Event On Event Hub
+        </h1>
+        </section>
+
+        <section class="flex flex-col justify-start container mt-4">
+        <h1 class=" text-gray-900 font-bold text-2xl ">Answer From {{$user->name}}</h1>
+        </section>
+
+        <div class=" mx-auto flex flex-col justify-center items-center">
 
 
 
             <!--Card 1-->
-            <div class="w-full min-h-screen">
+            <div class="w-full mb-3">
                 <div class="max-w-screen-md px-10 py-6 mx-4 mt-20 bg-white rounded-lg shadow md:mx-auto border-1">
                   <div class="flex flex-col items-start w-full m-auto sm:flex-row">
                     <div class="flex mx-auto sm:mr-10 sm:m-0">
@@ -73,20 +84,24 @@
 
 
                             </footer>
+                        
+
                             @if($questionName->answer_type == 'Text')
-                                @if($questionName->questionAnswer->where('user_id', $user->id)->last()->answer == null)
+                                @if($questionName->questionAnswer->where('user_id', $user->id)->last()== null or $questionName->questionAnswer->where('user_id', $user->id)->last()->answer == null)
                                     <p class="text-gray-500 dark:text-gray-400">No answer</p>
                                 @else
                                     <p class="text-gray-500 dark:text-gray-400">{{$questionName->questionAnswer->where('user_id', $user->id)->last()->answer}}</p>
                                 @endif
                             @elseif($questionName->answer_type == 'File')
-                                @if($questionName->questionAnswer->where('user_id', $user->id)->last()->image_path == null)
+                                @if($questionName->questionAnswer->where('user_id', $user->id)->last()== null or $questionName->questionAnswer->where('user_id', $user->id)->last()->image_path == null)
                                     <p class="text-gray-500 dark:text-gray-400">No answer</p>
                                 @else
                                     <img src="{{$questionName->questionAnswer->where('user_id', $user->id)->last()->getFileUrl()}}" class="h-full w-auto object-cover" alt="This User Doesn't submit file">
                                 @endif
                             @elseif($questionName->answer_type == 'Video')
-                                @if($questionName->questionAnswer->where('user_id', $user->id)->last()->image_path == null)
+
+                                
+                                @if($questionName->questionAnswer->where('user_id', $user->id)->last()== null or  $questionName->questionAnswer->where('user_id', $user->id)->last()->image_path == null )
                                     <p class="text-gray-500 dark:text-gray-400">No answer</p>
                                 @else
                                     <video controls>
