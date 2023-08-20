@@ -65,4 +65,13 @@ class Event extends Model
     {
         return  $this->belongsToMany(QuestionName::class, 'questions', 'event_id', 'question_name_id');
     }
+
+    public function isThisUserAnswered(User $user): bool
+    {
+        foreach ($this->questionName as $questionName) {
+            if ($questionName == null) return false;
+            if ($questionName->where('user_id', $user->id)) return true;
+        }
+        return false;
+    }
 }

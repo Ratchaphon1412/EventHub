@@ -28,8 +28,17 @@ class ApproveRegisterController
     public function join(Event $event)
     {
         if ($event->userEventApprove()->find(Auth::user()) == null) {
+            if ($event->question and $event->questionName->count() > 0) {
+                $questions_name = $event->questionName;
+                return view('answer-question', ['event'=>$event, 'questions_name'=>$questions_name]);
+            }
             $event->userEventApprove()->attach(Auth::user());
         }
+        return redirect()->back();
+    }
+
+    public function unJoin(Event $event){
+        $event->userEventApprove()->attach(Auth::user());
         return redirect()->back();
     }
 

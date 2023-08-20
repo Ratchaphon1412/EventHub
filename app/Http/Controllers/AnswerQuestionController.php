@@ -15,25 +15,16 @@ class AnswerQuestionController
 {
     public function index(Event $event)
     {
-        $questions_name = $this->findQuestionsNameFrom($event);
-        return view('answer-question', ['event' => $event, 'questions_name' => $questions_name]);
-    }
-
-    private function findQuestionsNameFrom(Event $event)
-    {
-        $questions = Question::where('event_id', $event->id)->get('question_name_id');
-        $questions_name = QuestionName::find($questions);
-        return $questions_name;
     }
 
     public function store(Request $request, Event $event)
     {
-        $questionsNameOfEvent = $this->findQuestionsNameFrom($event);
+        $questionsNameOfEvent = $event->questionName;
         $size = sizeof($questionsNameOfEvent);
         $user = Auth::user();
 
         for ($i = 1; $i <= $size; $i++) {
-
+            $questionName = $questionsNameOfEvent->get($i-1);
             $answer_str = 'answer' . $i;
             $image_str = 'image' . $i;
 
@@ -45,8 +36,9 @@ class AnswerQuestionController
                 $questionAnswer->image_name = $request->file($image_str)->getClientOriginalName();
                 $questionAnswer->image_path = $request->file($image_str)->storeAs('images', $questionAnswer->image_name, 'public');
             }
+            $questionAnswer->question_name_id = $questionName->id;
+            $questionAnswer->user_id = $user->id;
             $questionAnswer->save();
-
 
 
             // $question = new Question();
@@ -61,10 +53,7 @@ class AnswerQuestionController
         // if ($event->userEventApprove()->find(Auth::user()) == null) {
         //     $event->userEventApprove()->attach(Auth::user());
         // }
-
-
-
-
-        return view('dashboard', ['event' => $event, 'user' => $user]);
+        $event->userEventApprove()->attach($user);
+        return view('eventDetail', ['event' => $event]);
     }
 }

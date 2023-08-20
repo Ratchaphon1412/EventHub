@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Event;
 use App\Models\Question;
+use App\Models\QuestionAnswer;
 use App\Models\QuestionName;
 use Illuminate\Http\Request;
 
@@ -31,13 +32,16 @@ class CreateQuestionController
         $questionName->save();
 
         $event->questionName()->attach($questionName);
-        return view('eventDetail', ['event' => $event]);
+        return redirect()->back();
+//        return view('eventDetail', ['event' => $event]);
     }
 
     public function delete(Event $event, QuestionName $questionName)
     {
         $event->questionName()->detach($questionName);
+        $questionName->questionAnswer()->delete();
         $questionName->delete();
-        return view('eventDetail', ['event' => $event]);
+        return redirect()->back();
+//        return view('eventDetail', ['event' => $event]);
     }
 }
