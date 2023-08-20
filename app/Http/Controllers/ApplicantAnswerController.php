@@ -12,9 +12,8 @@ class ApplicantAnswerController
 {
     public function index(Event $event, User $user)
     {
-        $applicant = $user;
         $questionName = $event->questionName;
         return view('applicant-answer', [ 'event'=>$event,
-                                                'applicant'=> $applicant]);
+                                                'user'=> $user]);
     }
 }
