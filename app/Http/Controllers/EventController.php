@@ -269,5 +269,18 @@ class EventController extends Controller
         // $check->approveEvents->first()->pivot->status
         return redirect()->back();
     }
-   
+    public function isJoinedEvent(){
+        $user = Auth::user();
+        $joinedEvents = $user->approveEvents;
+        //  return $joinedEvents;
+        
+        return view('eventJoined',['joinedEvents' => $joinedEvents]);
+        
+    }
+    public function isInTeam(Request $request){
+        $user = Auth::user();
+        $inTeamEvents = $user->joinedTeam;
+        
+        return view('teamJoined',['inTeamEvents' => $inTeamEvents]);
+    }
 }
