@@ -15,7 +15,6 @@ class CertificateController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $events = Event::all();
         $approveEvents = $user->approveEvents;
         // return $approveEvents;
         // foreach($events as $event){
@@ -29,7 +28,7 @@ class CertificateController extends Controller
         // }
         // return $approveEvent;
 
-        return view('certificate',['approveEvent' => $approveEvents]);
+        return view('certificate',['approveEvents' => $approveEvents]);
     }
 
     /**
@@ -51,9 +50,13 @@ class CertificateController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Request $request)
     {
-        //
+        // dd($request->all());
+        // $user = Auth::user();
+        // $event = Event::find($request->event);
+        // // $approveEvents = $user->approveEvents;
+        // return view('certificate_show',['event' => $event]);
     }
 
     /**
