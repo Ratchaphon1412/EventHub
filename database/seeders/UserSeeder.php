@@ -61,5 +61,15 @@ class UserSeeder extends Seeder
         $user->phone = '555 555 5555';
         $user->gender = 'Male';
         $user->save();
+
+        $user = new User();
+        $user->name = 'Tirawat';
+        $user->email = 't31494384@gmail.com';
+        $user->password = bcrypt('123456789');
+        $user->first_name = 'Tirawat';
+        $user->last_name = 'Pongpratisonthi';
+        $user->phone = '555 555 5555';
+        $user->gender = 'Male';
+        $user->save();
     }
 }

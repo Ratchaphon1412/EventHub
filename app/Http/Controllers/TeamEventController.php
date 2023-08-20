@@ -53,4 +53,6 @@ class TeamEventController extends Controller
         $event_from_id->userTeam()->detach($user_form_id);
         return redirect()->back();
     }
+
+    
 }

@@ -33,6 +33,7 @@ return new class extends Migration
             $table->string("document_payment")->nullable();
             $table->string("certificate_file");
             $table->text("location_detail");
+            $table->boolean("result")->default(false);
             $table->text("contact")->nullable();
             $table->text("location_name")->nullable();
             $table->boolean("question")->default(false);

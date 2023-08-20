@@ -30,8 +30,8 @@ class EventSeeder extends Seeder
         $event->event_start_date = fake()->dateTime();
         $event->event_end_date = fake()->dateTime();
         $event->user_id = User::find(1)->get()[0]->id;
-
         $event->save();
+
         $event = new Event();
         $event->title = fake()->name();
         $event->description = fake()->text();

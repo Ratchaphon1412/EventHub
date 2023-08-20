@@ -89,6 +89,7 @@ Route::controller(EventController::class)->group(function () {
     Route::put('/event/update/{event}', [EventController::class, 'update'])->name('event.create.update');
     Route::delete('/event/delete/{event}', [EventController::class, 'destroy'])->name('event.delete');
     Route::post('/event/enable/question/',  'questionEnable')->name('event.enable.question');
+    Route::post('/event/result','result')->name('event.result');
 });
 
 Route::group(['middleware'=>['auth']],function (){

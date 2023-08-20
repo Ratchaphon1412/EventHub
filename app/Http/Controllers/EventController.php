@@ -11,12 +11,14 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Notification;
 use App\Notifications\UpdateEventWhenSomeoneEdit;
-
+use App\Notifications\ResultWhoPass;
+use App\Notifications\ResultWhoFail;
 use App\Interfaces\EventRepositoryInterface;
 use App\Interfaces\CategoryRepositoryInterface;
 use App\Interfaces\KanbanRepositoryInterface;
 use App\Interfaces\KanbanColumnsRepositoryInterface;
-
+use Illuminate\Support\Facades\Redirect;
+use Symfony\Component\VarDumper\Caster\RedisCaster;
 
 class EventController extends Controller
 {
@@ -217,10 +219,10 @@ class EventController extends Controller
             $pathCertificateFile,
         );
         // notification when someone edit
-        $userTeam = $event->userTeam();
-        
+        $userTeam = $event->userTeam;
+
         foreach($userTeam as $teamMember){
-            Notification::send($teamMember,new UpdateEventWhenSomeoneEdit());
+            Notification::send($teamMember,new UpdateEventWhenSomeoneEdit($event,$user));
         }
 
         return view('eventDetail', ['event' => $event]);
@@ -243,4 +245,27 @@ class EventController extends Controller
         $event->question = $request->enable;
         $event->save();
     }
+
+    public function result(Request $request){
+        // dd($request->all());
+        $event = Event::find($request->event);
+        // return $event;
+        $resultapplicant = $event->userEventApprove;
+        foreach($resultapplicant as $approveUser){
+            return $approveUser;
+            if($approveUser->approveEvents->first()->pivot->status === "Accept"){
+                // return $approveUser;
+                Notification::send($approveUser,new ResultWhoPass($event,$approveUser));
+            }
+            else
+            {
+                Notification::send($approveUser,new ResultWhoFail($event,$approveUser));
+            }
+        }
+        $event->result = true;
+        $event->save();
+        // $check->approveEvents->first()->pivot->status
+        return redirect()->back();
+    }
+   
 }

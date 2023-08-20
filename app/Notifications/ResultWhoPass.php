@@ -9,7 +9,7 @@ use Illuminate\Notifications\Notification;
 use App\Models\Event;
 use App\Models\User;
 
-class UpdateEventWhenSomeoneEdit extends Notification
+class ResultWhoPass extends Notification
 {
     use Queueable;
     public Event $event;
@@ -40,13 +40,14 @@ class UpdateEventWhenSomeoneEdit extends Notification
     public function toMail(object $notifiable): MailMessage
     {
         $eventTitle = $this->event->title;
-        $eventId = $this->event->id;
+        $eventStartDate = $this->event->event_start_date;
         $username = $this->user->name;
         return (new MailMessage)
-                    ->line($username)
-                    ->line( 'Update your event  ' .$eventTitle )
-                    ->action('Check it out your event', url('/event/detail/'.$eventId));
-                    // ->line('Someone');
+                    ->subject("Congratulations!!!")
+                    ->line('Congratulations, you\'ve passed. '.$eventTitle)
+                    ->line('Don\'t forgot our Event start at '.$eventStartDate)
+                    ->action('Congratulations', url('/event/joined'))
+                    ->line('Thank you for using our Website!');
     }
 
     /**
