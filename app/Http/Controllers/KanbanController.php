@@ -45,8 +45,6 @@ class KanbanController extends Controller
         $working = $kanban->columns[1]->cards;
         $done = $kanban->columns[2]->cards;
       }
-
-
         return view('kanban',compact('kanban','todo','working','done'));
 
     }

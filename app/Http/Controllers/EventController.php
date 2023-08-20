@@ -254,8 +254,8 @@ class EventController extends Controller
         // return $event;
         $resultapplicant = $event->userEventApprove;
         foreach($resultapplicant as $approveUser){
-            return $approveUser;
-            if($approveUser->approveEvents->first()->pivot->status === "Accept"){
+            // return $approveUser;
+            if($approveUser->approveEvents->first()->pivot->status === "accept"){
                 // return $approveUser;
                 Notification::send($approveUser,new ResultWhoPass($event,$approveUser));
             }

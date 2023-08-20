@@ -25,8 +25,6 @@ class RegisterStepTwoController extends Controller
             'instagram' =>$request->instagram,
             'line' =>$request->line,
             'age' =>$request->age,
-
-
         ]);
         return redirect()->route('login');
 

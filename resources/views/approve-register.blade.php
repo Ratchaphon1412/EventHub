@@ -65,10 +65,12 @@
         @endif
       </tbody>
     </table>
+
+
     <form action="{{route('event.result',['event' => $event])}}" enctype="multipart/form-data" method="POST">
       @csrf
       @method('post')
-      <button type="submit" class="block w-full bg-green-900 text-white font-bold p-2 rounded-lg">
+      <button type="submit" class="block w-full bg-green-900 text-white font-bold p-2 rounded-lg xt-10">
         Announment Who pass
       </button>
     </form>
@@ -78,30 +80,7 @@
 </div>
 
 <script>
-  // let clickbtn = document.getElementById("announment_show");
-  // function result(e){
-  //   let token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-  //   $.ajax({
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //       "Accept": "application/json, text-plain, */*",
-  //       "X-Requested-With": "XMLHttpRequest",
-  //       "X-CSRF-TOKEN": token
-  //     },
-  //     type: "POST",
-  //     url: '/event/result',
-  //     data: JSON.stringify({
-  //       "event" : {
-  //         !!json_encode($event->id)!!
-  //       }
-
-  //     }),
-  //     success: function(msg) {
-  //       console.log(msg);
-  //     }
-  //   })
-  // }
-  // clickbtn.addEventListener('click',announment);
+  
 
   function selectStatus(e) {
     console.log(e.value);
@@ -120,9 +99,7 @@
       data: JSON.stringify({
         "user_id": e.getAttribute("dataid"),
         "status": e.value,
-        "event_id": {
-          !!json_encode($event - > id) !!
-        }
+        "event_id": {!!json_encode($event->id)!!}
 
       }),
       success: function(msg) {
