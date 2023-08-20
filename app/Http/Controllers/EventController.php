@@ -5,9 +5,13 @@ namespace App\Http\Controllers;
 use App\Models\Event;
 use App\Models\Category;
 use App\Models\EventImage;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Notification;
+use App\Notifications\UpdateEventWhenSomeoneEdit;
+
 use App\Interfaces\EventRepositoryInterface;
 use App\Interfaces\CategoryRepositoryInterface;
 use App\Interfaces\KanbanRepositoryInterface;
@@ -212,6 +216,13 @@ class EventController extends Controller
             $request->location_name,
             $pathCertificateFile,
         );
+        // notification when someone edit
+        $userTeam = $event->userTeam();
+        
+        foreach($userTeam as $teamMember){
+            Notification::send($teamMember,new UpdateEventWhenSomeoneEdit());
+        }
+
         return view('eventDetail', ['event' => $event]);
     }
 

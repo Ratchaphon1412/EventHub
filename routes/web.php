@@ -91,10 +91,10 @@ Route::controller(EventController::class)->group(function () {
     Route::post('/event/enable/question/',  'questionEnable')->name('event.enable.question');
 });
 
-// Route::group(['middleware'=>['auth']],function (){
-//     Route::get('register-step-two',[RegisterStepTwoController::class,'create'])->name('register-step-two.view');
-//     Route::post('register-step-two',[RegisterStepTwoController::class,'store'])->name('register-step-two.store');
-// });
+Route::group(['middleware'=>['auth']],function (){
+    Route::get('register-step-two',[RegisterStepTwoController::class,'create'])->name('register-step-two.view');
+    Route::post('register-step-two',[RegisterStepTwoController::class,'store'])->name('register-step-two.store');
+});
 
 Route::get('/createEvent', function () {
     return view('createEvent');

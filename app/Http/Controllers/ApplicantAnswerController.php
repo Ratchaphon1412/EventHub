@@ -14,7 +14,7 @@ class ApplicantAnswerController
     {
         $applicant = $user;
         $questionName = $event->questionName;
-        return view('applicant-answer', [ 'event'=>$event,
-                                                'applicant'=> $applicant]);
+        return view('applicant-answer', [ 'event'=>$event,'applicant'=> $applicant]);
     }
+    
 }
