@@ -25,9 +25,12 @@ class HomeController extends Controller
     public function index()
     {
         $categories = Category::all();
-        $events = Event::paginate(9);
 
-        return view('welcome', compact('categories', 'events'));
+        $events_sort_date = Event::orderBy('event_start_date','desc')->paginate(9);
+
+        $events_sort_newest = Event::orderBy('id','desc')->paginate(9);
+
+        return view('welcome', ['categories' => $categories , 'events_sort_date' => $events_sort_date ,'events_sort_newest' => $events_sort_newest]);
     }
 
     public function categoryView(Category $category)

@@ -3,6 +3,5 @@
     <div class="card-body text-center self-center">
       <h2 >{{$title}}</h2>
       <p>{{$description}}</p>
-    
     </div>
 </a>
