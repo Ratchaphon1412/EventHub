@@ -17,19 +17,32 @@
     <main class="flex flex-col justify-center items-center">
 
     <!-- Parallax Background -->
-    <section class="flex flex-col w-full h-[400px] bg-cover bg-fixed bg-center  justify-center items-center " style="background-image:url({{url('storage/assets/images/background/landing.jpg')}})">
-        <h1 class="text-white text-5xl font-black mt-20 ">
-            <span class="text-gray-800 font-bold">Event</span> <span class="text-yellow-400">Hub</span> Thailand
+    <section id="coverImage" class="justify-center items-center  w-full h-[400px] bg-fixed w-full  rounded-lg  bg-cover bg-no-repeat " style="background-image:url({{url('storage/assets/images/background/landing.jpg')}})" >
+            <div class="flex flex-col w-full h-full bg-cover bg-fixed bg-center  justify-center items-center backdrop-filter bg-opacity-60 bg-black text-white  rounded-lg shadow-lg overflow-hidden  w-full h-full drop-shadow-lg">
+            <h1 class="text-white text-5xl font-black mt-20 ">
+            <div class="flex gap-4">
+                <div class="flex gap-4 bg-black rounded-xl p-2">
+                    <span class="text-white font-bold">Event</span>
+                    <div class="bg-[#ffa31a] text-white h-full w-full rounded-xl ">
+                        <span class="text-black">Hub</span> 
+                    </div>
+                    Thailand
+                </div>
+            </div>
+            
+            <!-- <span class="text-[#ffa31a] font-bold">Event</span> <span class="text-[#808080]">Hub</span> Thailand -->
         </h1>
 
         <span class="text-center font-bold my-10 text-white/90 container flex flex-col w-3/4">
            
-            <p class="text-xl text-slate-950">
+            <p class="text-xl text-white">
             An event website is a dynamic online platform that curates and delivers essential information, seamless registration processes, and interactive features, fostering an engaging digital space for event 
             attendees and participants to connect, explore, and make the most of their event experience.
             </p>
         </span>
-    </section>
+            </div>
+        </section>
+
     <!-- Section Category-->
     <section class="flex flex-col w-full container">
         <div class="flex flex-row justify-between m-4">
@@ -79,10 +92,10 @@
             </div>
         </div>
     </section>   
-    <section class="flex flex-col w-full h-[400px] bg-cover bg-fixed bg-center  justify-center items-center bg-[url('https://images.unsplash.com/photo-1479707341578-d3f239e493d1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80')]">
+    <!-- <section class="flex flex-col w-full h-[400px] bg-cover bg-fixed bg-center  justify-center items-center bg-[url('https://images.unsplash.com/photo-1479707341578-d3f239e493d1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80')]">
         <h1 class="text-white text-5xl font-semibold mt-20 mb-10">
             Join us for a joyous celebration and create lasting memories together.
-        </h1>
+        </h1> -->
 
         <!-- <span class="text-center font-bold my-20 text-white/90">
             <a
@@ -119,9 +132,15 @@
                 </a>
             </p>
         </span> -->
-        
+        <section id="coverImage" class="justify-center items-center  w-full h-[400px] bg-fixed w-full  rounded-lg  bg-cover bg-no-repeat " style="background-image:url({{url('storage/assets/images/background/landing.jpg')}})" >
+            <div class="flex justify-center items-center backdrop-filter bg-opacity-60 bg-black text-white  rounded-lg shadow-lg overflow-hidden  w-full h-full drop-shadow-lg">
+                <h1 class="text-white text-3xl font-semibold mt-20 mb-10">
+                        Join us for a joyous celebration and create lasting memories together.
+                </h1>
+            </div>
         </section>
-</main>
+                </section>
+            </main>
        </x-app-layout>
     </body>
 </html>

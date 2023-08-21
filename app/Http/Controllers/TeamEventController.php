@@ -25,22 +25,26 @@ class TeamEventController extends Controller
     public function index()
     {
         $events = Event::all();
-        return view('teamEvent', compact('events'));
+        return view('event.teamEvent', compact('events'));
     }
 
 
     public function update(Request $request, Event $event)
     {
 
-        $request->validate([
-            'email' => 'required|email|unique:users,email',
-        ]);
+        // $request->validate([
+        //     'email' => 'required|email|unique:users,email',
+        // ]);
 
         if ($this->userRepository->checkUserExist($request->get('email'))) {
             $event_from_id = $this->eventRepository->findById($request->get('event'));
             $user = $this->userRepository->findByEmail($request->get('email'));
             $this->eventRepository->addUserToTeam($event_from_id, $user);
         }
+        else{
+            return redirect()->back()->with('error','Not have email in system');
+        }
+
         return redirect()->back();
     }
 

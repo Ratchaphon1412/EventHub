@@ -10,6 +10,16 @@
         <form class="space-y-6" action="{{ route('teamEvent.update',['event' => $event]) }}" method="POST" enctype="multipart/form-data">
           @csrf
           @method('PUT')
+          @if(session('error'))
+            <div class="alert alert-danger text-red-600">
+              {{ session('error') }}
+            </div>
+          @endif
+          @error('email')
+            <div class="text-red-600">
+              {{ $message }}
+            </div>
+          @enderror
           <div>
             <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
             <input type="email" name="email" id="email" class="@error('email') border-red-600 @enderror bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" requeired>
@@ -84,16 +94,16 @@
                     <p class="whitespace-no-wrap">{{$user->last_name}}</p>
                   </td>
                   <td>
-                    <form action="{{route('teamEvent.delete',['event' => $event,'user' => $user])}}" enctype="multipart/form-data" method="POST"  >
-                    @csrf
-                    @method('post')  
-                    <button type="submit" class="block w-full bg-red-500 text-white font-bold p-2 rounded-lg">
-                          reject
+                    <form action="{{route('teamEvent.delete',['event' => $event,'user' => $user])}}" enctype="multipart/form-data" method="POST">
+                      @csrf
+                      @method('post')
+                      <button type="submit" class="block w-full bg-red-500 text-white font-bold p-2 rounded-lg">
+                        reject
                       </button>
                     </form>
                   </td>
                 </tr>
-              @endforeach
+                @endforeach
 
                 @endif
               </tbody>
@@ -105,7 +115,6 @@
               <button class="h-12 w-12 rounded-full border text-sm font-semibold text-gray-600 transition duration-150 hover:bg-gray-100">Next</button>
             </div>
           </div> -->
-      </div>
+        </div>
     </section>
   </div>
-

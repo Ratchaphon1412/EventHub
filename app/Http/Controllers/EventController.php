@@ -273,7 +273,7 @@ class EventController extends Controller
     {
         $user = Auth::user();
         $events = $user->approveEvents;
-        return view('event.certificate', ['approveEvent' => $events]);
+        return view('event.certificate', ['approveEvents' => $events]);
     }
 
     public function isJoinedEvent()
