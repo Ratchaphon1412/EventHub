@@ -76,7 +76,7 @@ class EventController extends Controller
             'Annumentdate' => ['after:dateCloseIn'],
             // 'datetimeAnnument' => ['required','after:dateCloseIn'],
             'startEventDate' => ['required','after:Annumentdate'],
-            'endEventDate' => ['required','after:dateCloseIn'],
+            'endEventDate' => ['required','after:startEventDate'],
             'file_input' => ['required'],
             'poster' => ['required', 'image', 'mimes:jpeg,png,jpg'],
             'location_detail' => ['required'],
