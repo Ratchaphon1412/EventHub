@@ -15,12 +15,19 @@ class CardEventImage extends Component
     public string $timeStart;
     public string $timeEnd;
     public string $location_name;
-    
+
+
+    public function mount()
+    {
+        //
+        $this->timeStart = Date::parse($this->timeStart)->format('D,d M');
+        $this->timeEnd = Date::parse($this->timeEnd)->format('D,d M');
+    }
+
     public function render()
     {
-        
-        $this->timeStart = date('d-m');
-        $this->timeEnd = date('d-m');
+
+
         return view('livewire.card-event-image');
     }
 }
