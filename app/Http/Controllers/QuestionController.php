@@ -3,16 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Models\Event;
+use App\Models\QuestionAnswer;
 use App\Models\User;
 use App\Models\QuestionName;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Interfaces\EventRepositoryInterface;
 use App\Interfaces\QuestionRepositoryInterface;
+use Illuminate\Support\Facades\Gate;
 
 
-
-class QuestionController
+class QuestionController extends Controller
 {
 
     private EventRepositoryInterface $eventRepository;
@@ -22,6 +23,7 @@ class QuestionController
     {
         $this->eventRepository = $eventRepository;
         $this->questionRepository = $questionRepository;
+        $this->authorizeResource(QuestionName::class);
     }
 
 
@@ -35,7 +37,7 @@ class QuestionController
     public function store(Request $request, Event $event)
     {
 
-
+        Gate::authorize('create', $event);
         $questionName = $this->questionRepository->newQuestionName($request->get("question"), $request->get('type'));
         $this->eventRepository->addQuestionName($event, $questionName);
         return redirect()->back();
@@ -44,6 +46,7 @@ class QuestionController
     public function delete(Event $event, QuestionName $questionName)
     {
 
+        Gate::authorize('delete', $questionName);
         $this->eventRepository->removeQuestionName($event, $questionName);
         $this->questionRepository->deleteQuestionName($questionName);
 
@@ -60,7 +63,9 @@ class QuestionController
 
     public function answer(Request $request, Event $event)
     {
-
+        $this->authorizeResource(QuestionAnswer::class);
+        Gate::authorize('create', QuestionAnswer::class);
+        $this->authorizeResource(QuestionName::class);
         $questionsNameOfEvent = $this->eventRepository->getQuestionName($event);
         $size = sizeof($questionsNameOfEvent);
 

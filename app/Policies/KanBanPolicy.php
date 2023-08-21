@@ -20,13 +20,13 @@ class KanBanPolicy
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, Event $event): bool
+    public function view(User $user, Kanban $kanban): bool
     {
-        if ($event->user_id == $user->id) { // Owner
+        if ($kanban->event->user_id == $user->id) { // Owner
             return true;
         }
-        foreach ($event->userTeam as $team) { // Team
-            if ($user->id == $team->id) {
+        foreach ($kanban->event->userTeam as $userTeam) {
+            if ($userTeam->id == $user->id) {
                 return true;
             }
         }
@@ -36,40 +36,40 @@ class KanBanPolicy
     /**
      * Determine whether the user can create models.
      */
-    public function create(User $user, Event $event): bool
+    public function create(User $user, Kanban $kanban): bool
     {
-        return $user->id === $event->user_id; // Owner
+        return true;
     }
 
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, Event $event): bool
+    public function update(User $user, Kanban $kanban): bool
     {
-        return $this->view($user, $event);
+        return $this->view($user, $kanban);
     }
 
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, Event $event): bool
+    public function delete(User $user, Kanban $kanban): bool
     {
-        return $this->view($user, $event);
+        return $this->view($user, $kanban);
     }
 
     /**
      * Determine whether the user can restore the model.
      */
-    public function restore(User $user, Event $event): bool
+    public function restore(User $user, Kanban $kanban): bool
     {
-        return $this->view($user, $event);
+        return $this->view($user, $kanban);
     }
 
     /**
      * Determine whether the user can permanently delete the model.
      */
-    public function forceDelete(User $user, Event $event): bool
+    public function forceDelete(User $user, Kanban $kanban): bool
     {
-        return $this->create($user, $event);
+        return $this->view($user, $kanban);
     }
 }

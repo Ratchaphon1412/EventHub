@@ -10,12 +10,15 @@ use App\Models\KanbanCard;
 use App\Models\KanbanColumn;
 use App\Models\QuestionAnswer;
 use App\Models\QuestionName;
+use App\Models\User;
 use App\Policies\EventPolicy;
 use App\Policies\KanBanPolicy;
 use App\Policies\QuestionAnswerPolicy;
 use App\Policies\QuestionNamePolicy;
 use Database\Seeders\KanbanSeeder;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class AuthServiceProvider extends ServiceProvider
 {

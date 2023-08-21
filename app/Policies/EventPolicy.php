@@ -3,8 +3,10 @@
 namespace App\Policies;
 
 use App\Models\Event;
+use App\Models\QuestionName;
 use App\Models\User;
 use Illuminate\Auth\Access\Response;
+use Illuminate\Support\Facades\Auth;
 
 class EventPolicy
 {
@@ -19,7 +21,7 @@ class EventPolicy
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, Event $event): bool
+    public function view(User $user): bool
     {
         return true;
     }
@@ -35,9 +37,9 @@ class EventPolicy
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, Event $event): bool
+    public function update(User $user, Event $event)
     {
-        return $event->user_id === $user->id;
+        return $user->id === $event->user_id;
     }
 
     /**

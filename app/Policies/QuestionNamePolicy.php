@@ -30,7 +30,17 @@ class QuestionNamePolicy
      */
     public function create(User $user, Event $event): bool
     {
-        return $event->user_id === $user->id;
+        if ($event->user_id == $user->id) {
+            return true;
+        }
+
+        foreach ($event->userTeam as $userTeam) {
+            if ($userTeam->id == $user->id) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /**

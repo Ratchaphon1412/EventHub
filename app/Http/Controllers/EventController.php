@@ -6,7 +6,9 @@ use App\Models\Event;
 use App\Models\Category;
 use App\Models\EventImage;
 
+use App\Models\QuestionName;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Notification;
@@ -20,6 +22,7 @@ use App\Interfaces\KanbanColumnsRepositoryInterface;
 
 
 use App\Notifications\EventUpdateNotification;
+use const http\Client\Curl\AUTH_ANY;
 
 
 class EventController extends Controller
@@ -37,6 +40,7 @@ class EventController extends Controller
         $this->categoryRepository = $categoryRepository;
         $this->kanbanRepository = $kanbanRepository;
         $this->kanbanColumnRepository = $kanbanColumnRepository;
+        $this->authorizeResource(Event::class);
     }
 
 
@@ -62,7 +66,7 @@ class EventController extends Controller
      */
     public function store(Request $request)
     {
-
+        Gate::authorize('create', Event::class);
         $request->validate([
             'title' => ['required', 'min:1', 'max:255'],
             'detail' => ['required', 'min:1'],
@@ -142,6 +146,7 @@ class EventController extends Controller
     public function show(Event $event)
     {
         // $event_detail = $event;
+        Gate::authorize('view', Event::class);
         return view('event.eventDetail', ['event' => $event]);
     }
 
@@ -150,6 +155,7 @@ class EventController extends Controller
      */
     public function edit(Event $event)
     {
+        Gate::authorize('update', $event);
         $categorys = $this->categoryRepository->getAllCategory();
         return view('event.editEvent', ['event' => $event, 'categorys' => $categorys]);
     }
@@ -159,6 +165,7 @@ class EventController extends Controller
      */
     public function update(Request $request, Event $event)
     {
+        Gate::authorize('update', $event);
         $request->validate([
             'title' => ['required', 'min:1', 'max:255'],
             'detail' => ['required', 'min:1'],
@@ -234,9 +241,8 @@ class EventController extends Controller
      * Remove the specified resource from storage.
      */
     public function destroy(Event $event)
-
     {
-
+        Gate::authorize('delete', $event);
         $this->eventRepository->deleteEvent($event);
         return redirect()->route('dashboard');
     }
@@ -244,6 +250,7 @@ class EventController extends Controller
     public function questionEnable(Request $request)
     {
         $event = $this->eventRepository->findById($request->id);
+        Gate::authorize('update', $event);
         $event->question = $request->enable;
         $event->save();
     }
@@ -252,7 +259,6 @@ class EventController extends Controller
     {
 
         $event = $this->eventRepository->findById($request->event);
-
         $resultapplicant = $this->eventRepository->getuserEventApprove($event);
         foreach ($resultapplicant as $approveUser) {
             // return $approveUser;
@@ -287,6 +293,7 @@ class EventController extends Controller
     public function isInTeam(Request $request)
     {
         $user = Auth::user();
+        Gate::authorize('view');
         $inTeamEvents = $user->joinedTeam;
 
         return view('teamJoined', ['inTeamEvents' => $inTeamEvents]);
