@@ -77,7 +77,7 @@
                     <x-events.event-detail-view :event="$event"/>
                 </div>
                 <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="approve" role="tabpanel" aria-labelledby="approve-tab">
-    
+
                     @include('approve-register',['event'=>$event])
 
                  </div>
@@ -95,7 +95,7 @@
                 <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="question" role="tabpanel" aria-labelledby="question-tab">
                     @include('event.question.create-question',['event'=>$event])
                 </div>
-              
+
             </div>
 
 

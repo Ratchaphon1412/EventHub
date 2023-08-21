@@ -42,16 +42,17 @@
                                     {{ __('Manage Account') }}
                                 </div>
                                 <x-responsive-nav-link href="{{ route('home') }}">
-                                    {{ __('home') }}
+                                    {{ __('Home') }}
+                                </x-responsive-nav-link>
+                                <x-responsive-nav-link href="{{ route('dashboard') }}">
+                                    {{ __('Dashboard') }}
                                 </x-responsive-nav-link>
 
                                 <x-dropdown-link href="{{ route('profile.show') }}">
                                     {{ __('Profile') }}
                                 </x-dropdown-link>
                                 
-                                <x-responsive-nav-link href="{{ route('dashboard') }}">
-                                    {{ __('dashboard') }}
-                                </x-responsive-nav-link>
+                           
                                 @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
                                     <x-dropdown-link href="{{ route('api-tokens.index') }}">
                                         {{ __('API Tokens') }}

@@ -3,11 +3,18 @@
 @section('content')
     <div class="w-full">
                 <!-- Parallax Background -->
-        <section class="flex flex-col w-full h-[200px] bg-cover bg-fixed bg-center  rounded-2xl justify-center items-center bg-[url('https://images.unsplash.com/photo-1470252649378-9c29740c9fa8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80')]">
-        <h1 class="text-black text-5xl font-semibold mt-20 mb-10">
-            My Owner Event On Event Hub
-        </h1>
+        <section id="coverImage" class="justify-center items-center  w-full h-[200px] bg-fixed w-full  rounded-lg  bg-cover bg-no-repeat " style="background-image:url({{url('https://images.unsplash.com/photo-1470252649378-9c29740c9fa8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80')}})" >
+            <div class="flex justify-center items-center backdrop-filter bg-opacity-60 bg-black text-white  rounded-lg shadow-lg overflow-hidden  w-full h-full drop-shadow-lg">
+                <h1 class="text-white text-6xl font-semibold mt-20 mb-10">
+                Answe Form
+                </h1>
+            </div>
         </section>
+        <!-- <section class="flex flex-col w-full h-[200px] bg-cover bg-fixed bg-center  rounded-2xl justify-center items-center bg-[url('https://images.unsplash.com/photo-1470252649378-9c29740c9fa8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80')]">
+        <h1 class="text-black text-5xl font-semibold mt-20 mb-10">
+            Answe Form
+        </h1>
+        </section> -->
 
         <section class="flex flex-col justify-start container mt-4">
         <h1 class=" text-gray-900 font-bold text-2xl ">Answer From {{$user->name}}</h1>
@@ -54,7 +61,7 @@
                             <div class="flex items-center">
                                 <p class="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white"><img
                                         class="mr-2 w-6 h-6 rounded-full"
-                                        src="{{url('storage/' . $event->eventImage->get(0)->event_image)}}"
+                                        src="{{url('storage/' . $event->image_poster)}}"
                                         alt="Michael Gough">{{$event->title}}</p>
                                 <p class="text-sm text-gray-600 dark:text-gray-400"><time pubdate datetime="2022-02-08"
                                                                                           title="February 8th, 2022">{{$event->event_start_date}}</time></p>
@@ -84,7 +91,7 @@
 
 
                             </footer>
-                        
+
 
                             @if($questionName->answer_type == 'Text')
                                 @if($questionName->questionAnswer->where('user_id', $user->id)->last()== null or $questionName->questionAnswer->where('user_id', $user->id)->last()->answer == null)
@@ -100,7 +107,7 @@
                                 @endif
                             @elseif($questionName->answer_type == 'Video')
 
-                                
+
                                 @if($questionName->questionAnswer->where('user_id', $user->id)->last()== null or  $questionName->questionAnswer->where('user_id', $user->id)->last()->image_path == null )
                                     <p class="text-gray-500 dark:text-gray-400">No answer</p>
                                 @else
