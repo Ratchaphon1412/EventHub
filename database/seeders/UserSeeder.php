@@ -33,26 +33,6 @@ class UserSeeder extends Seeder
         $user->save();
 
         $user = new User();
-        $user->name = 'Ratchaphon111';
-        $user->email = 'sevenknight5570@gmail.com';
-        $user->password = bcrypt('$Nueng111');
-        $user->first_name = 'Ratchaphon';
-        $user->last_name = 'Hinsui';
-        $user->phone = '0632686119';
-        $user->gender = 'Male';
-        $user->save();
-
-        $user = new User();
-        $user->name = 'Test 1';
-        $user->email = 'Test111@gmail.com';
-        $user->password = bcrypt('$Nueng111');
-        $user->first_name = 'Ratchaphon';
-        $user->last_name = 'Hinsui';
-        $user->phone = '0632686119';
-        $user->gender = 'Male';
-        $user->save();
-
-        $user = new User();
         $user->name = 'FolkXa';
         $user->email = 'jirakit11619@gmail.com';
         $user->password = bcrypt('123456789');
@@ -71,5 +51,7 @@ class UserSeeder extends Seeder
         $user->phone = '555 555 5555';
         $user->gender = 'Male';
         $user->save();
+
+        $users = User::factory(10)->create();
     }
 }
