@@ -34,8 +34,10 @@
   <div class="grid md:grid-cols-3 sm:grid-cols-1 justify-center gap-4 ">
     @if($joinedEvents != null)
       @foreach($joinedEvents as $event)
+      
         @if($event->result === 0)
-          @if($event->pivot->status === "notcomplete")
+        
+          @if($event->pivot->status == "notcomplete")
           <a href="{{route('event.detail.show' , ['event'=>$event])}}">
             <livewire:card-event-image title="{{$event->title}}" image="{{url('storage/'.$event->image_poster)}}" status="Upcomming" category="{{$event->category->category_name}}" description="{{$event->description}}" />
           </a>

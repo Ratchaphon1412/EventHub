@@ -86,7 +86,7 @@ class EventPolicy
 
     public function manageEventApprove(User $user, Event $event)
     {
-        if ($event->user_id === $user->id or $event->userEventApprove()->where('user_id', $user->id)->count() > 0) {
+        if ($event->user_id === $user->id or $event->userTeam()->where('user_id', $user->id)->count() > 0) {
             return true;
         }
 

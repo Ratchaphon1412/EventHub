@@ -49,6 +49,7 @@
     <section class="flex flex-col w-full container mt-8 mb-8">
         <div class="flex flex-row justify-between m-4">
                 <h1 class="font-bold text-xl text-black"> Gallary </h1>
+                <a href="{{route('gallery')}}" class="font-medium underline text-gray-600 hover:text-gray-900">See Gallary</a>
                 
         </div>
         <div id="default-carousel" class="relative w-full  " data-carousel="slide">
@@ -110,7 +111,7 @@
             <h1 class="font-bold text-xl text-black"> Upcoming</h1>
   
         </div>
-        <div class="flex flex-row justify-between flex-wrap">
+        <div class="flex flex-row justify-around flex-wrap">
             @foreach ($events as $event)
             <a href="{{route('event.detail.show' , ['event'=>$event])}}">
                 <livewire:card-event-image title="{{$event->title}}" image="{{url('storage/'.$event->image_poster)}}" status="Upcomming" category="{{$event->category->category_name}}" description="{{$event->description}}"/>

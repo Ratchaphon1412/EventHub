@@ -75,6 +75,10 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
             Route::put('/team', 'update')->name('teamEvent.update');
             Route::post('/team/rejectMember', 'destory')->name('teamEvent.delete');
         });
+
+        Route::get("/gallery", function () {
+            return view("gallary");
+        })->name("gallery");
     });
 });
 

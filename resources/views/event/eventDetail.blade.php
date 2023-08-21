@@ -95,29 +95,37 @@
                 <div class="hidden" id="detail" role="tabpanel" aria-labelledby="detail-tab">
                     <x-events.event-detail-view :event="$event"/>
                 </div>
+                @can('manageEventApprove',$event)
                 <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="approve" role="tabpanel" aria-labelledby="approve-tab">
 
                     @include('approve-register',['event'=>$event])
 
                  </div>
-
+                @endcan
+                 @can('manageEvent',$event)
                 <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="manage" role="tabpanel" aria-labelledby="manage-tab">
 
                     @include('event.editEvent',['categorys'=>App\Models\Category::all()])
 
                 </div>
+                @endcan
+                @can('manageEventTeam',$event)
                     @include('event.teamEvent',['event'=> $event])
-                </div>
+                @endcan
+
                 <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="payment" role="tabpanel" aria-labelledby="payment-tab">
                     @include('event.payment',['payment'=>$event->document_payment])
                  </div>
+                 @can('kanban',$event)
                 <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="kanban" role="tabpanel" aria-labelledby="kanban-tab">
                     @include('event.kanban.kanban',['kanban'=>$event->kanban,'todo'=>$event->kanban->columns[0]->cards,'working'=>$event->kanban->columns[1]->cards,'done'=>$event->kanban->columns[2]->cards])
                 </div>
+                @endcan
+                @can('question',$event)
                 <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="question" role="tabpanel" aria-labelledby="question-tab">
                     @include('event.question.create-question',['event'=>$event])
                 </div>
-              
+                @endcan
 
             </div>
 
@@ -132,7 +140,80 @@
     
 
     <script type="module">
-      import {tabs} from "{{ Vite::asset('resources/js/tabflowbite.js') }}"
+      import {initTabFlowbite} from "{{ Vite::asset('resources/js/tabflowbite.js') }}"
+
+
+      const tabElements = [
+    {
+        id: 'detail',
+        triggerEl: document.querySelector('#detail-tab'),
+        targetEl: document.querySelector('#detail')
+    },
+    @can('manageEvent',$event)
+    {
+        id: 'manage',
+        triggerEl: document.querySelector('#manage-tab'),
+        targetEl: document.querySelector('#manage')
+    },
+    @endcan
+    @can('manageEventTeam',$event)
+    {
+        id:'team',
+        triggerEl: document.querySelector('#team-tab'),
+        targetEl: document.querySelector('#team')
+    },
+    @endcan
+    @can('kanban',$event)
+    {
+        id:'kanban',
+        triggerEl: document.querySelector('#kanban-tab'),
+        targetEl: document.querySelector('#kanban')
+    },
+    @endcan
+    @can('question',$event)
+    {
+        id:'question',
+        triggerEl: document.querySelector('#question-tab'),
+        targetEl: document.querySelector('#question')
+    },
+    @endcan
+    @can('manageEventApprove',$event)
+    {
+        id:'approve',
+        triggerEl: document.querySelector('#approve-tab'),
+        targetEl: document.querySelector('#approve')
+    },
+    @endcan
+
+    @can('manageEventApprove',$event)
+    {
+        id:'approve',
+        triggerEl: document.querySelector('#approve-tab'),
+        targetEl: document.querySelector('#approve')
+    },
+    @endcan
+    @auth
+    {
+        id:'payment',
+        triggerEl: document.querySelector('#payment-tab'),
+        targetEl: document.querySelector('#payment')
+    }
+    @endauth
+
+]
+const options = {
+    
+    activeClasses: 'text-blue-600 hover:text-blue-600 dark:text-blue-500 dark:hover:text-blue-400 border-blue-600 dark:border-blue-500',
+    inactiveClasses: 'text-gray-500 hover:text-gray-600 dark:text-gray-400 border-gray-100 hover:border-gray-300 dark:border-gray-700 dark:hover:text-gray-300',
+    onShow: () => {
+       
+    }
+};
+
+    let tabs = initTabFlowbite(tabElements, options);
+
+
+
        
         let sessionTab = {!!json_encode(session()->get('tab'))!!};
        

@@ -27,6 +27,7 @@ class HomeController extends Controller
         $categories = Category::all();
         $events = Event::paginate(9);
 
+
         return view('welcome', compact('categories', 'events'));
     }
 

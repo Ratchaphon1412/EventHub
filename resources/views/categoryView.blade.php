@@ -30,5 +30,13 @@
             
         </section>
 
+        <section id="coverImage" class="justify-center items-center  w-full h-[400px] bg-fixed w-full  rounded-lg  bg-cover bg-no-repeat mt-8" style="background-image:url({{url('storage/assets/images/background/landing.jpg')}})" >
+            <div class="flex justify-center items-center backdrop-filter bg-opacity-60 bg-black text-white  rounded-lg shadow-lg overflow-hidden  w-full h-full drop-shadow-lg">
+                <h1 class="text-white text-3xl font-semibold mt-20 mb-10">
+                        Join us for a joyous celebration and create lasting memories together.
+                </h1>
+            </div>
+        </section>
+
 
 </x-app-layout>
