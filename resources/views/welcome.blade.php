@@ -105,22 +105,48 @@
     </section>
 
 
-    <!-- Section Product-->
+    <!-- Section Select Upcoming -->
     <section class="flex flex-col w-full container">
         <div class="flex flex-row justify-between m-4">
-            <h1 class="font-bold text-xl text-black"> Upcoming</h1>
+            <h1 class="font-bold text-4xl text-black"> Upcoming</h1>
   
         </div>
-        <div class="flex flex-row justify-around flex-wrap">
-            @foreach ($events as $event)
+
+        <div class="flex flex-row justify-between flex-wrap">
+            @foreach ($events_sort_date as $event)
             <a href="{{route('event.detail.show' , ['event'=>$event])}}">
-                <livewire:card-event-image title="{{$event->title}}" image="{{url('storage/'.$event->image_poster)}}" status="Upcomming" category="{{$event->category->category_name}}" description="{{$event->description}}"/>
+                <livewire:card-event-image title="{{$event->title}}" image="{{url('storage/'.$event->image_poster)}}" status="Upcomming" category="{{$event->category->category_name}}" description="{{$event->description}}" location_name="{{$event->location_name}}"
+                />
             </a>
             @endforeach
         </div>
-
         <div class="">
-            {{$events->links()}}
+            {{$events_sort_date->links();}}
+        </div>
+    </section>
+    <!-- Section Select Newest -->
+    <section class="flex flex-col w-full container">
+        <div class="flex flex-row justify-between m-4">
+            <h1 class="font-bold text-4xl text-black"> Newest</h1>
+        </div>
+        <div class="flex flex-row justify-between flex-wrap">
+            
+            @foreach ($events_sort_newest as $event)
+                <a href="{{route('event.detail.show',['event'=>$event])}}">
+                    <livewire:card-event-image title="{{$event->title}}" 
+                                                image="{{url('storage/'.$event->image_poster)}}" 
+                                                status="Newest" 
+                                                category="{{$event->category->category_name}}" 
+                                                description="{{$event->description}}"
+                                                timeEnd="{{$event->event_end_date}}"
+                                                timeStart="{{$event->event_start_date}}"
+                                                location_name="{{$event->location_name}}"
+                />
+                </a>
+            @endforeach
+        </div>
+        <div class="">
+            {{$events_sort_newest->links();}}
         </div>
     </section>
     <!-- Section Information-->

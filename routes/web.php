@@ -82,12 +82,6 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     });
 });
 
-
-
-
-
-
-
 Route::controller(HomeController::class)->group(
     function () {
         Route::get('/', 'index')->name('home');

@@ -62,22 +62,21 @@ class EventController extends Controller
      */
     public function store(Request $request)
     {
-
         $request->validate([
             'title' => ['required', 'min:1', 'max:255'],
             'detail' => ['required', 'min:1'],
             'category' => ['required'],
             'dateStartIn' => ['required'],
             'datetimeStartIn' => ['required'],
-            'dateCloseIn' => ['required'],
+            'dateCloseIn' => ['required','after:dateStartIn'],
             'datetimeCloseIn' => ['required'],
             'location_name' => ['required'],
             'address_latitude' => ['required'],
             'address_longitude' => ['required'],
-            // 'Annumentdate' => [],
-            // 'datetimeAnnument' => [],
-            'startEventDate' => ['required'],
-            'endEventDate' => ['required'],
+            'Annumentdate' => ['after:dateCloseIn'],
+            // 'datetimeAnnument' => ['required','after:dateCloseIn'],
+            'startEventDate' => ['required','after:Annumentdate'],
+            'endEventDate' => ['required','after:dateCloseIn'],
             'file_input' => ['required'],
             'poster' => ['required', 'image', 'mimes:jpeg,png,jpg'],
             'location_detail' => ['required'],
@@ -165,15 +164,15 @@ class EventController extends Controller
             'category' => ['required'],
             'dateStartIn' => ['required'],
             'datetimeStartIn' => ['required'],
-            'dateCloseIn' => ['required'],
+            'dateCloseIn' => ['required','after:dateStartIn'],
             'datetimeCloseIn' => ['required'],
             'location_name' => ['required'],
             'address_latitude' => ['required'],
             'address_longitude' => ['required'],
-            // 'Annumentdate' => [],
-            // 'datetimeAnnument' => [],
-            'startEventDate' => ['required'],
-            'endEventDate' => ['required'],
+            'Annumentdate' => ['after:dateCloseIn'],
+            // 'datetimeAnnument' => ['required','after:dateCloseIn'],
+            'startEventDate' => ['required','after:Annumentdate'],
+            'endEventDate' => ['required','after:dateCloseIn'],
             'file_input' => ['required'],
             'poster' => ['required', 'image', 'mimes:jpeg,png,jpg'],
             'location_detail' => ['required'],
@@ -235,7 +234,6 @@ class EventController extends Controller
      * Remove the specified resource from storage.
      */
     public function destroy(Event $event)
-
     {
 
         $this->eventRepository->deleteEvent($event);

@@ -29,11 +29,14 @@
         <th class="px-5 py-3">Certificate</th>
       </tr>
     </thead>
-
+    @php
+      use Carbon\Carbon;
+      $today_date = Carbon::now();
+    @endphp
     <tbody class="text-gray-500 ">
     @if(($approveEvents->count() > 0) && ($approveEvents->first()->pivot->status === 'accept'))
       @foreach($approveEvents as $event)
-        @if($event->result === 1)
+        @if($event->event_end_date < $today_date)
           <tr>
             <td class="border-b border-gray-200 bg-white px-5 py-5 text-sm">
               <p class="whitespace-no-wrap">{{$event->id}}</p>
