@@ -3,8 +3,8 @@
 
 @section('content')
 <!-- Parallax Background -->
-<section class="flex flex-col w-full h-[200px] bg-cover bg-fixed bg-center  justify-center items-center bg-[url('https://images.unsplash.com/photo-1642427749670-f20e2e76ed8c?auto=format&fit=crop&w=880&q=80')] rounded-2xl">
-  <h1 class="text-white text-5xl font-semibold mt-20 mb-10">
+<section class="flex flex-col w-full h-[200px] bg-cover bg-fixed bg-center  justify-center items-center bg-[url('https://images.unsplash.com/photo-1570610159825-ec5d3823660c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1633&q=80')] rounded-2xl">
+  <h1 class="text-black text-5xl font-semibold mt-20 mb-10">
     Ceritificate
   </h1>
 </section>
@@ -24,33 +24,33 @@
     </thead>
 
     <tbody class="text-gray-500 ">
-    @if($approveEvent->count() > 0)
-      @foreach($approveEvent as $event)
-      <tr>
-        <td class="border-b border-gray-200 bg-white px-5 py-5 text-sm">
-          <p class="whitespace-no-wrap">{{$event->id}}</p>
-        </td>
-        <td class="border-b border-gray-200 bg-white px-5 py-5 text-sm">
-          <div class="flex items-center">
-            <div class="h-10 w-10 flex-shrink-0">
-              <img class="h-full w-full rounded-full" src="" alt="" />
-            </div>
-            <div class="ml-3">
+    @if(($approveEvents->count() > 0) && ($approveEvents->first()->pivot->status === 'accept'))
+      @foreach($approveEvents as $event)
+        @if($event->result === 1)
+          <tr>
+            <td class="border-b border-gray-200 bg-white px-5 py-5 text-sm">
               <p class="whitespace-no-wrap">{{$event->id}}</p>
-            </div>
-          </div>
-        </td>
-        <td class="border-b border-gray-200 bg-white px-5 py-5 text-sm justify-center">
-          
-          <livewire:button-link link="{{route('event.detail.show',['event'=>$event])}}" text="View Event Detail" />
+            </td>
+            <td class="border-b border-gray-200 bg-white px-5 py-5 text-sm">
+              <div class="flex items-center">
+                <div class="h-10 w-10 flex-shrink-0">
+                  <img class="h-full w-full rounded-full" src="{{url('storage/'.$event->image_poster)}}" alt="" />
+                </div>
+                <div class="ml-8">
+                  <p class="whitespace-no-wrap">{{$event->title}}</p>
+                </div>
+              </div>
+            </td>
+            <td class="border-b border-gray-200 bg-white px-5 py-5 text-sm justify-center">
+              
+              <livewire:button-link link="{{route('event.detail.show',['event'=>$event])}}" text="View Event Detail" />
 
-        </td>
-        <td class="border-b border-gray-200 bg-white px-5 py-5 text-sm flex justify-center">
-          
-          <livewire:button-link link="{{route('certificate.show',['event'=>$event])}}" text="View Certificate" />
-
-        </td>
-      </tr>
+            </td>
+            <td class="border-b border-gray-200 bg-white px-5 py-5 text-sm flex justify-center">
+              <a href="{{url('storage/'.$event->certificate_file)}}">See this</a>
+            </td>
+          </tr>
+        @endif
       @endforeach
     @endif
     </tbody>

@@ -275,4 +275,20 @@ class EventController extends Controller
         $events = $user->approveEvents;
         return view('event.certificate', ['approveEvent' => $events]);
     }
+
+    public function isJoinedEvent()
+    {
+        $user = Auth::user();
+        $joinedEvents = $user->approveEvents;
+        //  return $joinedEvents;
+
+        return view('eventJoined', ['joinedEvents' => $joinedEvents]);
+    }
+    public function isInTeam(Request $request)
+    {
+        $user = Auth::user();
+        $inTeamEvents = $user->joinedTeam;
+
+        return view('teamJoined', ['inTeamEvents' => $inTeamEvents]);
+    }
 }

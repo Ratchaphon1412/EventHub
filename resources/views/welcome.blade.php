@@ -78,9 +78,8 @@
                 <img class="mt-4 w-full lg:mt-10 rounded-lg" src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/content/office-long-1.png" alt="office content 2">
             </div>
         </div>
-    </section>
-
-    <section class="flex flex-col w-full h-[400px] bg-cover bg-fixed bg-center  justify-center items-center bg-[url('https://img.freepik.com/free-photo/fuji-mountain-with-milky-way-night_335224-104.jpg?w=1480&t=st=1692457261~exp=1692457861~hmac=03a5c86bfa55147cfe66528d7c2720965992f7189601655c9d214184a5edb7e1')]">
+    </section>   
+    <section class="flex flex-col w-full h-[400px] bg-cover bg-fixed bg-center  justify-center items-center bg-[url('https://images.unsplash.com/photo-1479707341578-d3f239e493d1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80')]">
         <h1 class="text-white text-5xl font-semibold mt-20 mb-10">
             Join us for a joyous celebration and create lasting memories together.
         </h1>
@@ -120,7 +119,8 @@
                 </a>
             </p>
         </span> -->
-    </section>
+        
+        </section>
 </main>
        </x-app-layout>
     </body>

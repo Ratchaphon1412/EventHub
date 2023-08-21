@@ -176,3 +176,5 @@ class  EventRepository implements EventRepositoryInterface
         return $event->userTeam()->detach($user);
     }
 }
+
+

@@ -66,6 +66,8 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
             Route::post('/event/enable/question/',  'questionEnable')->name('event.enable.question');
             Route::post('/event/result', 'result')->name('event.result');
             Route::get('/certificate', 'certification')->name('certificate.index');
+            Route::get('/event/Team', 'isInTeam')->name('event.isInTeam');
+            Route::get('/event/joined', 'isJoinedEvent')->name('event.isJoinedEvent');
         });
 
         Route::controller(TeamEventController::class)->group(function () {

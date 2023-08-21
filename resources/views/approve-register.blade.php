@@ -48,7 +48,7 @@
               <option value="pending">Pending</option>
               <option value="accept">Accept</option>
               <option value="reject">Reject</option>
-              <option value="notcomplate">Not Complete</option>
+              <option value="notcomplete">Not Complete</option>
 
             </select>
           </td>
