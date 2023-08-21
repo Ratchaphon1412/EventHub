@@ -59,7 +59,7 @@
                             <div class="w-full px-3 sm:w-1/2">
                                 <div class="">
                                     <label for="dateStartIn" class=" block text-xl ">
-                                        StartIn
+                                        Start Register Date
                                     </label>
                                     @error('dateStartIn')
                                         <div class="text-red-600">
@@ -91,7 +91,7 @@
                             <div class="w-full px-3 sm:w-1/2">
                                 <div class="">
                                     <label for="dateCloseIn" class="block text-xl">
-                                        CloseIn
+                                        Close Register Date
                                     </label>
                                     @error('dateCloseIn')
                                         <div class="text-red-600">
