@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Event;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +19,8 @@ class QuestionFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'user_id' => User::find( fake()->numberBetween(1, User::all()->count()) ),
+            'event_id' => Event::find( fake()->numberBetween(1, Event::all()->count()) )
         ];
     }
 }

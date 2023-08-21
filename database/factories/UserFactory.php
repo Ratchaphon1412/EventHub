@@ -24,6 +24,7 @@ class UserFactory extends Factory
      */
     public function definition(): array
     {
+        $gender = ['Male', 'Female'];
         return [
             'name' => $this->faker->name(),
             'email' => $this->faker->unique()->safeEmail(),
@@ -31,6 +32,15 @@ class UserFactory extends Factory
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
             'two_factor_secret' => null,
             'two_factor_recovery_codes' => null,
+            'two_factor_confirmed_at' => null,
+            'first_name' => $this->faker->firstName(),
+            'last_name' => $this->faker->lastName(),
+            'phone' => $this->faker->phoneNumber(),
+            'gender' => $gender[fake()->numberBetween(0, 1)],
+            'age' => $this->faker->numberBetween(18, 60),
+            'facebook' => $this->faker->unique()->userName(),
+            'instagram' => $this->faker->unique()->userName(),
+            'line' => $this->faker->unique()->userName(),
             'remember_token' => Str::random(10),
             'profile_photo_path' => null,
             'current_team_id' => null,
