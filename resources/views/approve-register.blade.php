@@ -69,7 +69,7 @@
       $today_date = Carbon::now();
     @endphp
 
-    @if($event->announcement_date > $today_date)
+    @if($event->announcement_date <= $today_date)
     <form action="{{route('event.result',['event' => $event])}}" enctype="multipart/form-data" method="POST">
       @csrf
       @method('post')
