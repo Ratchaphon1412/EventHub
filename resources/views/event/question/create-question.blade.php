@@ -50,8 +50,7 @@
                             class="mr-2 w-6 h-6 rounded-full"
                             src="{{url('storage/'.$event->image_poster)}}"
                             alt="{{$event->title}}">{{$event->title}}</p>
-                    <p class="text-sm text-gray-600 dark:text-gray-400"><time pubdate datetime="2022-02-08"
-                            title="February 8th, 2022">Feb. 8, 2022</time></p>
+                    <p class="text-sm text-gray-600 dark:text-gray-400"></p>
                 </div>
 
                 <button id="dropdownComment1Button" data-dropdown-toggle="dropdownComment1"

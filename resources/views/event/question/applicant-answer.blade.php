@@ -54,7 +54,7 @@
                             <div class="flex items-center">
                                 <p class="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white"><img
                                         class="mr-2 w-6 h-6 rounded-full"
-                                        src="{{url('storage/' . $event->eventImage->get(0)->event_image)}}"
+                                        src="{{url('storage/' . $event->image_poster)}}"
                                         alt="Michael Gough">{{$event->title}}</p>
                                 <p class="text-sm text-gray-600 dark:text-gray-400"><time pubdate datetime="2022-02-08"
                                                                                           title="February 8th, 2022">{{$event->event_start_date}}</time></p>
@@ -84,7 +84,7 @@
 
 
                             </footer>
-                        
+
 
                             @if($questionName->answer_type == 'Text')
                                 @if($questionName->questionAnswer->where('user_id', $user->id)->last()== null or $questionName->questionAnswer->where('user_id', $user->id)->last()->answer == null)
@@ -100,7 +100,7 @@
                                 @endif
                             @elseif($questionName->answer_type == 'Video')
 
-                                
+
                                 @if($questionName->questionAnswer->where('user_id', $user->id)->last()== null or  $questionName->questionAnswer->where('user_id', $user->id)->last()->image_path == null )
                                     <p class="text-gray-500 dark:text-gray-400">No answer</p>
                                 @else
