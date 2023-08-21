@@ -4,14 +4,16 @@ namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
+use App\Models\Question;
 
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class User extends Authenticatable
 {
@@ -38,6 +40,7 @@ class User extends Authenticatable
         'line',
         'first_name',
         'last_name',
+
     ];
 
     /**
@@ -70,25 +73,53 @@ class User extends Authenticatable
         'profile_photo_url',
     ];
 
-
     public function eventOwner(): HasMany
     {
         return $this->hasMany(Event::class);
     }
-
 
     public function teamJoined(): HasMany
     {
         return $this->hasMany(Team::class);
     }
 
+    public function questionAnswer(): HasMany
+    {
+        return $this->hasMany(QuestionAnswer::class);
+    }
     public function kanbanCards(): HasMany
     {
         return $this->hasMany(KanbanCard::class);
     }
-
     public function approveEvents(): BelongsToMany
     {
         return $this->belongsToMany(Event::class, 'user_event_approve', 'user_id', 'event_id')->withPivot('status');
+    }
+
+    public function joinedTeam(): BelongsToMany
+    {
+        return $this->belongsToMany(Event::class, 'Team_Event', 'user_id', 'event_id');
+    }
+
+    public function getSubmitEvents()
+    { //get all event that this user submit answer
+        return Question::where('user_id', $this->id)->select('event_id')->distinct()->get();
+    }
+
+    public function getImageUrl() {
+        if ($this->profile_photo_path != null) {
+            return $this->getImageUrlFromPath();
+        }
+        return $this->profile_photo_url;
+    }
+
+    public function getImageUrlFromPath()
+    {
+        return url('storage/' . $this->profile_photo_path);
+    }
+
+    public function answerQuestionEvent()
+    {
+        return $this->belongsToMany(Event::class, 'questions', 'user_id', 'event_id');
     }
 }

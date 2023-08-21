@@ -21,13 +21,13 @@ class KanbanController extends Controller
     private KanbanColumnsRepositoryInterface $kanbanColumnRepository;
     private KanbanCardRepositoryInterface $kanbanCardRepository;
 
-    public function __construct(KanbanRepositoryInterface $kanbanRepository,KanbanColumnsRepositoryInterface $kanbanColumnRepository,KanbanCardRepositoryInterface $kanbanCardRepository)
+    public function __construct(KanbanRepositoryInterface $kanbanRepository, KanbanColumnsRepositoryInterface $kanbanColumnRepository, KanbanCardRepositoryInterface $kanbanCardRepository)
     {
         $this->kanbanRepository = $kanbanRepository;
         $this->kanbanColumnRepository = $kanbanColumnRepository;
         $this->kanbanCardRepository = $kanbanCardRepository;
     }
-   
+
 
     /**
      * Display a listing of the resource.
@@ -35,20 +35,17 @@ class KanbanController extends Controller
     public function index(string $id)
     {
         //
-       $kanban = $this->kanbanRepository->findById($id);
-       $todo = [];
-       $working = [];
-       $done = [];
+        $kanban = $this->kanbanRepository->findById($id);
+        $todo = [];
+        $working = [];
+        $done = [];
 
-      if($kanban != null){
-        $todo = $kanban->columns[0]->cards;
-        $working = $kanban->columns[1]->cards;
-        $done = $kanban->columns[2]->cards;
-      }
-
-
-        return view('kanban',compact('kanban','todo','working','done'));
-
+        if ($kanban != null) {
+            $todo = $kanban->columns[0]->cards;
+            $working = $kanban->columns[1]->cards;
+            $done = $kanban->columns[2]->cards;
+        }
+        return view('kanban.kanban', compact('kanban', 'todo', 'working', 'done'));
     }
 
     /**
@@ -70,26 +67,26 @@ class KanbanController extends Controller
             'kanban' => 'required',
             'Description' => 'required',
         ]);
-    
-      
+
+
 
         $title = $request->Title;
         $kanban_id = $request->kanban;
         $description = $request->Description;
-      
+
 
         // Notification
         $user = Auth::user();
         Notification::send($user, new UpdateKanban());
 
         // create card
-       $kanban = $this->kanbanRepository->findById($kanban_id);
-       $columnsTodo = $kanban->columns[0];
-       $this->kanbanCardRepository->createCard($columnsTodo,$title,$description,$user);
-       
+        $kanban = $this->kanbanRepository->findById($kanban_id);
+        $columnsTodo = $kanban->columns[0];
+        $this->kanbanCardRepository->createCard($columnsTodo, $title, $description, $user);
 
 
-        return redirect()->back();
+
+        return redirect()->back()->with(['tab' => 'kanban']);
     }
 
     /**
@@ -103,7 +100,7 @@ class KanbanController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Request $request,Kanban $kanban)
+    public function edit(Request $request, Kanban $kanban)
     {
 
         // validate
@@ -115,8 +112,8 @@ class KanbanController extends Controller
 
         // edit card
         $card = $this->kanbanCardRepository->findById($request->card_id);
-        $this->kanbanCardRepository->editCard($request->title,$request->description,$card);
-        return redirect()->back();
+        $this->kanbanCardRepository->editCard($request->title, $request->description, $card);
+        return redirect()->back()->with(['tab' => 'kanban']);
     }
 
     /**
@@ -130,11 +127,10 @@ class KanbanController extends Controller
             'card_id' => 'required',
             'column_name' => 'required',
         ]);
-    
+
         $card = $this->kanbanCardRepository->findById($request->card_id);
         $column = $this->kanbanColumnRepository->findByName($request->column_name);
-        $this->kanbanCardRepository->updateColumn($card,$column);
-
+        $this->kanbanCardRepository->updateColumn($card, $column);
     }
 
     /**
@@ -142,13 +138,13 @@ class KanbanController extends Controller
      */
     public function destroy(Request $request)
     {
+
         // validate
         $validated = $request->validate([
             'card' => 'required',
         ]);
 
         $this->kanbanCardRepository->deleteCard($request->card);
-        return redirect()->back();
+        return redirect()->back()->with(['tab' => 'kanban']);
     }
-
 }

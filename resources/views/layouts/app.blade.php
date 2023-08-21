@@ -13,7 +13,11 @@
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
-
+        <link rel="stylesheet" href="{{ url('css/jkanban.min.css') }}" />
+        
+        <meta name="csrf-token" content="{{ csrf_token() }}">
+        <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
+        
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
         <!-- Styles -->
         @livewireStyles

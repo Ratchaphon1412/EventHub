@@ -20,7 +20,7 @@ return new class extends Migration
         Schema::create('events', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('description');
+            $table->text('description');
             $table->foreignIdFor(Category::class);
             $table->string("image_poster");
             $table->dateTime('registration_start_date');
@@ -28,9 +28,15 @@ return new class extends Migration
             $table->dateTime("announcement_date")->nullable();
             $table->dateTime("event_start_date");
             $table->dateTime("event_end_date");
-            $table->string("event_latitude")->nullable();
-            $table->string("event_longitude")->nullable();
+            $table->double("event_latitude")->nullable();
+            $table->double("event_longitude")->nullable();
             $table->string("document_payment")->nullable();
+            $table->string("certificate_file");
+            $table->text("location_detail");
+            $table->boolean("result")->default(false);
+            $table->text("contact")->nullable();
+            $table->text("location_name")->nullable();
+            $table->boolean("question")->default(false);
             $table->foreignIdFor(User::class);
             $table->timestamps();
         });

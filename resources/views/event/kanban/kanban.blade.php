@@ -1,53 +1,9 @@
-@extends('layouts.applicationcontrol')
 
-@section('content')
 
 <script src="{{ url('js/kanban/jkanban.min.js') }}"></script>
 
   <section class="flex flex-col gap-6">
-        <!-- Parallax Background -->
-        <section class="flex flex-col w-full h-[200px] bg-cover bg-fixed bg-center  justify-center items-center bg-[url('https://images.unsplash.com/photo-1642427749670-f20e2e76ed8c?auto=format&fit=crop&w=880&q=80')]">
-          <h1 class="text-white text-5xl font-semibold mt-20 mb-10">
-              This is Parallax Effect
-          </h1>
-  
-          {{-- <span class="text-center font-bold my-20 text-white/90">
-              <a
-                  href="https://egoistdeveloper.github.io/twcss-to-sass-playground/"
-                  target="_blank"
-                  class="text-white/90 hover:text-white">
-                  Convetert to SASS
-              </a>
-  
-              <hr class="my-4" />
-  
-              <a
-                  href="https://unsplash.com/photos/8Pm_A-OHJGg"
-                  target="_blank"
-                  class="text-white/90 hover:text-white">
-                  Image Source
-              </a>
-  
-              <hr class="my-4" />
-  
-              <p>
-                  <a
-                      href="https://github.com/EgoistDeveloper/my-tailwind-components/blob/main/src/templates/parallax-landing-page.html"
-                      target="_blank"
-                      class="text-white/90 hover:text-white">
-                      Source Code
-                  </a>
-                  |
-                  <a
-                      href="https://egoistdeveloper.github.io/my-tailwind-components/./src/templates/parallax-landing-page.html"
-                      target="_blank"
-                      class="text-white/90 hover:text-white">
-                      Full Preview
-                  </a>
-              </p>
-          </span> --}}
-      
-      </section>
+
       @if($kanban !=null)
         <div class="w-full flex flex-row justify-between container">  
           <h3 class=" text-3xl  text-black font-semibold "> Kanban :  {{$kanban->name}}</h3>
@@ -72,7 +28,6 @@
           </div>
        
           <x-button>Submit</x-button>
-        
       </form>
     </x-modal-form>
 
@@ -92,7 +47,7 @@
                       <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
                   </svg>
                   <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Are you sure you want to delete this Post It</h3>
-                  <button data-modal-hide="popup-modal" id="confirmDelete" type="submit" class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2">
+                  <button data-modal-hide="popup-modal" onclick="confirmDelete()" type="submit" class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2">
                       Yes, I'm sure 
                   </button>
                   <button data-modal-hide="popup-modal" type="button" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">No, cancel</button>
@@ -117,7 +72,6 @@
         <x-button onclick="confirmEdit()" >Submit</x-button>
       
     </form>
-
 
     </x-modal-form>
   
@@ -269,10 +223,10 @@
        
           
 
-            var removeElements = document.getElementById("confirmDelete");
-            removeElements.addEventListener("click", function(e) {
+            
+             function confirmDelete() {
               let token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-
+             
           
               $.ajax({
                 headers: {
@@ -285,14 +239,15 @@
                 url:'/kanban/card/delete',
                 data: JSON.stringify({card:post_id_delete}),
                 success:function(msg){
-                  window.location.reload(true);
+                  // window.location.reload(true);
+                  KanbanTest.removeElement(post_id_delete);
 
                 }
               })
            
           
             
-            },false);
+            };
 
      
 
@@ -300,4 +255,3 @@
 
       </script>
     @endif
-@endsection
