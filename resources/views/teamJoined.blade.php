@@ -25,7 +25,7 @@
         
         @if($inTeamEvents != null)
             @foreach($inTeamEvents as $event)
-                @if($event->event_end_date > $today_date)
+                @if($today_date <= $event->event_end_date )
                     <a href="{{route('event.detail.show' , ['event'=>$event])}}">
                         <livewire:card-event-image title="{{$event->title}}" image="{{url('storage/'.$event->image_poster)}}" status="Upcomming" category="{{$event->category->category_name}}" description="{{$event->description}}" />
                     </a>
