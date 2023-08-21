@@ -38,7 +38,7 @@ class QuestionController
 
         $questionName = $this->questionRepository->newQuestionName($request->get("question"), $request->get('type'));
         $this->eventRepository->addQuestionName($event, $questionName);
-        return redirect()->back();
+        return redirect()->back()->with(['tab' => 'question']);
     }
 
     public function delete(Event $event, QuestionName $questionName)
@@ -47,7 +47,7 @@ class QuestionController
         $this->eventRepository->removeQuestionName($event, $questionName);
         $this->questionRepository->deleteQuestionName($questionName);
 
-        return redirect()->back();
+        return redirect()->back()->with(['tab' => 'question']);
     }
 
     public function applicant(Event $event, User $user)

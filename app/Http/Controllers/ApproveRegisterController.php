@@ -55,6 +55,8 @@ class ApproveRegisterController
         $user = $this->userRepository->findById($request->get('user_id'));
 
         $this->eventRepository->updateStatusApproveEvent($event, $user, $request->get('status'));
+
+        return redirect()->back();
     }
     public function notComplateQuestion(Event $event)
     {

@@ -38,7 +38,7 @@
             <p class="whitespace-no-wrap">{{$user->last_name}}</p>
           </td>
           <td class="border-b border-gray-200 bg-white px-5 py-5 text-sm">
-            <p class="whitespace-no-wrap">{{$event->userEventApprove->find($user->id)->pivot->status}}</p>
+            <p class="whitespace-no-wrap" id="{{"status".$user->id}}">{{$event->userEventApprove->find($user->id)->pivot->status}}</p>
           </td>
 
 
@@ -80,7 +80,7 @@
 </div>
 
 <script>
-  
+ 
 
   function selectStatus(e) {
     console.log(e.value);
@@ -103,7 +103,12 @@
 
       }),
       success: function(msg) {
-        window.location.reload(true);
+        
+        let dataid = document.getElementById("status"+e.getAttribute("dataid"));
+        dataid.innerHTML = e.value;
+
+        
+
 
       }
     })

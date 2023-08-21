@@ -41,7 +41,7 @@ class TeamEventController extends Controller
             $user = $this->userRepository->findByEmail($request->get('email'));
             $this->eventRepository->addUserToTeam($event_from_id, $user);
         }
-        return redirect()->back();
+        return redirect()->back()->with(['tab' => "team"]);
     }
 
     public function destory(Request $request, Event $event, User $user)
@@ -52,6 +52,6 @@ class TeamEventController extends Controller
 
         $this->eventRepository->removeUserFromTeam($event_from_id, $user_form_id);
 
-        return redirect()->back();
+        return redirect()->back()->with(['tab' => "team"]);
     }
 }

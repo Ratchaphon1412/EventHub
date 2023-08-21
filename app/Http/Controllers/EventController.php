@@ -227,7 +227,8 @@ class EventController extends Controller
             Notification::send($teamMember, new UpdateEventWhenSomeoneEdit($event, $user));
         }
 
-        return view('event.eventDetail', ['event' => $event]);
+        // return view('event.eventDetail', ['event' => $event]);
+        return redirect()->back()->with(['tab' => "detail"]);
     }
 
     /**

@@ -3,9 +3,9 @@
 
     <main class="flex-col justify-center items-center ">
 
-        <section id="coverImage" class="justify-center items-center  bg-fixed w-full  rounded-lg  bg-cover bg-no-repeat " style="background-image:url('{{url('storage/'.$event->image_poster)}}')" >
-            <div class="flex flex-col justify-center items-center  bg-black rounded-lg relative p-12  h-full w-auto overflow-hidden backdrop-filter backdrop-blur-sm bg-opacity-10  bg-[url('{{url('storage/'.$event->image_poster)}}')] ">
-                <div class="grid grid-cols-1 md:grid-cols-2 backdrop-filter backdrop-blur-sm bg-opacity-80 bg-black text-white  rounded-lg shadow-lg overflow-hidden  w-3/4 drop-shadow-lg">
+        <section id="coverImage" class="justify-center items-center overflow-x-hidden bg-fixed w-full  rounded-lg  bg-cover bg-no-repeat " style="background-image:url('{{url('storage/'.$event->image_poster)}}')" >
+            <div class="flex flex-col justify-center items-center  bg-black rounded-lg relative p-12   w-auto overflow-hidden backdrop-filter backdrop-blur-sm bg-opacity-10  bg-[url('{{url('storage/'.$event->image_poster)}}')] ">
+                <div class="grid grid-cols-1 md:grid-cols-2 backdrop-filter backdrop-blur-sm bg-opacity-80 -m-8   bg-black text-white  rounded-lg shadow-lg overflow-hidden  w-3/4  drop-shadow-lg">
                     <img src="{{url('storage/'.$event->image_poster)}}"  alt="Mountain"
                     class="w-full h-full object-cover">
                     <div id="text Title" class="flex justify-center items-center ">
@@ -39,7 +39,7 @@
             </div>
         </section>
         <div class="container mx-auto">
-
+            
             <div class="sticky top-12 z-10 bg-white mb-4 border-b border-gray-200 dark:border-gray-700">
                 <ul class="flex flex-wrap -mb-px text-sm font-medium text-center" id="myTab" data-tabs-toggle="#myTabContent" role="tablist">
                     <li class="mr-2" role="presentation">
@@ -105,50 +105,57 @@
 
 
     </main>
-</x-app-layout>
-
-
-<script>
-
-
-
-
-tabs.show('approve');
-
-
-    let joinButton = document.getElementById('joinButton');
-    let userjoin = {!!json_encode($event->userEventApprove()->find(Auth::user()))!!};
-    console.log(userjoin);
-
-    let eventQuestion = {!!json_encode($event->question)!!};
-    if (userjoin != null){
-            
-            if(userjoin.pivot.status=="notcomplate"){
-                joinButton.innerHTML = "Not Complete Answer Question"
-            }else{
-                joinButton.innerHTML = "Joined";
-            }
-    }else{
-        joinButton.innerHTML = "Join";
-    }
-
 
     
-    joinButton.addEventListener('click', function() {
-         if(userjoin != null){
-  
-           if(userjoin.pivot.status == "notcomplate"){
-            window.location.href = "{{route('approve.notComplate',['event'=>$event])}}"
-           }else{
-            window.location.href = "{{route('approve.unjoin',['event'=>$event])}}";
-           }
 
-         }else{
-            window.location.href = "{{route('approve.join',['event'=>$event])}}";
-         }
-
-
+    <script type="module">
+      import {tabs} from "{{ Vite::asset('resources/js/tabflowbite.js') }}"
+       
+        let sessionTab = {!!json_encode(session()->get('tab'))!!};
+       
+        
+        if(sessionTab != null){
+            tabs.show(sessionTab);
+        }
+        
+        
+        
+    
+        let joinButton = document.getElementById('joinButton');
+        let userjoin = {!!json_encode($event->userEventApprove()->find(Auth::user()))!!};
+        console.log(userjoin);
+    
+        let eventQuestion = {!!json_encode($event->question)!!};
+        if (userjoin != null){
+                
+                if(userjoin.pivot.status=="notcomplate"){
+                    joinButton.innerHTML = "Not Complete Answer Question"
+                }else{
+                    joinButton.innerHTML = "Joined";
+                }
+        }else{
+            joinButton.innerHTML = "Join";
+        }
+    
     
         
-    })
-</script>
+        joinButton.addEventListener('click', function() {
+             if(userjoin != null){
+      
+               if(userjoin.pivot.status == "notcomplate"){
+                window.location.href = "{{route('approve.notComplate',['event'=>$event])}}"
+               }else{
+                window.location.href = "{{route('approve.unjoin',['event'=>$event])}}";
+               }
+    
+             }else{
+                window.location.href = "{{route('approve.join',['event'=>$event])}}";
+             }
+    
+    
+        
+            
+        })
+    </script>
+
+</x-app-layout>
