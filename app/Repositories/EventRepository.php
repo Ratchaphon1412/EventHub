@@ -126,4 +126,53 @@ class  EventRepository implements EventRepositoryInterface
             'event_image' => $image,
         ]);
     }
+
+    public function getApplicants($event)
+    {
+        return $event->getApplicants();
+    }
+
+    public function checkUserInApproveEvent($event, $user)
+    {
+        return $event->userEventApprove()->find($user);
+    }
+
+    public function addUserInApproveEvent($event, $user)
+    {
+        return $event->userEventApprove()->attach($user);
+    }
+    public function removeUserInApproveEvent($event, $user)
+    {
+        return $event->userEventApprove()->detach($user);
+    }
+
+    public function updateStatusApproveEvent($event, $user, $status)
+    {
+        return  $event->userEventApprove()->updateExistingPivot($user->id, ['status' => $status]);
+    }
+    public function getuserEventApprove($event)
+    {
+        return $event->userEventApprove;
+    }
+
+    public function addQuestionName($event, $questionName)
+    {
+        return $event->questionName()->attach($questionName);
+    }
+    public function removeQuestionName($event, $questionName)
+    {
+        return $event->questionName()->detach($questionName);
+    }
+    public function getQuestionName($event)
+    {
+        return $event->questionName;
+    }
+    public function addUserToTeam($event, $user)
+    {
+        return $event->userTeam()->attach($user);
+    }
+    public function removeUserFromTeam($event, $user)
+    {
+        return $event->userTeam()->detach($user);
+    }
 }

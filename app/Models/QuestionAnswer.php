@@ -13,15 +13,26 @@ class QuestionAnswer extends Model
 {
     use HasFactory, SoftDeletes;
 
-    public function user(): BelongsTo{
+    protected $fillable = [
+        'answer',
+        'image_name',
+        'image_path',
+        'question_name_id',
+        'user_id',
+    ];
+
+    public function user(): BelongsTo
+    {
         return $this->belongsTo(User::class);
     }
 
-    public function questionName(): BelongsTo{
+    public function questionName(): BelongsTo
+    {
         return $this->belongsTo(QuestionName::class);
     }
 
-    public function getFileUrl() {
+    public function getFileUrl()
+    {
         return url('storage/' . $this->image_path);
     }
 }

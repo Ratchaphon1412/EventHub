@@ -7,62 +7,62 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+use App\Interfaces\EventRepositoryInterface;
+use App\Interfaces\UserRepositoryInterface;
+
 class ApproveRegisterController
 {
-    public function index(Event $event)
+
+    private EventRepositoryInterface $eventRepository;
+    private UserRepositoryInterface $userRepository;
+
+    public function __construct(EventRepositoryInterface $eventRepository, UserRepositoryInterface $userRepository)
     {
-        $applicants = $event->getApplicants();
-        return view('approve-register', ['event' => $event, 'applicants' => $applicants]);
+        $this->eventRepository = $eventRepository;
+        $this->userRepository = $userRepository;
     }
 
-    public function update(Request $request, Event $event, User $applicant)
-    {
-        $applicant = User::find($request->get('applicant'));
-        if ($event->userEventApprove()->find($applicant)->pivot->status == 'approved') {
-            $event->userEventApprove()->updateExistingPivot($applicant->id, ['status' => 'pending']);
-        } else $event->userEventApprove()->updateExistingPivot($applicant->id, ['status' => 'approved']);
 
-        return $this->index($event);
+    public function index(Event $event)
+    {
+        $applicants = $this->eventRepository->getApplicants($event);
+        return view('event.approve-register', ['event' => $event, 'applicants' => $applicants]);
     }
 
     public function join(Event $event)
-    {   
+    {
         // user not in approve
-        if ($event->userEventApprove()->find(Auth::user()) == null) {
+        if ($this->eventRepository->checkUserInApproveEvent($event, Auth::user()) == null) {
             if ($event->question and $event->questionName->count() > 0) {
                 $questions_name = $event->questionName;
-                return view('answer-question', ['event' => $event, 'questions_name' => $questions_name]);
+                return view('event.answer-question', ['event' => $event, 'questions_name' => $questions_name]);
             }
-            $event->userEventApprove()->attach(Auth::user());
+            $this->eventRepository->addUserInApproveEvent($event, Auth::user());
         }
         return redirect()->back();
     }
 
     public function unJoin(Event $event)
     {
-        $event->userEventApprove()->detach(Auth::user());
+        $this->eventRepository->removeUserInApproveEvent($event, Auth::user());
         return redirect()->back();
     }
 
     public function status(Request $request)
     {
-        $event = Event::find($request->get('event_id'));
-        $user = User::find($request->get('user_id'));
-        $event->userEventApprove()->updateExistingPivot($user->id, ['status' => $request->get('status')]);
-        
+        $event = $this->eventRepository->findById($request->get('event_id'));
 
+        $user = $this->userRepository->findById($request->get('user_id'));
+
+        $this->eventRepository->updateStatusApproveEvent($event, $user, $request->get('status'));
     }
-    public function notComplateQuestion(Event $event){
-        
-            //user in approve but not complate Question
-            if($event->userEventApprove()->find(Auth::user())->pivot->status == "notcomplate"){
-                $questions_name = $event->questionName;
-                return view('answer-question', ['event' => $event, 'questions_name' => $questions_name]);
-            }
+    public function notComplateQuestion(Event $event)
+    {
 
-            
-        
-
-
+        //user in approve but not complate Question
+        if ($this->eventRepository->checkUserInApproveEvent($event, Auth::user())->pivot->status == "notcomplate") {
+            $questions_name = $event->questionName;
+            return view('event.answer-question', ['event' => $event, 'questions_name' => $questions_name]);
+        }
     }
 }

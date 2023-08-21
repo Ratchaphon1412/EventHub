@@ -14,6 +14,10 @@ use App\Interfaces\EventRepositoryInterface;
 use App\Repositories\EventRepository;
 use App\Repositories\CategoryRepository;
 use App\Interfaces\CategoryRepositoryInterface;
+use App\Repositories\UserRepository;
+use App\Interfaces\UserRepositoryInterface;
+use App\Interfaces\QuestionRepositoryInterface;
+use App\Repositories\QuestionRepository;
 
 class RepositoryServiceProvider extends ServiceProvider
 {
@@ -28,6 +32,8 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(KanbanCardRepositoryInterface::class, KanbanCardRepository::class);
         $this->app->bind(EventRepositoryInterface::class, EventRepository::class);
         $this->app->bind(CategoryRepositoryInterface::class, CategoryRepository::class);
+        $this->app->bind(UserRepositoryInterface::class, UserRepository::class);
+        $this->app->bind(QuestionRepositoryInterface::class, QuestionRepository::class);
     }
 
     /**

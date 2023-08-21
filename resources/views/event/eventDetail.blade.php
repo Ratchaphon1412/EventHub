@@ -84,16 +84,16 @@
 
                 <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="manage" role="tabpanel" aria-labelledby="manage-tab">
 
-                    @include('editEvent',['categorys'=>App\Models\Category::all()])
+                    @include('event.editEvent',['categorys'=>App\Models\Category::all()])
 
                 </div>
-                    @include('teamEvent',['event'=> $event])
+                    @include('event.teamEvent',['event'=> $event])
                 </div>
                 <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="kanban" role="tabpanel" aria-labelledby="kanban-tab">
-                    @include('kanban',['kanban'=>$event->kanban,'todo'=>$event->kanban->columns[0]->cards,'working'=>$event->kanban->columns[1]->cards,'done'=>$event->kanban->columns[2]->cards])
+                    @include('event.kanban.kanban',['kanban'=>$event->kanban,'todo'=>$event->kanban->columns[0]->cards,'working'=>$event->kanban->columns[1]->cards,'done'=>$event->kanban->columns[2]->cards])
                 </div>
                 <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="question" role="tabpanel" aria-labelledby="question-tab">
-                    @include('create-question',['event'=>$event])
+                    @include('event.question.create-question',['event'=>$event])
                 </div>
               
             </div>
@@ -109,6 +109,13 @@
 
 
 <script>
+
+
+
+
+tabs.show('approve');
+
+
     let joinButton = document.getElementById('joinButton');
     let userjoin = {!!json_encode($event->userEventApprove()->find(Auth::user()))!!};
     console.log(userjoin);

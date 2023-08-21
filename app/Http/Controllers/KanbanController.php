@@ -45,7 +45,7 @@ class KanbanController extends Controller
         $working = $kanban->columns[1]->cards;
         $done = $kanban->columns[2]->cards;
       }
-        return view('kanban',compact('kanban','todo','working','done'));
+        return view('kanban.kanban',compact('kanban','todo','working','done'));
 
     }
 
@@ -140,11 +140,12 @@ class KanbanController extends Controller
      */
     public function destroy(Request $request)
     {
+        
         // validate
         $validated = $request->validate([
             'card' => 'required',
         ]);
-
+   
         $this->kanbanCardRepository->deleteCard($request->card);
         return redirect()->back();
     }

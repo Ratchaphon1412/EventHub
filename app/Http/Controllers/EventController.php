@@ -54,7 +54,7 @@ class EventController extends Controller
     public function create()
     {
         $categorys = $this->categoryRepository->getAllCategory();
-        return view('createEvent', compact('categorys'));
+        return view('event.createEvent', compact('categorys'));
     }
 
     /**
@@ -62,7 +62,7 @@ class EventController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->all());
+
         $request->validate([
             'title' => ['required', 'min:1', 'max:255'],
             'detail' => ['required', 'min:1'],
@@ -142,7 +142,7 @@ class EventController extends Controller
     public function show(Event $event)
     {
         // $event_detail = $event;
-        return view('eventDetail', ['event' => $event]);
+        return view('event.eventDetail', ['event' => $event]);
     }
 
     /**
@@ -151,7 +151,7 @@ class EventController extends Controller
     public function edit(Event $event)
     {
         $categorys = $this->categoryRepository->getAllCategory();
-        return view('editEvent', ['event' => $event, 'categorys' => $categorys]);
+        return view('event.editEvent', ['event' => $event, 'categorys' => $categorys]);
     }
 
     /**
@@ -223,11 +223,11 @@ class EventController extends Controller
         // notification when someone edit
         $userTeam = $event->userTeam;
 
-        foreach($userTeam as $teamMember){
-            Notification::send($teamMember,new UpdateEventWhenSomeoneEdit($event,$user));
+        foreach ($userTeam as $teamMember) {
+            Notification::send($teamMember, new UpdateEventWhenSomeoneEdit($event, $user));
         }
 
-        return view('eventDetail', ['event' => $event]);
+        return view('event.eventDetail', ['event' => $event]);
     }
 
     /**
@@ -236,9 +236,9 @@ class EventController extends Controller
     public function destroy(Event $event)
 
     {
-        // $event->delete();
+
         $this->eventRepository->deleteEvent($event);
-        return redirect()->route('teamEvent.index');
+        return redirect()->route('dashboard');
     }
 
     public function questionEnable(Request $request)
@@ -248,20 +248,19 @@ class EventController extends Controller
         $event->save();
     }
 
-    public function result(Request $request){
-        // dd($request->all());
-        $event = Event::find($request->event);
-        // return $event;
-        $resultapplicant = $event->userEventApprove;
-        foreach($resultapplicant as $approveUser){
+    public function result(Request $request)
+    {
+
+        $event = $this->eventRepository->findById($request->event);
+
+        $resultapplicant = $this->eventRepository->getuserEventApprove($event);
+        foreach ($resultapplicant as $approveUser) {
             // return $approveUser;
-            if($approveUser->approveEvents->first()->pivot->status === "accept"){
+            if ($approveUser->approveEvents->first()->pivot->status === "accept") {
                 // return $approveUser;
-                Notification::send($approveUser,new ResultWhoPass($event,$approveUser));
-            }
-            else
-            {
-                Notification::send($approveUser,new ResultWhoFail($event,$approveUser));
+                Notification::send($approveUser, new ResultWhoPass($event, $approveUser));
+            } else {
+                Notification::send($approveUser, new ResultWhoFail($event, $approveUser));
             }
         }
         $event->result = true;
@@ -269,5 +268,11 @@ class EventController extends Controller
         // $check->approveEvents->first()->pivot->status
         return redirect()->back();
     }
-   
+
+    public function certification()
+    {
+        $user = Auth::user();
+        $events = $user->approveEvents;
+        return view('event.certificate', ['approveEvent' => $events]);
+    }
 }

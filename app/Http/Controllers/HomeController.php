@@ -10,7 +10,7 @@ use App\Interfaces\EventRepositoryInterface;
 
 
 
-class WelcomeController extends Controller
+class HomeController extends Controller
 {
 
     private EventRepositoryInterface $eventRepository;
