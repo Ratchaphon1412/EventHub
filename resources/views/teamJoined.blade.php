@@ -15,12 +15,16 @@
     Team
   </h1>
 </section> -->
+    @php
+      use Carbon\Carbon;
+      $today_date = Carbon::now();
+    @endphp
 <section class="flex flex-col justify-start container m-4">
     <h1 class=" text-gray-900 font-bold text-2xl ">Team</h1>
     <div class="grid md:grid-cols-3 sm:grid-cols-1 justify-center gap-4 ">
         @if($inTeamEvents != null)
             @foreach($inTeamEvents as $event)
-                @if($event->result === 0)
+                @if($event->event_end_date > $today_date)
                     <a href="{{route('event.detail.show' , ['event'=>$event])}}">
                         <livewire:card-event-image title="{{$event->title}}" image="{{url('storage/'.$event->image_poster)}}" status="Upcomming" category="{{$event->category->category_name}}" description="{{$event->description}}" />
                     </a>
