@@ -30,7 +30,7 @@
       @endforeach
     @endif
   </div>
-  <h1 class=" text-gray-900 font-bold text-2xl ">Event Joined Incomplete</h1>
+  <h1 class=" text-gray-900 font-bold text-2xl ">Event Joined Incomplete กรณีมีคำถามแล้วไม่เห็นกรุณากด join อีกครั้ง</h1>
   <div class="grid md:grid-cols-3 sm:grid-cols-1 justify-center gap-4 ">
     @if($joinedEvents != null)
       @foreach($joinedEvents as $event)

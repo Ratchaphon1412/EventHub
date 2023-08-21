@@ -7,7 +7,6 @@
         <tr class=" bg-blue-600 text-center  text-xs font-semibold uppercase tracking-widest text-white ">
           <th class="px-5 py-3">ID</th>
           <th class="px-5 py-3">First Name</th>
-
           <th class="px-5 py-3">Last Name</th>
           <th class="px-5 py-3">Status</th>
           <th class="px-5 py-3">Select Status</th>
@@ -65,8 +64,12 @@
         @endif
       </tbody>
     </table>
+    @php
+      use Carbon\Carbon;
+      $today_date = Carbon::now();
+    @endphp
 
-
+    @if($event->announcement_date > $today_date)
     <form action="{{route('event.result',['event' => $event])}}" enctype="multipart/form-data" method="POST">
       @csrf
       @method('post')
@@ -74,6 +77,7 @@
         Announment Who pass
       </button>
     </form>
+    @endif
 
 
   </div>
