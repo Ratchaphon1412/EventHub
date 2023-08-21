@@ -54,25 +54,41 @@
                     <li class="mr-2" role="presentation">
                         <a href="#Contact" class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300" data-tabs-target="#detail" type="button" role="tab" aria-controls="detail" aria-selected="false">Contact</a>
                     </li>
-                    <li class="mr-2" role="presentation">
-                        <button class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300" id="manage-tab" data-tabs-target="#manage" type="button" role="tab" aria-controls="manage" aria-selected="false">Manange</button>
-                    </li>
-                    <li class="mr-2" role="presentation">
-                        <button class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300" id="team-tab" data-tabs-target="#team" type="button" role="tab" aria-controls="team" aria-selected="false">Team</button>
-                    </li>
-                    <li class="mr-2" role="presentation">
-                        <button class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300" id="kanban-tab" data-tabs-target="#kanban" type="button" role="tab" aria-controls="kanban" aria-selected="false">Kanban</button>
-                    </li>
-                    <li class="mr-2" role="presentation">
-                        <button class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300" id="question-tab" data-tabs-target="#question" type="button" role="tab" aria-controls="question" aria-selected="false">Question</button>
-                    </li>
-                    <li class="mr-2" role="presentation">
-                        <button class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300" id="approve-tab" data-tabs-target="#approve" type="button" role="tab" aria-controls="approve" aria-selected="false">Approve</button>
-                    </li>
-                    <li class="mr-2" role="presentation">
-                        <button class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300" id="payment-tab" data-tabs-target="#payment" type="button" role="tab" aria-controls="approve" aria-selected="false">Payment</button>
-                    </li>
+                    @auth
+                        @can('manageEvent',$event)
+                        <li class="mr-2" role="presentation">
+                            <button class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300" id="manage-tab" data-tabs-target="#manage" type="button" role="tab" aria-controls="manage" aria-selected="false">Manange</button>
+                        </li>
+                        @endcan
 
+                        @can('manageEventTeam',$event)
+                        <li class="mr-2" role="presentation">
+                            <button class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300" id="team-tab" data-tabs-target="#team" type="button" role="tab" aria-controls="team" aria-selected="false">Team</button>
+                        </li>
+                        @endcan
+
+                        @can('kanban',$event)
+                        <li class="mr-2" role="presentation">
+                            <button class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300" id="kanban-tab" data-tabs-target="#kanban" type="button" role="tab" aria-controls="kanban" aria-selected="false">Kanban</button>
+                        </li>
+                        @endcan
+
+                        @can('question',$event)
+                        <li class="mr-2" role="presentation">
+                            <button class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300" id="question-tab" data-tabs-target="#question" type="button" role="tab" aria-controls="question" aria-selected="false">Question</button>
+                        </li>
+                        @endcan
+
+                        @can('manageEventApprove',$event)
+                        <li class="mr-2" role="presentation">
+                            <button class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300" id="approve-tab" data-tabs-target="#approve" type="button" role="tab" aria-controls="approve" aria-selected="false">Approve</button>
+                        </li>
+                        @endcan
+                        
+                        <li class="mr-2" role="presentation">
+                            <button class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300" id="payment-tab" data-tabs-target="#payment" type="button" role="tab" aria-controls="approve" aria-selected="false">Budget</button>
+                        </li>
+                    @endauth
                 </ul>
             </div>
             <div id="myTabContent">

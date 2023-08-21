@@ -1,6 +1,6 @@
 <section class="flex flex-col justify-center items-center">
     <h1 class="text-4xl text-gray-400 font-bold mb-6 ">
-        Payment
+        Budget
     </h1>
     <div>
 
