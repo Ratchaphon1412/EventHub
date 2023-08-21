@@ -123,7 +123,8 @@
 
                 }),
                 success:function(msg){
-                  window.location.reload(true);
+
+                //   window.location.reload(true);
 
                 }
               })

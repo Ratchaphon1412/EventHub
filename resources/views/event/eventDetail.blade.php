@@ -3,9 +3,9 @@
 
     <main class="flex-col justify-center items-center ">
 
-        <section id="coverImage" class="justify-center items-center  bg-fixed w-full  rounded-lg  bg-cover bg-no-repeat " style="background-image:url('{{url('storage/'.$event->image_poster)}}')" >
-            <div class="flex flex-col justify-center items-center  bg-black rounded-lg relative p-12  h-full w-auto overflow-hidden backdrop-filter backdrop-blur-sm bg-opacity-10  bg-[url('{{url('storage/'.$event->image_poster)}}')] ">
-                <div class="grid grid-cols-1 md:grid-cols-2 backdrop-filter backdrop-blur-sm bg-opacity-80 bg-black text-white  rounded-lg shadow-lg overflow-hidden  w-3/4 drop-shadow-lg">
+        <section id="coverImage" class="justify-center items-center overflow-x-hidden bg-fixed w-full  rounded-lg  bg-cover bg-no-repeat " style="background-image:url('{{url('storage/'.$event->image_poster)}}')" >
+            <div class="flex flex-col justify-center items-center  bg-black rounded-lg relative p-12   w-auto overflow-hidden backdrop-filter backdrop-blur-sm bg-opacity-10  bg-[url('{{url('storage/'.$event->image_poster)}}')] ">
+                <div class="grid grid-cols-1 md:grid-cols-2 backdrop-filter backdrop-blur-sm bg-opacity-80 -m-8   bg-black text-white  rounded-lg shadow-lg overflow-hidden  w-3/4  drop-shadow-lg">
                     <img src="{{url('storage/'.$event->image_poster)}}"  alt="Mountain"
                     class="w-full h-full object-cover">
                     <div id="text Title" class="flex justify-center items-center ">
@@ -39,7 +39,7 @@
             </div>
         </section>
         <div class="container mx-auto">
-
+            
             <div class="sticky top-12 z-10 bg-white mb-4 border-b border-gray-200 dark:border-gray-700">
                 <ul class="flex flex-wrap -mb-px text-sm font-medium text-center" id="myTab" data-tabs-toggle="#myTabContent" role="tablist">
                     <li class="mr-2" role="presentation">
@@ -54,22 +54,41 @@
                     <li class="mr-2" role="presentation">
                         <a href="#Contact" class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300" data-tabs-target="#detail" type="button" role="tab" aria-controls="detail" aria-selected="false">Contact</a>
                     </li>
-                    <li class="mr-2" role="presentation">
-                        <button class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300" id="manage-tab" data-tabs-target="#manage" type="button" role="tab" aria-controls="manage" aria-selected="false">Manange</button>
-                    </li>
-                    <li class="mr-2" role="presentation">
-                        <button class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300" id="team-tab" data-tabs-target="#team" type="button" role="tab" aria-controls="team" aria-selected="false">Team</button>
-                    </li>
-                    <li class="mr-2" role="presentation">
-                        <button class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300" id="kanban-tab" data-tabs-target="#kanban" type="button" role="tab" aria-controls="kanban" aria-selected="false">Kanban</button>
-                    </li>
-                    <li class="mr-2" role="presentation">
-                        <button class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300" id="question-tab" data-tabs-target="#question" type="button" role="tab" aria-controls="question" aria-selected="false">Question</button>
-                    </li>
-                    <li class="mr-2" role="presentation">
-                        <button class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300" id="approve-tab" data-tabs-target="#approve" type="button" role="tab" aria-controls="approve" aria-selected="false">Approve</button>
-                    </li>
+                    @auth
+                        @can('manageEvent',$event)
+                        <li class="mr-2" role="presentation">
+                            <button class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300" id="manage-tab" data-tabs-target="#manage" type="button" role="tab" aria-controls="manage" aria-selected="false">Manange</button>
+                        </li>
+                        @endcan
 
+                        @can('manageEventTeam',$event)
+                        <li class="mr-2" role="presentation">
+                            <button class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300" id="team-tab" data-tabs-target="#team" type="button" role="tab" aria-controls="team" aria-selected="false">Team</button>
+                        </li>
+                        @endcan
+
+                        @can('kanban',$event)
+                        <li class="mr-2" role="presentation">
+                            <button class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300" id="kanban-tab" data-tabs-target="#kanban" type="button" role="tab" aria-controls="kanban" aria-selected="false">Kanban</button>
+                        </li>
+                        @endcan
+
+                        @can('question',$event)
+                        <li class="mr-2" role="presentation">
+                            <button class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300" id="question-tab" data-tabs-target="#question" type="button" role="tab" aria-controls="question" aria-selected="false">Question</button>
+                        </li>
+                        @endcan
+
+                        @can('manageEventApprove',$event)
+                        <li class="mr-2" role="presentation">
+                            <button class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300" id="approve-tab" data-tabs-target="#approve" type="button" role="tab" aria-controls="approve" aria-selected="false">Approve</button>
+                        </li>
+                        @endcan
+                        
+                        <li class="mr-2" role="presentation">
+                            <button class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300" id="payment-tab" data-tabs-target="#payment" type="button" role="tab" aria-controls="approve" aria-selected="false">Budget</button>
+                        </li>
+                    @endauth
                 </ul>
             </div>
             <div id="myTabContent">
@@ -89,12 +108,16 @@
                 </div>
                     @include('event.teamEvent',['event'=> $event])
                 </div>
+                <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="payment" role="tabpanel" aria-labelledby="payment-tab">
+                    @include('event.payment',['payment'=>$event->document_payment])
+                 </div>
                 <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="kanban" role="tabpanel" aria-labelledby="kanban-tab">
                     @include('event.kanban.kanban',['kanban'=>$event->kanban,'todo'=>$event->kanban->columns[0]->cards,'working'=>$event->kanban->columns[1]->cards,'done'=>$event->kanban->columns[2]->cards])
                 </div>
                 <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="question" role="tabpanel" aria-labelledby="question-tab">
                     @include('event.question.create-question',['event'=>$event])
                 </div>
+              
 
             </div>
 
@@ -105,50 +128,57 @@
 
 
     </main>
+
+    
+
+    <script type="module">
+      import {tabs} from "{{ Vite::asset('resources/js/tabflowbite.js') }}"
+       
+        let sessionTab = {!!json_encode(session()->get('tab'))!!};
+       
+        
+        if(sessionTab != null){
+            tabs.show(sessionTab);
+        }
+        
+        
+        
+    
+        let joinButton = document.getElementById('joinButton');
+        let userjoin = {!!json_encode($event->userEventApprove()->find(Auth::user()))!!};
+        console.log(userjoin);
+    
+        let eventQuestion = {!!json_encode($event->question)!!};
+        if (userjoin != null){
+                
+                if(userjoin.pivot.status=="notcomplate"){
+                    joinButton.innerHTML = "Not Complete Answer Question"
+                }else{
+                    joinButton.innerHTML = "Joined";
+                }
+        }else{
+            joinButton.innerHTML = "Join";
+        }
+    
+    
+        
+        joinButton.addEventListener('click', function() {
+             if(userjoin != null){
+      
+               if(userjoin.pivot.status == "notcomplate"){
+                window.location.href = "{{route('approve.notComplate',['event'=>$event])}}"
+               }else{
+                window.location.href = "{{route('approve.unjoin',['event'=>$event])}}";
+               }
+    
+             }else{
+                window.location.href = "{{route('approve.join',['event'=>$event])}}";
+             }
+    
+    
+        
+            
+        })
+    </script>
+
 </x-app-layout>
-
-
-<script>
-
-
-
-
-// tabs.show('approve');
-
-
-    let joinButton = document.getElementById('joinButton');
-    let userjoin = {!!json_encode($event->userEventApprove()->find(Auth::user()))!!};
-    console.log(userjoin);
-
-    let eventQuestion = {!!json_encode($event->question)!!};
-    if (userjoin != null){
-
-            if(userjoin.pivot.status=="notcomplate"){
-                joinButton.innerHTML = "Not Complete Answer Question"
-            }else{
-                joinButton.innerHTML = "Joined";
-            }
-    }else{
-        joinButton.innerHTML = "Join";
-    }
-
-
-
-    joinButton.addEventListener('click', function() {
-         if(userjoin != null){
-
-           if(userjoin.pivot.status == "notcomplate"){
-            window.location.href = "{{route('approve.notComplate',['event'=>$event])}}"
-           }else{
-            window.location.href = "{{route('approve.unjoin',['event'=>$event])}}";
-           }
-
-         }else{
-            window.location.href = "{{route('approve.join',['event'=>$event])}}";
-         }
-
-
-
-
-    })
-</script>

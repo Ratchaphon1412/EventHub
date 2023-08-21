@@ -239,7 +239,8 @@
                 url:'/kanban/card/delete',
                 data: JSON.stringify({card:post_id_delete}),
                 success:function(msg){
-                  window.location.reload(true);
+                  // window.location.reload(true);
+                  KanbanTest.removeElement(post_id_delete);
 
                 }
               })

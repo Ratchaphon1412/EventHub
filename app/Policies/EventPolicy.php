@@ -63,4 +63,51 @@ class EventPolicy
     {
         return $this->update($user, $event);
     }
+
+    public function manageEvent(User $user, Event $event)
+    {
+
+        if ($event->user_id === $user->id) {
+            return true;
+        }
+
+        return false;
+    }
+
+
+    public function manageEventTeam(User $user, Event $event)
+    {
+        if ($event->user_id === $user->id or $event->userTeam()->where('user_id', $user->id)->count() > 0) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public function manageEventApprove(User $user, Event $event)
+    {
+        if ($event->user_id === $user->id or $event->userEventApprove()->where('user_id', $user->id)->count() > 0) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public function kanban(User $user, Event $event)
+    {
+        if ($event->user_id === $user->id or $event->userTeam()->where('user_id', $user->id)->count() > 0) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public function question(User $user, Event $event)
+    {
+        if ($event->user_id === $user->id or $event->userTeam()->where('user_id', $user->id)->count() > 0) {
+            return true;
+        }
+
+        return false;
+    }
 }
