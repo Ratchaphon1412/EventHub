@@ -69,6 +69,9 @@
                     <li class="mr-2" role="presentation">
                         <button class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300" id="approve-tab" data-tabs-target="#approve" type="button" role="tab" aria-controls="approve" aria-selected="false">Approve</button>
                     </li>
+                    <li class="mr-2" role="presentation">
+                        <button class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300" id="payment-tab" data-tabs-target="#payment" type="button" role="tab" aria-controls="approve" aria-selected="false">Payment</button>
+                    </li>
 
                 </ul>
             </div>
@@ -89,12 +92,16 @@
                 </div>
                     @include('event.teamEvent',['event'=> $event])
                 </div>
+                <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="payment" role="tabpanel" aria-labelledby="payment-tab">
+                    @include('event.payment',['payment'=>$event->document_payment])
+                 </div>
                 <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="kanban" role="tabpanel" aria-labelledby="kanban-tab">
                     @include('event.kanban.kanban',['kanban'=>$event->kanban,'todo'=>$event->kanban->columns[0]->cards,'working'=>$event->kanban->columns[1]->cards,'done'=>$event->kanban->columns[2]->cards])
                 </div>
                 <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="question" role="tabpanel" aria-labelledby="question-tab">
                     @include('event.question.create-question',['event'=>$event])
                 </div>
+              
 
             </div>
 

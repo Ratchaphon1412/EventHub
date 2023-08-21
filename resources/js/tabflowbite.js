@@ -30,6 +30,11 @@ const tabElements = [
         id:'approve',
         triggerEl: document.querySelector('#approve-tab'),
         targetEl: document.querySelector('#approve')
+    },
+    {
+        id:'payment',
+        triggerEl: document.querySelector('#payment-tab'),
+        targetEl: document.querySelector('#payment')
     }
 
 ]
