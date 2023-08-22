@@ -175,6 +175,8 @@ class  EventRepository implements EventRepositoryInterface
     {
         return $event->userTeam()->detach($user);
     }
+
+    public function updateEventImage($event, $filename)
+    {
+    }
 }
-
-

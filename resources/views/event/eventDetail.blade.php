@@ -27,11 +27,12 @@
 
                                 </p>
                             </div>
+                            @can('join',$event)
                             <button id="joinButton"  class="py-2.5 px-5 mr-2 mb-2  text-sm font-medium  focus:outline-none text-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
                                 Join
 
                             </button>
-
+                            @endcan
 
                         </div>
                     </div>
@@ -61,7 +62,7 @@
                         </li>
                         @endcan
 
-                        @can('manageEventTeam',$event)
+                        @can('manageEvent',$event)
                         <li class="mr-2" role="presentation">
                             <button class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300" id="team-tab" data-tabs-target="#team" type="button" role="tab" aria-controls="team" aria-selected="false">Team</button>
                         </li>
@@ -156,7 +157,7 @@
         targetEl: document.querySelector('#manage')
     },
     @endcan
-    @can('manageEventTeam',$event)
+    @can('manageEvent',$event)
     {
         id:'team',
         triggerEl: document.querySelector('#team-tab'),

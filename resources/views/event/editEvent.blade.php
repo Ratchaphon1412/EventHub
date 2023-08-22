@@ -136,7 +136,7 @@
                             <div class="w-full px-3 sm:w-1/2">
                                 <div class="mb-5">
                                     <label for="Annumentdate" class="block  text-xl ">
-                                        Annument date
+                                        Announcement date
                                     </label>
                                     @error('Annumentdate')
                                             <div class="text-red-600">

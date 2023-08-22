@@ -18,7 +18,16 @@
             <div class="flex flex-row justify-between flex-wrap container">
                 @foreach ($events as $event)
                 <a href="{{route('event.detail.show' , ['event'=>$event])}}">
-                    <livewire:card-event-image title="{{$event->title}}" image="{{url('storage/'.$event->image_poster)}}" status="Upcomming" category="{{$event->category->category_name}}" description="{{$event->description}}"/>
+                  
+                    
+                    <livewire:card-event-image title="{{$event->title}}"
+                        image="{{url('storage/'.$event->image_poster)}}" 
+                        status="Upcomming" category="{{$event->category->category_name}}" 
+                        description="{{$event->description}}" 
+                        location_name="{{$event->location_name}}"
+                        timeEnd="{{$event->event_end_date}}"
+                        timeStart="{{$event->event_start_date}}"
+                       />
                 </a>
                 @endforeach
             </div>

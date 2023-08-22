@@ -110,4 +110,11 @@ class EventPolicy
 
         return false;
     }
+    public function join(User $user, Event $event)
+    {
+        if ($event->user_id !== $user->id and $event->userTeam()->where('user_id', $user->id)->count() == 0) {
+            return true;
+        }
+        return false;
+    }
 }

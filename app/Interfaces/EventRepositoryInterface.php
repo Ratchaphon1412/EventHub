@@ -26,4 +26,5 @@ interface EventRepositoryInterface
     public function getQuestionName($event);
     public function addUserToTeam($event, $user);
     public function removeUserFromTeam($event, $user);
+    public function updateEventImage($event, $filename);
 }

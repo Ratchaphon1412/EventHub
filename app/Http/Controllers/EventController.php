@@ -68,15 +68,15 @@ class EventController extends Controller
             'category' => ['required'],
             'dateStartIn' => ['required'],
             'datetimeStartIn' => ['required'],
-            'dateCloseIn' => ['required','after:dateStartIn'],
+            'dateCloseIn' => ['required', 'after:dateStartIn'],
             'datetimeCloseIn' => ['required'],
             'location_name' => ['required'],
             'address_latitude' => ['required'],
             'address_longitude' => ['required'],
             'Annumentdate' => ['after:dateCloseIn'],
             // 'datetimeAnnument' => ['required','after:dateCloseIn'],
-            'startEventDate' => ['required','after:Annumentdate'],
-            'endEventDate' => ['required','after:startEventDate'],
+            'startEventDate' => ['required', 'after:Annumentdate'],
+            'endEventDate' => ['required', 'after:startEventDate'],
             'file_input' => ['required'],
             'poster' => ['required', 'image', 'mimes:jpeg,png,jpg'],
             'location_detail' => ['required'],
@@ -164,32 +164,49 @@ class EventController extends Controller
             'category' => ['required'],
             'dateStartIn' => ['required'],
             'datetimeStartIn' => ['required'],
-            'dateCloseIn' => ['required','after:dateStartIn'],
+            'dateCloseIn' => ['required', 'after:dateStartIn'],
             'datetimeCloseIn' => ['required'],
             'location_name' => ['required'],
             'address_latitude' => ['required'],
             'address_longitude' => ['required'],
             'Annumentdate' => ['after:dateCloseIn'],
             // 'datetimeAnnument' => ['required','after:dateCloseIn'],
-            'startEventDate' => ['required','after:Annumentdate'],
-            'endEventDate' => ['required','after:dateCloseIn'],
-            'file_input' => ['required'],
-            'poster' => ['required', 'image', 'mimes:jpeg,png,jpg'],
+            'startEventDate' => ['required', 'after:Annumentdate'],
+            'endEventDate' => ['required', 'after:dateCloseIn'],
+            // 'file_input' => ['required'],
+            'poster' => ['image', 'mimes:jpeg,png,jpg'], //
             'location_detail' => ['required'],
             'contact' => ['required'],
-            'file_certificate' => ['required'],
+            //'file_certificate' => ['required'], certificate
         ]);
+
         $category  =  $this->categoryRepository->findCategoryByName($request->category);
         $user = Auth::user();
 
-        $imageName = $request->file('poster')->getClientOriginalName();
-        $pathImage = $request->file('poster')->storeAs('events/images', $imageName, 'public');
 
-        $imageNameFile = $request->file('file_input')->getClientOriginalName();
-        $pathFile = $request->file('file_input')->storeAs('events/files', $imageNameFile, 'public');
 
-        $certificateFile = $request->file('file_certificate')->getClientOriginalName();
-        $pathCertificateFile = $request->file('file_certificate')->storeAs('events/files', $certificateFile, 'public');
+        $imageName = null;
+        $pathImage = $event->image_poster;
+        if ($request->hasFile('poster')) {
+            $imageName = $request->file('poster')->getClientOriginalName();
+            $pathImage = $request->file('poster')->storeAs('events/images', $imageName, 'public');
+        }
+
+        $imageNameFile = null;
+        $pathFile = null;
+
+        if ($request->hasFile('file_input')) {
+
+            $imageNameFile = $request->file('file_input')->getClientOriginalName();
+            $pathFile = $request->file('file_input')->storeAs('events/files', $imageNameFile, 'public');
+        }
+
+        $certificateFile = null;
+        $pathCertificateFile = $event->document_payment;
+        if ($request->hasFile('file_certificate')) {
+            $certificateFile = $request->file('file_certificate')->getClientOriginalName();
+            $pathCertificateFile = $request->file('file_certificate')->storeAs('events/files', $certificateFile, 'public');
+        }
 
 
         $combinedDTStartIn = date('Y-m-d H:i:s', strtotime("$request->dateStartIn $request->datetimeStartIn"));
@@ -227,7 +244,7 @@ class EventController extends Controller
         }
 
         // return view('event.eventDetail', ['event' => $event]);
-        return redirect()->back()->with(['tab' => "detail"]);
+        return redirect()->back()->with(['tab' => "manage"]);
     }
 
     /**
