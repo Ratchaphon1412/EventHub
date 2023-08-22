@@ -5,7 +5,7 @@
     <table class="w-full">
       <thead>
         <tr class=" bg-blue-600 text-center  text-xs font-semibold uppercase tracking-widest text-white ">
-          <th class="px-5 py-3">ID</th>
+          <th class="px-5 py-3">No.</th>
           <th class="px-5 py-3">First Name</th>
           <th class="px-5 py-3">Last Name</th>
           <th class="px-5 py-3">Status</th>
@@ -18,48 +18,51 @@
       </thead>
       <tbody class="text-gray-500">
         @if(sizeof($event->userEventApprove) > 0)
-        @foreach($event->userEventApprove as $user)
-        <tr>
-          <td class="border-b border-gray-200 bg-white px-5 py-5 text-sm">
-            <p class="whitespace-no-wrap">{{$user->id}}</p>
-          </td>
-          <td class="border-b border-gray-200 bg-white px-5 py-5 text-sm">
-            <div class="flex items-center">
-              <div class="h-10 w-10 flex-shrink-0">
-                <img class="h-full w-full rounded-full" src="{{$user->profile_photo_url}}" alt="" />
-              </div>
-              <div class="ml-3">
-                <p class="whitespace-no-wrap">{{$user->first_name}}</p>
-              </div>
-            </div>
-          </td>
-          <td class="border-b border-gray-200 bg-white px-5 py-5 text-sm">
-            <p class="whitespace-no-wrap">{{$user->last_name}}</p>
-          </td>
-          <td class="border-b border-gray-200 bg-white px-5 py-5 text-sm">
-            <p class="whitespace-no-wrap" id="{{"status".$user->id}}">{{$event->userEventApprove->find($user->id)->pivot->status}}</p>
-          </td>
+            @for($i = 0; $i < $event->userEventApprove->count(); $i++)
+                <tr>
+                    <td class="border-b border-gray-200 bg-white px-5 py-5 text-sm">
+                        <p class="whitespace-no-wrap">{{$i+1}}</p>
+                    </td>
+                    <td class="border-b border-gray-200 bg-white px-5 py-5 text-sm">
+                        <div class="flex items-center">
+                            <div class="h-10 w-10 flex-shrink-0">
+                                <img class="h-full w-full rounded-full" src="{{$event->userEventApprove->get($i)->profile_photo_url}}" alt="" />
+                            </div>
+                            <div class="ml-3">
+                                <p class="whitespace-no-wrap">{{$event->userEventApprove->get($i)->first_name}}</p>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="border-b border-gray-200 bg-white px-5 py-5 text-sm">
+                        <p class="whitespace-no-wrap">{{$event->userEventApprove->get($i)->last_name}}</p>
+                    </td>
+                    <td class="border-b border-gray-200 bg-white px-5 py-5 text-sm">
+                        <p class="whitespace-no-wrap" id="{{"status".$event->userEventApprove->get($i)->id}}">{{$event->userEventApprove->find($event->userEventApprove->get($i)->id)->pivot->status}}</p>
+                    </td>
 
 
-          <td class="border-b border-gray-200 bg-white px-5 py-5 text-sm">
-            <select id="status" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " onchange="selectStatus(this)" dataid="{{$user->id}}">
-              <option selected>Choose a Status</option>
-              <option value="pending">Pending</option>
-              <option value="accept">Accept</option>
-              <option value="reject">Reject</option>
-              <option value="notcomplete">Not Complete</option>
+                    <td class="border-b border-gray-200 bg-white px-5 py-5 text-sm">
+                        <select id="status" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " onchange="selectStatus(this)" dataid="{{$event->userEventApprove->get($i)->id}}">
+                            <option selected>Choose a Status</option>
+                            <option value="pending">Pending</option>
+                            <option value="accept">Accept</option>
+                            <option value="reject">Reject</option>
+                            <option value="notcomplete">Not Complete</option>
 
-            </select>
-          </td>
-          @if($event->question)
-          <td class="border-b border-gray-200 bg-white px-5 py-5 text-sm flex justify-center">
-            <livewire:button-link link="{{route('applicant.answer', ['event' => $event, 'user' => $user])}}" text="View AnsQuestion" />
-          </td>
-          @endif
+                        </select>
+                    </td>
+                    @if($event->question)
+                        <td class="border-b border-gray-200 bg-white px-5 py-5 text-sm flex justify-center">
+                            <livewire:button-link link="{{route('applicant.answer', ['event' => $event, 'user' => $event->userEventApprove->get($i)])}}" text="View AnsQuestion" />
+                        </td>
+                    @endif
 
 
-        </tr>
-        @endforeach
+                </tr>
+            @endfor
+{{--        @foreach($event->userEventApprove as $user)--}}
+{{--        --}}
+{{--        @endforeach--}}
 
         @endif
       </tbody>
@@ -84,7 +87,7 @@
 </div>
 
 <script>
- 
+
 
   function selectStatus(e) {
     console.log(e.value);
@@ -107,11 +110,11 @@
 
       }),
       success: function(msg) {
-        
+
         let dataid = document.getElementById("status"+e.getAttribute("dataid"));
         dataid.innerHTML = e.value;
 
-        
+
 
 
       }

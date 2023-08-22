@@ -66,7 +66,7 @@
             <table class="w-full">
               <thead>
                 <tr class=" bg-blue-600 text-center  text-xs font-semibold uppercase tracking-widest text-white ">
-                  <th class="px-5 py-3">ID</th>
+                  <th class="px-5 py-3">No.</th>
                   <th class="px-5 py-3">First Name</th>
                   <!-- <th class="px-5 py-3">User Role</th> -->
                   <th class="px-5 py-3">Last Name</th>
@@ -75,35 +75,35 @@
               </thead>
               <tbody class="text-gray-500">
                 @if($event->userTeam->count() > 0)
-                @foreach($event->userTeam as $user)
-                <tr>
-                  <td class="border-b border-gray-200 bg-white px-5 py-5 text-sm">
-                    <p class="whitespace-no-wrap">{{$user->id}}</p>
-                  </td>
-                  <td class="border-b border-gray-200 bg-white px-5 py-5 text-sm">
-                    <div class="flex items-center">
-                      <div class="h-10 w-10 flex-shrink-0">
-                        <img class="h-full w-full rounded-full" src="{{$user->profile_photo_url}}" alt="" />
-                      </div>
-                      <div class="ml-3">
-                        <p class="whitespace-no-wrap">{{$user->first_name}}</p>
-                      </div>
-                    </div>
-                  </td>
-                  <td class="border-b border-gray-200 bg-white px-5 py-5 text-sm">
-                    <p class="whitespace-no-wrap">{{$user->last_name}}</p>
-                  </td>
-                  <td>
-                    <form action="{{route('teamEvent.delete',['event' => $event,'user' => $user])}}" enctype="multipart/form-data" method="POST">
-                      @csrf
-                      @method('post')
-                      <button type="submit" class="block w-full bg-red-500 text-white font-bold p-2 rounded-lg">
-                        reject
-                      </button>
-                    </form>
-                  </td>
-                </tr>
-                @endforeach
+                    @for($i = 0; $i < $event->userTeam->count(); $i++)
+                        <tr>
+                            <td class="border-b border-gray-200 bg-white px-5 py-5 text-sm">
+                                <p class="whitespace-no-wrap">{{$i+1}}</p>
+                            </td>
+                            <td class="border-b border-gray-200 bg-white px-5 py-5 text-sm">
+                                <div class="flex items-center">
+                                    <div class="h-10 w-10 flex-shrink-0">
+                                        <img class="h-full w-full rounded-full" src="{{$event->userTeam->get($i)->profile_photo_url}}" alt="" />
+                                    </div>
+                                    <div class="ml-3">
+                                        <p class="whitespace-no-wrap">{{$event->userTeam->get($i)->first_name}}</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="border-b border-gray-200 bg-white px-5 py-5 text-sm">
+                                <p class="whitespace-no-wrap">{{$event->userTeam->get($i)->last_name}}</p>
+                            </td>
+                            <td>
+                                <form action="{{route('teamEvent.delete',['event' => $event,'user' => $event->userTeam->get($i)])}}" enctype="multipart/form-data" method="POST">
+                                    @csrf
+                                    @method('post')
+                                    <button type="submit" class="block w-full bg-red-500 text-white font-bold p-2 rounded-lg">
+                                        reject
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                    @endfor
 
                 @endif
               </tbody>
