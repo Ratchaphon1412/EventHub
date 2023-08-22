@@ -180,6 +180,8 @@ class EventController extends Controller
             //'file_certificate' => ['required'], certificate
         ]);
 
+
+
         $category  =  $this->categoryRepository->findCategoryByName($request->category);
         $user = Auth::user();
 
@@ -193,7 +195,7 @@ class EventController extends Controller
         }
 
         $imageNameFile = null;
-        $pathFile = null;
+        $pathFile = $event->document_payment;
 
         if ($request->hasFile('file_input')) {
 
@@ -202,7 +204,8 @@ class EventController extends Controller
         }
 
         $certificateFile = null;
-        $pathCertificateFile = $event->document_payment;
+        $pathCertificateFile = $event->certificate_file;
+        // dd($pathFile, $pathImage, $pathCertificateFile);
         if ($request->hasFile('file_certificate')) {
             $certificateFile = $request->file('file_certificate')->getClientOriginalName();
             $pathCertificateFile = $request->file('file_certificate')->storeAs('events/files', $certificateFile, 'public');
@@ -230,6 +233,7 @@ class EventController extends Controller
             $request->address_latitude,
             $request->address_longitude,
             $pathFile,
+            $certificateFile,
             $user,
             $request->location_detail,
             $request->contact,
