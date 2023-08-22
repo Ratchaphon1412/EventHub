@@ -17,13 +17,13 @@
             </div>
         </section>
 <section class="flex flex-col justify-start container m-4 rounded-lg">
-  
-  
+
+
   <h1 class=" text-gray-900 font-bold text-2xl ">My Certificate</h1>
   <table class="w-full">
     <thead>
       <tr class=" bg-blue-600 text-center  text-xs font-semibold uppercase tracking-widest text-white ">
-        <th class="px-5 py-3">ID</th>
+        <th class="px-5 py-3">No.</th>
         <th class="px-5 py-3">Event Name</th>
         <th class="px-5 py-3">Event Details</th>
         <th class="px-5 py-3">Certificate</th>
@@ -35,38 +35,38 @@
     @endphp
     <tbody class="text-gray-500 ">
     @if(($approveEvents->count() > 0) && ($approveEvents->first()->pivot->status === 'accept'))
-      @foreach($approveEvents as $event)
-        @if($today_date >= $event->event_end_date )
-          <tr>
-            <td class="border-b border-gray-200 bg-white px-5 py-5 text-sm">
-              <p class="whitespace-no-wrap">{{$event->id}}</p>
-            </td>
-            <td class="border-b border-gray-200 bg-white px-5 py-5 text-sm">
-              <div class="flex items-center">
-                <div class="h-10 w-10 flex-shrink-0">
-                  <img class="h-full w-full rounded-full" src="{{url('storage/'.$event->image_poster)}}" alt="" />
-                </div>
-                <div class="ml-8">
-                  <p class="whitespace-no-wrap">{{$event->title}}</p>
-                </div>
-              </div>
-            </td>
-            <td class="border-b border-gray-200 bg-white px-5 py-5 text-sm justify-center">
-              
-              <livewire:button-link link="{{route('event.detail.show',['event'=>$event])}}" text="View Event Detail" />
+        @for($i = 0; $i < $approveEvents->count(); $i++)
+            @if($today_date >= $approveEvents->get($i)->event_end_date )
+                <tr>
+                    <td class="border-b border-gray-200 bg-white px-5 py-5 text-sm">
+                        <p class="whitespace-no-wrap">{{$i+1}}</p>
+                    </td>
+                    <td class="border-b border-gray-200 bg-white px-5 py-5 text-sm">
+                        <div class="flex items-center">
+                            <div class="h-10 w-10 flex-shrink-0">
+                                <img class="h-full w-full rounded-full" src="{{url('storage/'.$approveEvents->get($i)->image_poster)}}" alt="" />
+                            </div>
+                            <div class="ml-8">
+                                <p class="whitespace-no-wrap">{{$approveEvents->get($i)->title}}</p>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="border-b border-gray-200 bg-white px-5 py-5 text-sm justify-center">
 
-            </td>
-            <td class="border-b border-gray-200 bg-white px-5 py-5 text-sm flex justify-center">
-              <a href="{{url('storage/'.$event->certificate_file)}}">See this</a>
-            </td>
-          </tr>
-        @endif
-      @endforeach
+                        <livewire:button-link link="{{route('event.detail.show',['event'=>$approveEvents->get($i)])}}" text="View Event Detail" />
+
+                    </td>
+                    <td class="border-b border-gray-200 bg-white px-5 py-5 text-sm flex justify-center">
+                        <a href="{{url('storage/'.$approveEvents->get($i)->certificate_file)}}">See this</a>
+                    </td>
+                </tr>
+            @endif
+        @endfor
     @endif
     </tbody>
   </table>
 
-  
+
 </section>
 
 @endsection
