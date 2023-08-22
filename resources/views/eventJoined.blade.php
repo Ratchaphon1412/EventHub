@@ -22,9 +22,17 @@
       @foreach($joinedEvents as $event)
         @if($event->result === 0)
           @if($event->pivot->status != "notcomplete")
-          <a href="{{route('event.detail.show' , ['event'=>$event])}}">
-            <livewire:card-event-image title="{{$event->title}}" image="{{url('storage/'.$event->image_poster)}}" status="Upcomming" category="{{$event->category->category_name}}" description="{{$event->description}}" />
-          </a>
+          <a href="{{route('event.detail.show',['event'=>$event])}}">
+                    <livewire:card-event-image title="{{$event->title}}" 
+                                                image="{{url('storage/'.$event->image_poster)}}" 
+                                                status="Newest" 
+                                                category="{{$event->category->category_name}}" 
+                                                description="{{$event->description}}"
+                                                timeEnd="{{$event->event_end_date}}"
+                                                timeStart="{{$event->event_start_date}}"
+                                                location_name="{{$event->location_name}}"
+                />
+                </a>
           @endif
         @endif
       @endforeach
@@ -38,9 +46,17 @@
         @if($event->result === 0)
         
           @if($event->pivot->status == "notcomplete")
-          <a href="{{route('event.detail.show' , ['event'=>$event])}}">
-            <livewire:card-event-image title="{{$event->title}}" image="{{url('storage/'.$event->image_poster)}}" status="Upcomming" category="{{$event->category->category_name}}" description="{{$event->description}}" />
-          </a>
+          <a href="{{route('event.detail.show',['event'=>$event])}}">
+                    <livewire:card-event-image title="{{$event->title}}" 
+                                                image="{{url('storage/'.$event->image_poster)}}" 
+                                                status="Newest" 
+                                                category="{{$event->category->category_name}}" 
+                                                description="{{$event->description}}"
+                                                timeEnd="{{$event->event_end_date}}"
+                                                timeStart="{{$event->event_start_date}}"
+                                                location_name="{{$event->location_name}}"
+                />
+                </a>
           @endif
         @endif
       @endforeach
@@ -52,9 +68,17 @@
       @foreach($joinedEvents as $event)
         @if($event->result === 1)
           @if($event->pivot->status === "accept")
-          <a href="{{route('event.detail.show' , ['event'=>$event])}}">
-            <livewire:card-event-image title="{{$event->title}}" image="{{url('storage/'.$event->image_poster)}}" status="Upcomming" category="{{$event->category->category_name}}" description="{{$event->description}}" />
-          </a>
+          <a href="{{route('event.detail.show',['event'=>$event])}}">
+                    <livewire:card-event-image title="{{$event->title}}" 
+                                                image="{{url('storage/'.$event->image_poster)}}" 
+                                                status="Newest" 
+                                                category="{{$event->category->category_name}}" 
+                                                description="{{$event->description}}"
+                                                timeEnd="{{$event->event_end_date}}"
+                                                timeStart="{{$event->event_start_date}}"
+                                                location_name="{{$event->location_name}}"
+                />
+                </a>
           @endif
         @endif
       @endforeach
