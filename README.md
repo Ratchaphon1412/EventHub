@@ -21,46 +21,91 @@ Laravel is a web application framework with expressive, elegant syntax. We belie
 
 Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
-## Learning Laravel
+# Initialize Project
+<aside>
+🪟 For Windows, use WSL (Windows Subsystem for Linux) only.
+Verify with the command `whoami` that you receive a UNIX Username that has been previously set up.
+If you get 'root' as the result, it indicates incorrect configuration.
+</aside>
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### 1. Set up an alias for the `sail` command:
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+   <aside>
+   🪟 (wsl) Run 'echo "alias sail='[ -f sail ] && sh sail || sh vendor/bin/sail'" >> ~/.bashrc'
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+   </aside>
 
-## Laravel Sponsors
+   <aside>
+   ⚡ (zsh) Run `echo "alias sail='[ -f sail ] && sh sail || sh vendor/bin/sail'" >> ~/.zshrc`
+   </aside>
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+### 2. Close and reopen the terminal for changes to take effect.
 
-### Premium Partners
+### 3. Run the following command to install the Composer dependencies using Laravel Sail's PHP 8.2 container:
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+   ```bash
+   docker run --rm \
+       -u "$(id -u):$(id -g)" \
+       -v "$(pwd):/var/www/html" \
+       -w /var/www/html \
+       laravelsail/php82-composer:latest \
+       composer install --ignore-platform-reqs
+   ```
 
-## Contributing
+### 2. Create a `.env` file by executing the following command:
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+   ```bash
+   cp .env.example .env
+   ```
 
-## Code of Conduct
+### 3. Edit the `.env` file with the following values:
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+    1. `APP_NAME="Laravel Layout"` (Line 1)
+    2. `DB_HOST=mysql` (Line 12)
+    3. `DB_USERNAME=sail` (Line 15)
+    4. `DB_PASSWORD=password` (Line 16)
+    5. `REDIS_HOST=redis` (Line 27)
 
-## Security Vulnerabilities
+### 4. Run the command `sail up -d` (Make sure that services from other projects are already down).
+    - If you encounter issues in step 6, make sure to perform the following steps:
+        - Run `sail down`
+        - Correct your modifications in step 6c and 6d
+        - Delete Docker Volumes with names matching your project directory name suffixed with `_sail-mysql`, e.g., `03-laravel-layout-...._sail-mysql`
+        - Run `sail build --no-cache`
+        - Run `sail up -d` again
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### 5. Generate the `APP_KEY` in the `.env` file by running the command:
 
-## License
+   ```bash
+   sail artisan key:generate
+   ```
+Sure, here it is in English:
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### 6. Use Yarn instead of npm
+
+Use the following command to use Yarn for installing dependencies:
+
+```bash
+sail yarn install
+```
+
+### 7. Command for Processing CSS with Yarn
+
+Use the following command to process CSS using Yarn:
+
+```bash
+sail yarn dev
+```
+
+
+## How To Use
+
+### For General Users:
+
+- Ordinary users can register by clicking on the "Register" option located at the upper right corner of the webpage. After registering, they will have the option to log in. Once logged in, they can participate in events.
+
+- If a user doesn't log in, they can still view events, but they won't be able to actively engage with them.
+
+### For Event Owners:
+
+- Event owners are regular users who have logged in. They can create events and manage them. This means they have the ability to both create new events and handle existing ones.
