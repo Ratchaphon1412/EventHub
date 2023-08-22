@@ -36,7 +36,7 @@
   @if($events != null)
     @foreach ($events as $event)
       <a href="{{route('event.detail.show' , ['event'=>$event])}}">
-        <livewire:card-event-image title="{{$event->title}}" image="{{url('storage/'.$event->image_poster)}}" status="Upcomming" category="{{$event->category->category_name}}" description="{{$event->description}}" />
+        <livewire:card-event-image title="{{$event->title}}" image="{{url('storage/'.$event->image_poster)}}" status="Upcomming" category="{{$event->category->category_name}}" description="{{$event->description}}" timeStart="{{$event->evet_start_date}}" timeEnd="{{$event->event_end_date}}" />
       </a>
     @endforeach
   @endif
