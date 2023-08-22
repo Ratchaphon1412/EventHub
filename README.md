@@ -67,10 +67,9 @@ If you get 'root' as the result, it indicates incorrect configuration.
     5. `REDIS_HOST=redis` (Line 27)
 
 ### 4. Run the command `sail up -d` (Make sure that services from other projects are already down).
-    - If you encounter issues in step 6, make sure to perform the following steps:
+    - If you encounter issues in step 4, make sure to perform the following steps:
         - Run `sail down`
-        - Correct your modifications in step 6c and 6d
-        - Delete Docker Volumes with names matching your project directory name suffixed with `_sail-mysql`, e.g., `03-laravel-layout-...._sail-mysql`
+        - Delete Docker Volumes with names matching your project directory name suffixed with `_sail-mysql`, e.g., `EventHub-...._sail-mysql`
         - Run `sail build --no-cache`
         - Run `sail up -d` again
 
@@ -79,7 +78,6 @@ If you get 'root' as the result, it indicates incorrect configuration.
    ```bash
    sail artisan key:generate
    ```
-Sure, here it is in English:
 
 ### 6. Use Yarn instead of npm
 
@@ -95,6 +93,18 @@ Use the following command to process CSS using Yarn:
 
 ```bash
 sail yarn dev
+```
+
+### 8. You can use dummy data with
+
+```bash
+sail artisan migrate:fresh --seed
+```
+
+### or you can use empty data with
+
+```bash
+sail artisan migrate
 ```
 
 
