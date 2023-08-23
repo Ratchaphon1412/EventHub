@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Notification;
 use App\Interfaces\KanbanCardRepositoryInterface;
 use App\Interfaces\KanbanColumnsRepositoryInterface;
 use App\Interfaces\KanbanRepositoryInterface;
+use App\Interfaces\EventRepositoryInterface;
+use App\Repositories\EventRepository;
 
 class KanbanController extends Controller
 {
@@ -20,12 +22,14 @@ class KanbanController extends Controller
     private KanbanRepositoryInterface $kanbanRepository;
     private KanbanColumnsRepositoryInterface $kanbanColumnRepository;
     private KanbanCardRepositoryInterface $kanbanCardRepository;
+    private EventRepositoryInterface $eventRepository;
 
-    public function __construct(KanbanRepositoryInterface $kanbanRepository, KanbanColumnsRepositoryInterface $kanbanColumnRepository, KanbanCardRepositoryInterface $kanbanCardRepository)
+    public function __construct(KanbanRepositoryInterface $kanbanRepository, KanbanColumnsRepositoryInterface $kanbanColumnRepository, KanbanCardRepositoryInterface $kanbanCardRepository, EventRepositoryInterface $eventRepository)
     {
         $this->kanbanRepository = $kanbanRepository;
         $this->kanbanColumnRepository = $kanbanColumnRepository;
         $this->kanbanCardRepository = $kanbanCardRepository;
+        $this->eventRepository = $eventRepository;
     }
 
 
@@ -75,6 +79,8 @@ class KanbanController extends Controller
         $description = $request->Description;
 
 
+
+
         // Notification
         $user = Auth::user();
         Notification::send($user, new UpdateKanban());
@@ -82,6 +88,14 @@ class KanbanController extends Controller
         // create card
         $kanban = $this->kanbanRepository->findById($kanban_id);
         $columnsTodo = $kanban->columns[0];
+
+        $event = $this->eventRepository->findById($kanban->event->id);
+        $userTeam = $event->userTeam;
+
+        foreach ($userTeam as $teamMember) {
+            Notification::send($teamMember, new UpdateKanban());
+        }
+
         $this->kanbanCardRepository->createCard($columnsTodo, $title, $description, $user);
 
 
