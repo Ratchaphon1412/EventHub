@@ -2,7 +2,8 @@ FROM php:8.0.24-zts-alpine3.16
 WORKDIR /var/www/html
 
 RUN apk update 
-RUN curl -sS https://getcomposer.org/installer | php -- --version=2.4.3 --install-dir=/usr/local/bin --filename=composer
+RUN curl -s https://getcomposer.org/installer | php
+RUN mv composer.phar /usr/local/bin/composer
 
 COPY . .
 RUN composer install
