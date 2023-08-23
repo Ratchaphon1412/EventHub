@@ -60,26 +60,36 @@ If you get 'root' as the result, it indicates incorrect configuration.
 
 ### 3. Edit the `.env` file with the following values:
 
-    1. `APP_NAME="Laravel Layout"` (Line 1)
+    1. `APP_NAME={name}` (Line 1)
     2. `DB_HOST=mysql` (Line 12)
     3. `DB_USERNAME=sail` (Line 15)
     4. `DB_PASSWORD=password` (Line 16)
     5. `REDIS_HOST=redis` (Line 27)
+### 4. Edit smtp email
+    - MAIL_HOST=smtp.gmail.com
+    - MAIL_PORT=465
+    - MAIL_USERNAME={your email}
+    - MAIL_PASSWORD={your password}
 
-### 4. Run the command `sail up -d` (Make sure that services from other projects are already down).
+### 5. Get google API key by following these step
+[view](https://cloud.google.com/docs/authentication/api-keys)
+
+    - GOOGLE_API={API Key} (line 61)
+### 6. Run the command `sail up -d` (Make sure that services from other projects are already down).
     - If you encounter issues in step 4, make sure to perform the following steps:
         - Run `sail down`
         - Delete Docker Volumes with names matching your project directory name suffixed with `_sail-mysql`, e.g., `EventHub-...._sail-mysql`
         - Run `sail build --no-cache`
         - Run `sail up -d` again
 
-### 5. Generate the `APP_KEY` in the `.env` file by running the command:
+
+### 7. Generate the `APP_KEY` in the `.env` file by running the command:
 
    ```bash
    sail artisan key:generate
    ```
 
-### 6. Use Yarn instead of npm
+### 8. Use Yarn instead of npm
 
 Use the following command to use Yarn for installing dependencies:
 
@@ -87,7 +97,7 @@ Use the following command to use Yarn for installing dependencies:
 sail yarn install
 ```
 
-### 7. Command for Processing CSS with Yarn
+### 9. Command for Processing CSS with Yarn
 
 Use the following command to process CSS using Yarn:
 
@@ -95,7 +105,14 @@ Use the following command to process CSS using Yarn:
 sail yarn dev
 ```
 
-### 8. You can use dummy data with
+### 10. Initialize storage
+
+```bash
+mkdir storage/app/public/images
+sail artisan storage:link
+```
+
+### 11. You can use dummy data with
 
 ```bash
 sail artisan migrate:fresh --seed
@@ -107,15 +124,44 @@ sail artisan migrate:fresh --seed
 sail artisan migrate
 ```
 
+## Feature
+### Security:
+- register
+- authentication user
+- two-factor authentication
+- change password
+- policy
+- browser sessions
+- verify user
 
-## How To Use
 
-### For General Users:
+### User:
+- view general information of event such as location budget
+- join event
+- edit profile
+- delete account
+- notification when event announcement
+- create own event
 
-- Ordinary users can register by clicking on the "Register" option located at the upper right corner of the webpage. After registering, they will have the option to log in. Once logged in, they can participate in events.
 
-- If a user doesn't log in, they can still view events, but they won't be able to actively engage with them.
+### Event:
+- CRUD event
+- add another user to team
+- CRUD kanban
+- CRUD question
+- view applicant answer
+- change applicant status
+- team management
+- team notification when update event
+- certificate
 
-### For Event Owners:
+### Owner Event User:
 
-- Event owners are regular users who have logged in. They can create events and manage them. This means they have the ability to both create new events and handle existing ones.
+-   email : ratchaphon.h111@gmail.com password : $Nueng111
+
+- email : jirakit11619@gmail.com password 123456789
+
+
+### wire frame and prototype
+
+[figma](https://www.figma.com/file/0ifb4koy90XYfswq07OiPI/Wireframe-and-Prototype?type=design&node-id=0-1&mode=design)
