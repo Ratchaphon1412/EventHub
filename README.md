@@ -118,4 +118,4 @@ sail artisan migrate
 
 ### For Event Owners:
 
-- Event owners are regular users who have logged in. They can create events and manage them. This means they have the ability to both create new events and handle existing ones.
+- Event owners are regular users who have logged in. They can create events and manage them. This means they have the ability to both create new events and handle existing ones..
