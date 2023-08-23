@@ -74,7 +74,7 @@ services:
             - sail
 networks:
     sail:
-        driver: bridge
+        driver: overlay
 volumes:
     sail-mysql:
         driver: local
