@@ -9,19 +9,19 @@
                 <div class="flex gap-4 bg-black rounded-xl p-2">
                     <span class="text-white font-bold">Event</span>
                     <div class="bg-[#ffa31a] text-white h-full w-full rounded-xl ">
-                        <span class="text-black">Hub</span> 
+                        <span class="text-black">Hub</span>
                     </div>
                     Thailand
                 </div>
             </div>
-            
+
             <!-- <span class="text-[#ffa31a] font-bold">Event</span> <span class="text-[#808080]">Hub</span> Thailand -->
         </h1>
 
         <span class="text-center font-bold my-10 text-white/90 container flex flex-col w-3/4">
-           
+
             <p class="text-xl text-white">
-            An event website is a dynamic online platform that curates and delivers essential information, seamless registration processes, and interactive features, fostering an engaging digital space for event 
+            An event website is a dynamic online platform that curates and delivers essential information, seamless registration processes, and interactive features, fostering an engaging digital space for event
             attendees and participants to connect, explore, and make the most of their event experience.
             </p>
         </span>
@@ -32,16 +32,16 @@
     <section class="flex flex-col w-full container">
         <div class="flex flex-row justify-between m-4">
             <h1 class="font-bold text-xl text-black"> Category</h1>
-            
+
         </div>
         <div class="flex flex-row justify-around space-x-4">
 
             @foreach ($categories as $category)
-           
-            <livewire:card-background-image route="{{route('category.view',['category'=>$category])}}" image="{{url('storage/'.$category->category_photo_path)}}" title="{{$category->category_name}}" description=""/>
+
+            <livewire:card-background-image route="{{route('category.view',['category'=>$category])}}" image="{{asset($category->category_photo_path)}}" title="{{$category->category_name}}" description=""/>
             @endforeach
-        
-    
+
+
         </div>
     </section>
 
@@ -50,7 +50,7 @@
         <div class="flex flex-row justify-between m-4">
                 <h1 class="font-bold text-xl text-black"> Gallary </h1>
                 <a href="{{route('gallery')}}" class="font-medium underline text-gray-600 hover:text-gray-900">See Gallary</a>
-                
+
         </div>
         <div id="default-carousel" class="relative w-full  " data-carousel="slide">
             <!-- Carousel wrapper -->
@@ -109,16 +109,16 @@
     <section class="flex flex-col w-full container">
         <div class="flex flex-row justify-between m-4">
             <h1 class="font-bold text-4xl text-black"> Upcoming</h1>
-  
+
         </div>
 
         <div class="flex flex-row justify-between flex-wrap">
             @foreach ($events_sort_date as $event)
             <a href="{{route('event.detail.show' , ['event'=>$event])}}">
                 <livewire:card-event-image title="{{$event->title}}"
-                 image="{{url('storage/'.$event->image_poster)}}" 
-                 status="Upcomming" category="{{$event->category->category_name}}" 
-                 description="{{$event->description}}" 
+                 image="{{Storage::disk('s3')->url($event->image_poster)}}"
+                 status="Upcomming" category="{{$event->category->category_name}}"
+                 description="{{$event->description}}"
                  location_name="{{$event->location_name}}"
                  timeEnd="{{$event->event_end_date}}"
                  timeStart="{{$event->event_start_date}}"
@@ -136,14 +136,14 @@
             <h1 class="font-bold text-4xl text-black"> Newest</h1>
         </div>
         <div class="flex flex-row justify-between flex-wrap">
-            
+
             @foreach ($events_sort_newest as $event)
-           
+
                 <a href="{{route('event.detail.show',['event'=>$event])}}">
-                    <livewire:card-event-image title="{{$event->title}}" 
-                                                image="{{url('storage/'.$event->image_poster)}}" 
-                                                status="Newest" 
-                                                category="{{$event->category->category_name}}" 
+                    <livewire:card-event-image title="{{$event->title}}"
+                                                image="{{Storage::disk('s3')->url($event->image_poster)}}"
+                                                status="Newest"
+                                                category="{{$event->category->category_name}}"
                                                 description="{{$event->description}}"
                                                 timeEnd="{{$event->event_end_date}}"
                                                 timeStart="{{$event->event_start_date}}"
@@ -170,7 +170,7 @@
                 <img class="mt-4 w-full lg:mt-10 rounded-lg" src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/content/office-long-1.png" alt="office content 2">
             </div>
         </div>
-    </section>   
+    </section>
 
         <section id="coverImage" class="justify-center items-center  w-full h-[400px] bg-fixed w-full  rounded-lg  bg-cover bg-no-repeat " style="background-image:url({{asset('assets/images/background/landing.jpg')}})" >
             <div class="flex justify-center items-center backdrop-filter bg-opacity-60 bg-black text-white  rounded-lg shadow-lg overflow-hidden  w-full h-full drop-shadow-lg">

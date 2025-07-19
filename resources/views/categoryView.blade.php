@@ -1,6 +1,6 @@
 <x-app-layout>
         <!-- Parallax Background -->
-        <section class="flex flex-col w-full h-[400px] bg-cover bg-fixed bg-center  justify-center items-center " style="background-image:url({{url('storage/'.$category->category_photo_path)}})">
+        <section class="flex flex-col w-full h-[400px] bg-cover bg-fixed bg-center  justify-center items-center " style="background-image:url({{asset($category->category_photo_path)}})">
             <h1 class="text-white text-5xl font-black mt-20 ">
                 {{$category->category_name}}
 
@@ -12,18 +12,18 @@
         <section class="flex flex-col w-full container">
             <div class="flex flex-row justify-between m-4">
                 <h1 class="font-bold text-xl text-black"> All Event in {{$category->category_name}}</h1>
-               
+
             </div>
             @if ($events->count() > 0)
             <div class="flex flex-row justify-between flex-wrap container">
                 @foreach ($events as $event)
                 <a href="{{route('event.detail.show' , ['event'=>$event])}}">
-                  
-                    
+
+
                     <livewire:card-event-image title="{{$event->title}}"
-                        image="{{url('storage/'.$event->image_poster)}}" 
-                        status="Upcomming" category="{{$event->category->category_name}}" 
-                        description="{{$event->description}}" 
+                        image="{{Storage::disk('s3')->url($event->image_poster)}}"
+                        status="Upcomming" category="{{$event->category->category_name}}"
+                        description="{{$event->description}}"
                         location_name="{{$event->location_name}}"
                         timeEnd="{{$event->event_end_date}}"
                         timeStart="{{$event->event_start_date}}"
@@ -36,7 +36,7 @@
                 <h1 class="text-xl font-bold text-gray-900">Not Found Event in {{$category->category_name}}</h1>
             </div>
             @endif
-            
+
         </section>
 
         <section id="coverImage" class="justify-center items-center  w-full h-[400px] bg-fixed w-full  rounded-lg  bg-cover bg-no-repeat mt-8" style="background-image:url({{url('storage/assets/images/background/landing.jpg')}})" >

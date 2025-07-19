@@ -21,7 +21,7 @@
 </section>
 
 
-<div class="grid md:grid-cols-3 sm:grid-cols-1 justify-center gap-4 ">
+<div class="flex flex-col justify-center gap-4 ">
   <div class="group bg-gray-900/30 py-20 px-4 flex flex-col space-y-2 items-center  justify-center cursor-pointer rounded-md hover:bg-gray-900/40 hover:smooth-hover">
     <a href="{{route('event.create.view')}}" class="bg-gray-900/70 text-white/50 group-hover:text-white group-hover:smooth-hover flex w-20 h-20 rounded-full items-center justify-center" href="#">
       <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -34,19 +34,22 @@
 
   </div>
   @if($events != null)
-    @foreach ($events as $event)
-    <a href="{{route('event.detail.show',['event'=>$event])}}">
-                    <livewire:card-event-image title="{{$event->title}}" 
-                                                image="{{url('storage/'.$event->image_poster)}}" 
-                                                status="Newest" 
-                                                category="{{$event->category->category_name}}" 
-                                                description="{{$event->description}}"
-                                                timeEnd="{{$event->event_end_date}}"
-                                                timeStart="{{$event->event_start_date}}"
-                                                location_name="{{$event->location_name}}"
-                />
-                </a>
-    @endforeach
+  <div class="flex flex-wrap justify-center items-center gap-4">
+
+      @foreach ($events as $event)
+      <a href="{{route('event.detail.show',['event'=>$event])}}">
+                      <livewire:card-event-image title="{{$event->title}}"
+                                                  image="{{Storage::disk('s3')->url($event->image_poster)}}"
+                                                  status="Newest"
+                                                  category="{{$event->category->category_name}}"
+                                                  description="{{$event->description}}"
+                                                  timeEnd="{{$event->event_end_date}}"
+                                                  timeStart="{{$event->event_start_date}}"
+                                                  location_name="{{$event->location_name}}"
+                  />
+                  </a>
+      @endforeach
+  </div>
   @endif
 
 </div>

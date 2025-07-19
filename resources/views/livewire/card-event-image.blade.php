@@ -10,8 +10,8 @@
 
 
       <div class="card-actions justify-end">
-        <div class="badge badge-outline">{{$category}}</div> 
-  
+        <div class="badge badge-outline">{{$category}}</div>
+
       </div>
     </div>
 </div>

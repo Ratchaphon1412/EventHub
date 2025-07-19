@@ -44,7 +44,7 @@
                     <td class="border-b border-gray-200 bg-white px-5 py-5 text-sm">
                         <div class="flex items-center">
                             <div class="h-10 w-10 flex-shrink-0">
-                                <img class="h-full w-full rounded-full" src="{{url('storage/'.$approveEvents->get($i)->image_poster)}}" alt="" />
+                                <img class="h-full w-full rounded-full" src="{{Storage::disk('s3')->url($approveEvents->get($i)->image_poster)}}" alt="" />
                             </div>
                             <div class="ml-8">
                                 <p class="whitespace-no-wrap">{{$approveEvents->get($i)->title}}</p>
@@ -57,7 +57,7 @@
 
                     </td>
                     <td class="border-b border-gray-200 bg-white px-5 py-5 text-sm flex justify-center">
-                        <a href="{{url('storage/'.$approveEvents->get($i)->certificate_file)}}">See this</a>
+                        <a href="{{Storage::disk('s3')->url($approveEvents->get($i)->certificate_file)}}">See this</a>
                     </td>
                 </tr>
             @endif

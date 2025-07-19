@@ -6,17 +6,18 @@ RUN composer install --optimize-autoloader --no-dev
 # Production stage
 FROM php:8.3-rc-apache-bullseye as production
 
-ENV APP_ENV=production
-ENV APP_DEBUG=false
+# ENV APP_ENV=production
+# ENV APP_DEBUG=false
 
 # Install system dependencies
 RUN apt-get update && apt-get install -y \
     curl
 
+RUN useradd -m sail
 
 
 # Install Node.js using NodeSource repository
-RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash -
+RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash -
 RUN apt-get install -y nodejs
 
 # Install Yarn
@@ -36,14 +37,17 @@ COPY .env.prod /var/www/html/.env
 WORKDIR /var/www/html
 
 # Install frontend dependencies and build assets using Yarn
-RUN yarn install && yarn run build
+RUN yarn install
 RUN yarn add vite@latest --dev
-RUN yarn upgrade
+RUN yarn run build
 
 RUN php artisan config:cache && \
     php artisan route:cache && \
     chmod 777 -R storage/ && \
-    chown -R www-data:www-data /var/www/ && \
+    chown -R www-data:www-data /var/www/* && \
     a2enmod rewrite
 
-CMD ["yarn","run","dev"]
+
+
+# CMD ["yarn","run","dev"]
+CMD ["apache2-foreground"]

@@ -86,14 +86,14 @@ class EventController extends Controller
         $category  =  $this->categoryRepository->findCategoryByName($request->category);
         $user = Auth::user();
 
-        $imageName = $request->file('poster')->getClientOriginalName();
-        $pathImage = $request->file('poster')->storeAs('events/images', $imageName, 'public');
+        // $imageName = $request->file('poster')->getClientOriginalName();
+        $pathImage = $request->file('poster')->storePublicly("events/images","s3");
 
-        $imageNameFile = $request->file('file_input')->getClientOriginalName();
-        $pathFile = $request->file('file_input')->storeAs('events/files', $imageNameFile, 'public');
+        // $imageNameFile = $request->file('file_input')->getClientOriginalName();
+        $pathFile = $request->file('file_input')->storePublicly('events/files',"s3");
 
-        $certificateFile = $request->file('file_certificate')->getClientOriginalName();
-        $pathCertificateFile = $request->file('file_certificate')->storeAs('events/files', $certificateFile, 'public');
+        // $certificateFile = $request->file('file_certificate')->getClientOriginalName();
+        $pathCertificateFile = $request->file('file_certificate')->storePublicly('events/files',"s3");
 
         $combinedDTStartIn = date('Y-m-d H:i:s', strtotime("$request->dateStartIn $request->datetimeStartIn"));
         $combinedDTCloseIn = date('Y-m-d H:i:s', strtotime("$request->dateCloseIn $request->datetimeCloseIn"));
@@ -124,7 +124,7 @@ class EventController extends Controller
         //Multiple Image
         $listFiles = $request->file('listImage');
         foreach ($listFiles as $file) {
-            $filename = $file->storeAs('events/images',  $file->getClientOriginalName(), 'public');
+            $filename = $file->storePublicly('events/images', 's3');
             $this->eventRepository->addEventImage($event, $filename);
         }
 

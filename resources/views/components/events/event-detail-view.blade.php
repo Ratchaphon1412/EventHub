@@ -13,11 +13,11 @@
                 {{$event->location_name}}
             </p>
         </div>
-       
+
         <hr class="mt-5">
     </section>
     <section id="Image" class="flex flex-col justify-center items-center  first-letter w-full">
-        <img src="{{url('storage/'.$event->image_poster)}}"  alt="Mountain" 
+        <img src="{{Storage::disk('s3')->url($event->image_poster)}}"  alt="Mountain"
             class="w-1/2 h-1/2 object-cover">
 
     </section>
@@ -30,7 +30,7 @@
 
     <section class="flex flex-col justify-center items-center gap-4  mt-4">
         @foreach ( $event->eventImage as $image)
-            <img src="{{url('storage/'.$image->event_image)}}" class="w-3/4 h-full object-cover" alt="">
+            <img src="{{Storage::disk('s3')->url($image->event_image)}}" class="w-3/4 h-full object-cover" alt="">
         @endforeach
     </section>
 

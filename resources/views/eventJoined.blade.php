@@ -23,10 +23,10 @@
         @if($event->result === 0)
           @if($event->pivot->status != "notcomplete")
           <a href="{{route('event.detail.show',['event'=>$event])}}">
-                    <livewire:card-event-image title="{{$event->title}}" 
-                                                image="{{url('storage/'.$event->image_poster)}}" 
-                                                status="Newest" 
-                                                category="{{$event->category->category_name}}" 
+                    <livewire:card-event-image title="{{$event->title}}"
+                                                image="{{Storage::disk('s3')->url($event->image_poster)}}"
+                                                status="Newest"
+                                                category="{{$event->category->category_name}}"
                                                 description="{{$event->description}}"
                                                 timeEnd="{{$event->event_end_date}}"
                                                 timeStart="{{$event->event_start_date}}"
@@ -42,15 +42,15 @@
   <div class="grid md:grid-cols-3 sm:grid-cols-1 justify-center gap-4 ">
     @if($joinedEvents != null)
       @foreach($joinedEvents as $event)
-      
+
         @if($event->result === 0)
-        
+
           @if($event->pivot->status == "notcomplete")
           <a href="{{route('event.detail.show',['event'=>$event])}}">
-                    <livewire:card-event-image title="{{$event->title}}" 
-                                                image="{{url('storage/'.$event->image_poster)}}" 
-                                                status="Newest" 
-                                                category="{{$event->category->category_name}}" 
+                    <livewire:card-event-image title="{{$event->title}}"
+                                                image="{{Storage::disk('s3')->url($event->image_poster)}}"
+                                                status="Newest"
+                                                category="{{$event->category->category_name}}"
                                                 description="{{$event->description}}"
                                                 timeEnd="{{$event->event_end_date}}"
                                                 timeStart="{{$event->event_start_date}}"
@@ -69,10 +69,10 @@
         @if($event->result === 1)
           @if($event->pivot->status === "accept")
           <a href="{{route('event.detail.show',['event'=>$event])}}">
-                    <livewire:card-event-image title="{{$event->title}}" 
-                                                image="{{url('storage/'.$event->image_poster)}}" 
-                                                status="Newest" 
-                                                category="{{$event->category->category_name}}" 
+                    <livewire:card-event-image title="{{$event->title}}"
+                                                image="{{Storage::disk('s3')->url($event->image_poster)}}"
+                                                status="Newest"
+                                                category="{{$event->category->category_name}}"
                                                 description="{{$event->description}}"
                                                 timeEnd="{{$event->event_end_date}}"
                                                 timeStart="{{$event->event_start_date}}"

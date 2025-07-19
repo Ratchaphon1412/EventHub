@@ -1,9 +1,9 @@
 <x-app-layout>
     <div class="bg-white w-full   mt-16" xmlns:livewire="http://www.w3.org/1999/html">
-        <section id="coverImage" class="justify-center items-center  bg-fixed w-full  rounded-lg  bg-cover bg-no-repeat " style="background-image:url('{{url('storage/'.$event->image_poster)}}')" >
-            <div class="flex flex-col justify-center items-center  bg-black rounded-lg relative p-12  h-full w-auto overflow-hidden backdrop-filter backdrop-blur-sm bg-opacity-10  bg-[url('{{url('storage/'.$event->image_poster)}}')] ">
+        <section id="coverImage" class="justify-center items-center  bg-fixed w-full  rounded-lg  bg-cover bg-no-repeat " style="background-image:url('{{Storage::disk('s3')->url($event->image_poster)}}')" >
+            <div class="flex flex-col justify-center items-center  bg-black rounded-lg relative p-12  h-full w-auto overflow-hidden backdrop-filter backdrop-blur-sm bg-opacity-10  bg-[url('{{Storage::disk('s3')->url($event->image_poster)}}')] ">
                 <div class="grid grid-cols-1 md:grid-cols-2 backdrop-filter backdrop-blur-sm bg-opacity-80 bg-black text-white  rounded-lg shadow-lg overflow-hidden  w-3/4 drop-shadow-lg">
-                    <img src="{{url('storage/'.$event->image_poster)}}"  alt="Mountain"
+                    <img src="{{Storage::disk('s3')->url($event->image_poster)}}"  alt="Mountain"
                     class="w-full h-full object-cover">
                     <div id="text Title" class="flex justify-center items-center ">
                         <div id="text" class="p-6 flex-col  justify-center items-center space-y-4  gap-4">
@@ -24,7 +24,7 @@
 
                                 </p>
                             </div>
-                       
+
 
 
                         </div>
@@ -40,7 +40,7 @@
         @csrf
         @for($i = 1; $i <= $questions_name->count(); $i++)
             @if($questions_name->get($i-1)->answer_type == 'Text')
-            
+
                 <section class="flex flex-col justify-center  w-full  ">
                     <div class="flex justify-start items-center mb-6">
                         <h2 class="text-lg lg:text-2xl font-bold text-gray-900 ">{{$i}} . {{$questions_name->get($i-1)->name}}</h2>
@@ -55,8 +55,8 @@
 
 
                 @else
-           
-                
+
+
                     <section class="flex flex-col justify-center  w-full  ">
                         <div class="flex justify-start items-center mb-6">
                             <h2 class="text-lg lg:text-2xl font-bold text-gray-900 ">{{$i}} . {{$questions_name->get($i-1)->name}}</h2>
@@ -69,8 +69,8 @@
 
             @endif
             @endfor
-        </div>           
-        
+        </div>
+
 
         <button type="submit" class="m-6 mt-0 inline-flex items-center px-4 py-2  bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase  hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150">
             Submit</button>

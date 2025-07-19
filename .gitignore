@@ -19,3 +19,6 @@ yarn-error.log
 /.vscode
 .DS_Store
 
+/sail-minio
+/sail-mysql
+/sail-redis
