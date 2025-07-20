@@ -1,0 +1,20 @@
+{
+  "resources/css/app.css": {
+    "file": "assets/app-599765d9.css",
+    "isEntry": true,
+    "src": "resources/css/app.css"
+  },
+  "resources/js/app.js": {
+    "file": "assets/app-25d72fab.js",
+    "imports": [
+      "resources/js/tabflowbite.js"
+    ],
+    "isEntry": true,
+    "src": "resources/js/app.js"
+  },
+  "resources/js/tabflowbite.js": {
+    "file": "assets/tabflowbite-55b385e2.js",
+    "isEntry": true,
+    "src": "resources/js/tabflowbite.js"
+  }
+}
